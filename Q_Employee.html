@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Q_Employee</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//bind_events @1-BF0EB765
+function bind_events() {
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+<a href="{Link1_Src}" id="Link1">Back</a> 
+</div>
+<div align="left">
+  &nbsp;
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<div align="left">
+  <!-- BEGIN Record employeeSearch -->
+  <form id="employeeSearch" name="{HTMLFormName}" action="{Action}" method="post">
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td valign="top">
+          <table class="Header" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+              <td class="th"><strong>Search Employee </strong></td> 
+              <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+            </tr>
+          </table>
+ 
+          <table class="Record" cellspacing="0" cellpadding="0">
+            <!-- BEGIN Error -->
+            <tr class="Error">
+              <td colspan="4">{Error}</td>
+            </tr>
+            <!-- END Error -->
+            <tr class="Controls">
+              <td class="th"><label for="employeeSearchs_EmployeeIDNo">Employee ID No.</label></td> 
+              <td><input id="employeeSearchs_EmployeeIDNo" maxlength="6" size="6" value="{s_EmployeeIDNo}" name="{s_EmployeeIDNo_Name}"></td> 
+              <td>&nbsp;<label for="employeeSearchs_Sex">Sex</label><label for="employeeSearchs_StatAppID"></label></td> 
+              <td>&nbsp; 
+                <select id="employeeSearchs_Sex" name="{s_Sex_Name}">
+                  <option value="" selected>Select Value</option>
+                  {s_Sex_Options}
+                </select>
+ </td>
+            </tr>
+ 
+            <tr class="Controls">
+              <td class="th"><label for="employeeSearchs_Surname">Surname</label></td> 
+              <td><input id="employeeSearchs_Surname" style="TEXT-TRANSFORM: uppercase" maxlength="50" size="34" value="{s_Surname}" name="{s_Surname_Name}"></td> 
+              <td>&nbsp;<label for="employeeSearchs_CivilStatus">Civil Status</label><label for="employeeSearchs_Sex"></label></td> 
+              <td>&nbsp; 
+                <select id="employeeSearchs_CivilStatus" name="{s_CivilStatus_Name}">
+                  <option value="" selected>Select Value</option>
+                  {s_CivilStatus_Options}
+                </select>
+ </td>
+            </tr>
+ 
+            <tr class="Controls">
+              <td class="th"><label for="employeeSearchs_FirstName">First Name</label></td> 
+              <td><input id="employeeSearchs_FirstName" style="TEXT-TRANSFORM: uppercase" maxlength="50" size="34" value="{s_FirstName}" name="{s_FirstName_Name}"></td> 
+              <td>&nbsp;<label for="employeeSearchs_StepIncrement">Municipality</label></td> 
+              <td>&nbsp; 
+                <select id="employeeSearchs_PermMunicipality" name="{s_PermMunicipality_Name}">
+                  <option value="" selected>Select Value</option>
+                  {s_PermMunicipality_Options}
+                </select>
+ </td>
+            </tr>
+ 
+            <tr class="Controls">
+              <td class="th"><label for="employeeSearchs_MiddleName">Middle Name</label></td> 
+              <td><input id="employeeSearchs_MiddleName" style="TEXT-TRANSFORM: uppercase" maxlength="50" size="34" value="{s_MiddleName}" name="{s_MiddleName_Name}"></td> 
+              <td>&nbsp;<label for="employeeSearchs_StepIncrement">Department/Office</label></td> 
+              <td>&nbsp; 
+                <select id="employeeSearchs_OfficeID" name="{s_OfficeID_Name}">
+                  <option value="" selected>Select Value</option>
+                  {s_OfficeID_Options}
+                </select>
+ </td>
+            </tr>
+ 
+            <tr class="Controls">
+              <td class="th"><label for="employeeSearchs_PermMunicipality">Status of Appointment</label></td> 
+              <td colspan="3">
+                <!-- BEGIN CheckBoxList CheckBoxList1 --><input id="employeeSearchCheckBoxList1_{CheckBoxList1:optionNumber}" type="checkbox" value="{Value}" name="{CheckBoxList1_Name}" {Check}><label for="employeeSearchCheckBoxList1_{CheckBoxList1:optionNumber}">{Description}</label><!-- END CheckBoxList CheckBoxList1 -->&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </td>
+            </tr>
+ 
+            <tr class="Bottom">
+              <td><a href="{ClearParameters_Src}" id="employeeSearchClearParameters">Clear</a></td> 
+              <td align="right" colspan="3">
+                <!-- BEGIN Button Button_DoSearch --><input class="Button" id="employeeSearchButton_DoSearch" type="submit" alt="Search" value="Search" name="{Button_Name}"><!-- END Button Button_DoSearch -->&nbsp;&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <!-- END Record employeeSearch --><br>
+</div>
+<div align="left">
+  <!-- BEGIN Grid employee -->
+  <div align="left">
+    <table cellspacing="0" cellpadding="0" align="center" border="0">
+      <tr>
+        <td valign="top">
+          <table class="Header" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+              <td class="th"><strong>List of Employees </strong></td> 
+              <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+            </tr>
+          </table>
+ 
+          <table class="Grid" cellspacing="0" cellpadding="0">
+            <tr class="Row">
+              <td colspan="6">Total Employees:&nbsp;{employee_TotalRecords}</td>
+            </tr>
+ 
+            <tr class="Caption">
+              <th scope="col">
+              <p align="center">Employee</p>
+              </th>
+ 
+              <th scope="col">&nbsp;</th>
+ 
+              <th scope="col">&nbsp;</th>
+ 
+              <th scope="col">&nbsp;</th>
+ 
+              <th scope="col">&nbsp;</th>
+ 
+              <th scope="col">&nbsp;</th>
+            </tr>
+ 
+            <tr class="Caption">
+              <th scope="col">
+              <p align="center">ID No.&nbsp; </p>
+              </th>
+ 
+              <th scope="col">Surname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+ 
+              <th scope="col">First Name&nbsp;&nbsp;&nbsp;&nbsp;</th>
+ 
+              <th scope="col">Middle Name&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+              <th scope="col">PHOTO</th>
+ 
+              <th scope="col">&nbsp;</th>
+            </tr>
+ 
+            <!-- BEGIN Row -->
+            <tr class="Row">
+              <td>
+                <div align="center">
+                  {EmployeeIDNo} 
+                </div>
+                &nbsp;</td> 
+              <td>{Surname}&nbsp;</td> 
+              <td>{FirstName}&nbsp;</td> 
+              <td>{MiddleName}&nbsp;</td> 
+              <td><img id="employeeEmpPicture_{employee:rowNumber}" height="130" alt="" src="photofolder/{EmpPicture}" width="90">&nbsp;</td> 
+              <td>
+                <p align="center"><a href="{Link1_Src}" id="employeeLink1_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Personal</a><a href="{Link2_Src}" id="employeeLink2_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Children</a><a href="{Link3_Src}" id="employeeLink3_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Education</a><a href="{Link4_Src}" id="employeeLink4_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Eligibility</a><a href="{Link5_Src}" id="employeeLink5_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">WorkExp.</a><a href="{Link6_Src}" id="employeeLink6_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Vol.Work</a><a href="{Link7_Src}" id="employeeLink7_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Training</a></p>
+ 
+                <p align="center"><a href="{Link8_Src}" id="employeeLink8_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Skills</a><a href="{Link9_Src}" id="employeeLink9_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Distinctions</a><a href="{Link11_Src}" id="employeeLink11_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Membership</a><a href="{Link14_Src}" id="employeeLink14_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Consanguinity</a><a href="{Link15_Src}" id="employeeLink15_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">References</a></p>
+ 
+                <p align="center"><a href="{Link10_Src}" id="employeeLink10_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">CurrentPosition</a></p>
+              </td>
+            </tr>
+ <!-- END Row -->
+            <!-- BEGIN NoRecords -->
+            <tr class="NoRecords">
+              <td colspan="6">No records</td>
+            </tr>
+            <!-- END NoRecords -->
+            <tr class="Footer">
+              <td colspan="6">
+                <!-- BEGIN Navigator Navigator -->
+                <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+                <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+                  <option value="" selected>-</option>
+ {PageSize_Options}
+                </select>
+ 
+                <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+                <!-- BEGIN First_Off -->First <!-- END First_Off -->
+                <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+                <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+                <!-- BEGIN Pages -->
+                <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+                <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+                <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+                <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+                <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+                <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <p align="left">&nbsp;</p>
+  <p align="left">&nbsp;</p>
+  <p align="left">&nbsp;</p>
+  <div align="left">
+  </div>
+  <p align="left">&nbsp;</p>
+  <div align="left">
+  </div>
+  <p align="left">&nbsp;</p>
+  <!-- END Grid employee -->
+</div>
+<div align="left">
+</div>
+<div align="left">
+</div>
+<p align="left"><br>
+&nbsp;</p>
+</body>
+</html>

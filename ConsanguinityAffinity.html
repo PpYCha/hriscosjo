@@ -1,0 +1,399 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>ConsanguinityAffinity</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-2310149C
+
+var employee1_DatePicker_DateAccomplished = new Object(); 
+employee1_DatePicker_DateAccomplished.format           = "ShortDate";
+employee1_DatePicker_DateAccomplished.style            = "Styles/Fresh/Style.css";
+employee1_DatePicker_DateAccomplished.relativePathPart = "";
+employee1_DatePicker_DateAccomplished.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//employee1Button_Delete_OnClick @108-9D84B75E
+function employee1Button_Delete_OnClick()
+{
+    var result = true;
+//End employee1Button_Delete_OnClick
+
+//Confirmation Message @109-8243B274
+    return confirm('Delete record?');
+//End Confirmation Message
+
+//Close employee1Button_Delete_OnClick @108-BC33A33A
+    return result;
+}
+//End Close employee1Button_Delete_OnClick
+
+//employee1Button_Cancel_OnClick @110-431A3369
+function employee1Button_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End employee1Button_Cancel_OnClick
+
+//bind_events @1-6115F593
+function bind_events() {
+    addEventHandler("employee1Button_Delete", "click", employee1Button_Delete_OnClick);
+    addEventHandler("employee1Button_Cancel", "click", employee1Button_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/Fresh/Style_doctype.css">
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1">Back</a></p>
+<!-- BEGIN Grid employee -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th"><strong></strong></td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+        </tr>
+ 
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">Employee ID</th>
+ 
+          <th scope="col">Employee ID No.</th>
+ 
+          <th scope="col">Surname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">First Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Middle Name&nbsp;&nbsp; </th>
+ 
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: right"><a href="{EmployeeID_Src}" id="employeeEmployeeID_{employee:rowNumber}">{EmployeeID}</a>&nbsp;</td> 
+          <td>
+            <div align="center">
+              {EmployeeIDNo} 
+            </div>
+ &nbsp;</td> 
+          <td>{Surname}&nbsp;</td> 
+          <td>{FirstName}&nbsp;</td> 
+          <td>{MiddleName}&nbsp;</td> 
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="5">No records</td> 
+        </tr>
+ <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="5">&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option value="" selected>-</option>
+ {PageSize_Options} 
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td> 
+        </tr>
+ 
+      </table>
+ </td> 
+  </tr>
+</table>
+<!-- END Grid employee --><br>
+<!-- BEGIN Record employee1 -->
+<form id="employee1" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Add/Edit Consanguinity or Affinity</strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="3">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1ConsanThird">a) within the third degree?</label></td> 
+            <td>
+              <select id="employee1ConsanThird" name="{ConsanThird_Name}">
+                <option value="" selected>Select Value</option>
+ {ConsanThird_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1ConsanThirdDetaila"></label></td> 
+            <td class="th"><label for="employee1ConsanThirdDetaila">If YES, give details:</label></td> 
+            <td><input id="employee1ConsanThirdDetaila" maxlength="50" size="50" value="{ConsanThirdDetaila}" name="{ConsanThirdDetaila_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1ConsanFourth">b) within the fourth degree?</label></td> 
+            <td>
+              <select id="employee1ConsanFourth" name="{ConsanFourth_Name}">
+                <option value="" selected>Select Value</option>
+ {ConsanFourth_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1ConsanFourthDetails"></label></td> 
+            <td><label for="employee1ConsanFourthDetails">If YES, give details:</label></td> 
+            <td><input id="employee1ConsanFourthDetails" maxlength="50" size="50" value="{ConsanFourthDetails}" name="{ConsanFourthDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1AdminOffense">a) Have you ever been found guity of any administrative offense?</label></td> 
+            <td>
+              <select id="employee1AdminOffense" name="{AdminOffense_Name}">
+                <option value="" selected>Select Value</option>
+ {AdminOffense_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1AdminOffenseDetails"></label></td> 
+            <td><label for="employee1AdminOffenseDetails">If YES, give details:</label></td> 
+            <td><input id="employee1AdminOffenseDetails" maxlength="50" size="50" value="{AdminOffenseDetails}" name="{AdminOffenseDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1CriminallyCharged">b) have you been criminally charged before any court?</label></td> 
+            <td>
+              <select id="employee1CriminallyCharged" name="{CriminallyCharged_Name}">
+                <option value="" selected>Select Value</option>
+ {CriminallyCharged_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1CriminallyChargedDetails"></label></td> 
+            <td><label for="employee1CriminallyChargedDetails">If YES, give details:</label></td> 
+            <td><input id="employee1CriminallyChargedDetails" maxlength="50" size="50" value="{CriminallyChargedDetails}" name="{CriminallyChargedDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1ConvictedOfCrime">Have you been convicted of any crime or violation of any law?</label></td> 
+            <td>
+              <select id="employee1ConvictedOfCrime" name="{ConvictedOfCrime_Name}">
+                <option value="" selected>Select Value</option>
+ {ConvictedOfCrime_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1ConvictedCrimeDetails"></label></td> 
+            <td><label for="employee1ConvictedCrimeDetails">If YES, give details:</label></td> 
+            <td><input id="employee1ConvictedCrimeDetails" maxlength="50" size="50" value="{ConvictedCrimeDetails}" name="{ConvictedCrimeDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1SeparatedFromService">Have you ever been separated from the service?</label></td> 
+            <td>
+              <select id="employee1SeparatedFromService" name="{SeparatedFromService_Name}">
+                <option value="" selected>Select Value</option>
+ {SeparatedFromService_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1SeparatedFromServiceDetails"></label></td> 
+            <td><label for="employee1SeparatedFromServiceDetails">If YES, give details:</label></td> 
+            <td><input id="employee1SeparatedFromServiceDetails" maxlength="50" size="50" value="{SeparatedFromServiceDetails}" name="{SeparatedFromServiceDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1CandidateElection">a) Have you ever been a candidate in a national or local election?</label></td> 
+            <td>
+              <select id="employee1CandidateElection" name="{CandidateElection_Name}">
+                <option value="" selected>Select Value</option>
+ {CandidateElection_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1CandidateElectionDetails"></label></td> 
+            <td><label for="employee1CandidateElectionDetails">If YES, give details:</label></td> 
+            <td><input id="employee1CandidateElectionDetails" maxlength="50" size="50" value="{CandidateElectionDetails}" name="{CandidateElectionDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1ResignedGovService">b) Have you resigned from the government service?</label></td> 
+            <td>
+              <select id="employee1ResignedGovService" name="{ResignedGovService_Name}">
+                <option value="" selected>Select Value</option>
+ {ResignedGovService_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1ResignedGovServiceDetails"></label></td> 
+            <td><label for="employee1ResignedGovServiceDetails">If YES, give details:</label></td> 
+            <td><input id="employee1ResignedGovServiceDetails" maxlength="50" size="50" value="{ResignedGovServiceDetails}" name="{ResignedGovServiceDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1StatOfImmigrant">Have you acquired the status of an immigrant?</label></td> 
+            <td>
+              <select id="employee1StatOfImmigrant" name="{StatOfImmigrant_Name}">
+                <option value="" selected>Select Value</option>
+ {StatOfImmigrant_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StatOfImmigrantDetails"></label></td> 
+            <td><label for="employee1StatOfImmigrantDetails">If YES, give details:</label></td> 
+            <td><input id="employee1StatOfImmigrantDetails" maxlength="50" size="50" value="{StatOfImmigrantDetails}" name="{StatOfImmigrantDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1IndigenousGroupMember">a) Are you a member of any indigenous group?</label></td> 
+            <td>
+              <select id="employee1IndigenousGroupMember" name="{IndigenousGroupMember_Name}">
+                <option value="" selected>Select Value</option>
+ {IndigenousGroupMember_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1IndigenousDetails"></label></td> 
+            <td><label for="employee1IndigenousDetails">If YES, please specify:</label></td> 
+            <td><input id="employee1IndigenousDetails" maxlength="50" size="50" value="{IndigenousDetails}" name="{IndigenousDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1DifferentlyAbled">b) Are you a person with disability?</label></td> 
+            <td>
+              <select id="employee1DifferentlyAbled" name="{DifferentlyAbled_Name}">
+                <option value="" selected>Select Value</option>
+ {DifferentlyAbled_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1DifferentlyAbledDetails"></label></td> 
+            <td><label for="employee1DifferentlyAbledDetails">If YES, please specify ID No.:</label></td> 
+            <td><input id="employee1DifferentlyAbledDetails" maxlength="50" size="50" value="{DifferentlyAbledDetails}" name="{DifferentlyAbledDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1SoloParent">c) Are you a solo parent?</label></td> 
+            <td>
+              <select id="employee1SoloParent" name="{SoloParent_Name}">
+                <option value="" selected>Select Value</option>
+ {SoloParent_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1SoloParentDetails"></label></td> 
+            <td><label for="employee1SoloParentDetails">If YES, please specify ID No.:</label></td> 
+            <td><input id="employee1SoloParentDetails" maxlength="50" size="50" value="{SoloParentDetails}" name="{SoloParentDetails_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2">&nbsp;</td> 
+            <td>&nbsp;</td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2">&nbsp;</td> 
+            <td>&nbsp;</td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1GovIssuedID">Government Issued ID</label></td> 
+            <td><input id="employee1GovIssuedID" maxlength="50" size="50" value="{GovIssuedID}" name="{GovIssuedID_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1IDNo">ID/License/Passport No.</label></td> 
+            <td><input id="employee1IDNo" maxlength="35" size="35" value="{IDNo}" name="{IDNo_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1DatePlaceIssuance">Date/Place of Issuance</label></td> 
+            <td><input id="employee1DatePlaceIssuance" maxlength="50" size="50" value="{DatePlaceIssuance}" name="{DatePlaceIssuance_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2">&nbsp;</td> 
+            <td>&nbsp;</td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th" colspan="2"><label for="employee1DateAccomplished">Date Accomplished</label></td> 
+            <td><input id="employee1DateAccomplished" maxlength="100" size="8" value="{DateAccomplished}" name="{DateAccomplished_Name}">
+              <!-- BEGIN DatePicker DatePicker_DateAccomplished --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="employee1DatePicker_DateAccomplished"><img id="employee1DatePicker_DateAccomplished_Image" alt="Show Date Picker" src="Styles/Fresh/Images/DatePicker.gif" border="0"></a><!-- END DatePicker DatePicker_DateAccomplished --></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td align="right" colspan="3">
+              <!-- BEGIN Button Button_Insert --><input class="Button" id="employee1Button_Insert" type="submit" alt="Add" value="Add" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input class="Button" id="employee1Button_Update" type="submit" alt="Submit" value="Submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input class="Button" id="employee1Button_Delete" type="submit" alt="Delete" value="Delete" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input class="Button" id="employee1Button_Cancel" type="submit" alt="Cancel" value="Cancel" name="{Button_Name}"><!-- END Button Button_Cancel --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record employee1 --><br>
+</body>
+</html>

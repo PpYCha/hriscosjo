@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Eligibility</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-F58814F7
+
+var employee_eligibility1_DatePicker_DateOfExam = new Object(); 
+employee_eligibility1_DatePicker_DateOfExam.format           = "ShortDate";
+employee_eligibility1_DatePicker_DateOfExam.style            = "Styles/Fresh/Style.css";
+employee_eligibility1_DatePicker_DateOfExam.relativePathPart = "";
+employee_eligibility1_DatePicker_DateOfExam.themeVersion = "3.0";
+
+var employee_eligibility1_DatePicker_DateOfValidity = new Object(); 
+employee_eligibility1_DatePicker_DateOfValidity.format           = "ShortDate";
+employee_eligibility1_DatePicker_DateOfValidity.style            = "Styles/Fresh/Style.css";
+employee_eligibility1_DatePicker_DateOfValidity.relativePathPart = "";
+employee_eligibility1_DatePicker_DateOfValidity.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//employee_eligibility1Button_Delete_OnClick @33-2BA4AC57
+function employee_eligibility1Button_Delete_OnClick()
+{
+    var result = true;
+//End employee_eligibility1Button_Delete_OnClick
+
+//Confirmation Message @34-8243B274
+    return confirm('Delete record?');
+//End Confirmation Message
+
+//Close employee_eligibility1Button_Delete_OnClick @33-BC33A33A
+    return result;
+}
+//End Close employee_eligibility1Button_Delete_OnClick
+
+//employee_eligibility1Button_Cancel_OnClick @35-CD4661BB
+function employee_eligibility1Button_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End employee_eligibility1Button_Cancel_OnClick
+
+//bind_events @1-8038C2F6
+function bind_events() {
+    addEventHandler("employee_eligibility1Button_Delete", "click", employee_eligibility1Button_Delete_OnClick);
+    addEventHandler("employee_eligibility1Button_Cancel", "click", employee_eligibility1Button_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/Fresh/Style_doctype.css">
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1">Back</a></p>
+<!-- BEGIN Grid employee_eligibility -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th"><strong>Civil Service Eligibility </strong></td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+        </tr>
+ 
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Row">
+          <td colspan="7">Total of Eligibility:&nbsp;{employee_eligibility_TotalRecords}</td> 
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">Employee ID</th>
+ 
+          <th scope="col">Career Service&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+ 
+          <th scope="col">Rating&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Date of Examination&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Place of Examination&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+ 
+          <th scope="col">License Number&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Date of Validity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: right"><a href="{EmployeeID_Src}" id="employee_eligibilityEmployeeID_{employee_eligibility:rowNumber}">{EmployeeID}</a>&nbsp;</td> 
+          <td>{CareerService}&nbsp;&nbsp;&nbsp;&nbsp;</td> 
+          <td>{Rating}&nbsp;</td> 
+          <td>
+            <div align="center">
+              {DateOfExam} 
+            </div>
+ 
+            <div align="left">
+            </div>
+ </td> 
+          <td>{PlaceOfExam}&nbsp;</td> 
+          <td>{LicenseNo}&nbsp;</td> 
+          <td>
+            <div align="left">
+              {DateOfValidity} 
+            </div>
+ 
+            <div align="center">
+            </div>
+ 
+            <div align="left">
+            </div>
+ &nbsp;</td> 
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="7">No records</td> 
+        </tr>
+ <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="7">
+            <p align="left"><a href="{employee_eligibility_Insert_Src}" id="employee_eligibilityemployee_eligibility_Insert">Add New</a>&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option value="" selected>-</option>
+ {PageSize_Options} 
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</p>
+ </td> 
+        </tr>
+ 
+      </table>
+ </td> 
+  </tr>
+</table>
+<!-- END Grid employee_eligibility --><br>
+<!-- BEGIN Record employee_eligibility1 -->
+<form id="employee_eligibility1" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Add/Edit Eligibility </strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employee_eligibility1EmployeeID">Employee ID</label></td> 
+            <td><input id="employee_eligibility1EmployeeID" maxlength="10" size="10" value="{EmployeeID}" name="{EmployeeID_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_eligibility1CareerService">Career Service</label></td> 
+            <td><input id="employee_eligibility1CareerService" maxlength="70" size="50" value="{CareerService}" name="{CareerService_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_eligibility1Rating">Rating</label></td> 
+            <td><input id="employee_eligibility1Rating" maxlength="20" value="{Rating}" name="{Rating_Name}" size="20"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_eligibility1DateOfExam">Date of Examination (mm/dd/yyyy)</label></td> 
+            <td><input id="employee_eligibility1DateOfExam" maxlength="100" size="8" value="{DateOfExam}" name="{DateOfExam_Name}">
+              <!-- BEGIN DatePicker DatePicker_DateOfExam --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="employee_eligibility1DatePicker_DateOfExam"><img id="employee_eligibility1DatePicker_DateOfExam_Image" alt="Show Date Picker" src="Styles/Fresh/Images/DatePicker.gif" border="0"></a><!-- END DatePicker DatePicker_DateOfExam --></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_eligibility1PlaceOfExam">Place of Examination</label></td> 
+            <td><input id="employee_eligibility1PlaceOfExam" maxlength="100" size="50" value="{PlaceOfExam}" name="{PlaceOfExam_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_eligibility1LicenseNo">License Number</label></td> 
+            <td><input id="employee_eligibility1LicenseNo" maxlength="50" size="50" value="{LicenseNo}" name="{LicenseNo_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_eligibility1DateOfValidity">Date of Validity(mm/dd/yyyy)</label></td> 
+            <td><input id="employee_eligibility1DateOfValidity" maxlength="100" size="8" value="{DateOfValidity}" name="{DateOfValidity_Name}">
+              <!-- BEGIN DatePicker DatePicker_DateOfValidity --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="employee_eligibility1DatePicker_DateOfValidity"><img id="employee_eligibility1DatePicker_DateOfValidity_Image" alt="Show Date Picker" src="Styles/Fresh/Images/DatePicker.gif" border="0"></a><!-- END DatePicker DatePicker_DateOfValidity --></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td align="right" colspan="2">
+              <!-- BEGIN Button Button_Insert --><input class="Button" id="employee_eligibility1Button_Insert" type="submit" alt="Add" value="Add" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input class="Button" id="employee_eligibility1Button_Update" type="submit" alt="Submit" value="Submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input class="Button" id="employee_eligibility1Button_Delete" type="submit" alt="Delete" value="Delete" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input class="Button" id="employee_eligibility1Button_Cancel" type="submit" alt="Cancel" value="Cancel" name="{Button_Name}"><!-- END Button Button_Cancel --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record employee_eligibility1 --><br>
+</body>
+</html>

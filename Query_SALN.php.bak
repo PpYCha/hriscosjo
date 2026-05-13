@@ -1,0 +1,1305 @@
+<?php
+//Include Common Files @1-543B3B21
+define("RelativePath", ".");
+define("PathToCurrentPage", "/");
+define("FileName", "Query_SALN.php");
+include_once(RelativePath . "/Common.php");
+include_once(RelativePath . "/Template.php");
+include_once(RelativePath . "/Sorter.php");
+include_once(RelativePath . "/Navigator.php");
+//End Include Common Files
+
+//saln_employee ReportGroup class @2-7611966B
+class clsReportGroupsaln_employee {
+    var $GroupType;
+    var $mode; //1 - open, 2 - close
+    var $Report_TotalRecords, $_Report_TotalRecordsAttributes;
+    var $EmployeeIDNo, $_EmployeeIDNoAttributes;
+    var $Surname, $_SurnameAttributes;
+    var $FirstName, $_FirstNameAttributes;
+    var $YearID, $_YearIDAttributes;
+    var $ScannedSALN, $_ScannedSALNPage, $_ScannedSALNParameters, $_ScannedSALNAttributes;
+    var $Sum_YearID2, $_Sum_YearID2Attributes;
+    var $Sum_YearID1, $_Sum_YearID1Attributes;
+    var $Sum_YearID, $_Sum_YearIDAttributes;
+    var $TotalSum_YearID, $_TotalSum_YearIDAttributes;
+    var $Report_CurrentDate, $_Report_CurrentDateAttributes;
+    var $Attributes;
+    var $ReportTotalIndex = 0;
+    var $PageTotalIndex;
+    var $PageNumber;
+    var $RowNumber;
+    var $Parent;
+    var $EmployeeIDNoTotalIndex;
+    var $SurnameTotalIndex;
+    var $FirstNameTotalIndex;
+
+    function clsReportGroupsaln_employee(& $parent) {
+        $this->Parent = & $parent;
+        $this->Attributes = $this->Parent->Attributes->GetAsArray();
+    }
+    function SetControls($PrevGroup = "") {
+        $this->EmployeeIDNo = $this->Parent->EmployeeIDNo->Value;
+        $this->Surname = $this->Parent->Surname->Value;
+        $this->FirstName = $this->Parent->FirstName->Value;
+        $this->YearID = $this->Parent->YearID->Value;
+        $this->ScannedSALN = $this->Parent->ScannedSALN->Value;
+    }
+
+    function SetTotalControls($mode = "", $PrevGroup = "") {
+        $this->Report_TotalRecords = $this->Parent->Report_TotalRecords->GetTotalValue($mode);
+        $this->Sum_YearID2 = $this->Parent->Sum_YearID2->GetTotalValue($mode);
+        $this->Sum_YearID1 = $this->Parent->Sum_YearID1->GetTotalValue($mode);
+        $this->Sum_YearID = $this->Parent->Sum_YearID->GetTotalValue($mode);
+        $this->TotalSum_YearID = $this->Parent->TotalSum_YearID->GetTotalValue($mode);
+        $this->_ScannedSALNPage = $this->Parent->ScannedSALN->Page;
+        $this->_ScannedSALNParameters = $this->Parent->ScannedSALN->Parameters;
+        $this->_Report_TotalRecordsAttributes = $this->Parent->Report_TotalRecords->Attributes->GetAsArray();
+        $this->_Sorter_YearIDAttributes = $this->Parent->Sorter_YearID->Attributes->GetAsArray();
+        $this->_Sorter_ScannedSALNAttributes = $this->Parent->Sorter_ScannedSALN->Attributes->GetAsArray();
+        $this->_EmployeeIDNoAttributes = $this->Parent->EmployeeIDNo->Attributes->GetAsArray();
+        $this->_SurnameAttributes = $this->Parent->Surname->Attributes->GetAsArray();
+        $this->_FirstNameAttributes = $this->Parent->FirstName->Attributes->GetAsArray();
+        $this->_YearIDAttributes = $this->Parent->YearID->Attributes->GetAsArray();
+        $this->_ScannedSALNAttributes = $this->Parent->ScannedSALN->Attributes->GetAsArray();
+        $this->_Sum_YearID2Attributes = $this->Parent->Sum_YearID2->Attributes->GetAsArray();
+        $this->_Sum_YearID1Attributes = $this->Parent->Sum_YearID1->Attributes->GetAsArray();
+        $this->_Sum_YearIDAttributes = $this->Parent->Sum_YearID->Attributes->GetAsArray();
+        $this->_TotalSum_YearIDAttributes = $this->Parent->TotalSum_YearID->Attributes->GetAsArray();
+        $this->_Report_CurrentDateAttributes = $this->Parent->Report_CurrentDate->Attributes->GetAsArray();
+        $this->_NavigatorAttributes = $this->Parent->Navigator->Attributes->GetAsArray();
+    }
+    function SyncWithHeader(& $Header) {
+        $Header->Report_TotalRecords = $this->Report_TotalRecords;
+        $Header->_Report_TotalRecordsAttributes = $this->_Report_TotalRecordsAttributes;
+        $Header->Sum_YearID2 = $this->Sum_YearID2;
+        $Header->_Sum_YearID2Attributes = $this->_Sum_YearID2Attributes;
+        $Header->Sum_YearID1 = $this->Sum_YearID1;
+        $Header->_Sum_YearID1Attributes = $this->_Sum_YearID1Attributes;
+        $Header->Sum_YearID = $this->Sum_YearID;
+        $Header->_Sum_YearIDAttributes = $this->_Sum_YearIDAttributes;
+        $Header->TotalSum_YearID = $this->TotalSum_YearID;
+        $Header->_TotalSum_YearIDAttributes = $this->_TotalSum_YearIDAttributes;
+        $this->EmployeeIDNo = $Header->EmployeeIDNo;
+        $Header->_EmployeeIDNoAttributes = $this->_EmployeeIDNoAttributes;
+        $this->Parent->EmployeeIDNo->Value = $Header->EmployeeIDNo;
+        $this->Parent->EmployeeIDNo->Attributes->RestoreFromArray($Header->_EmployeeIDNoAttributes);
+        $this->Surname = $Header->Surname;
+        $Header->_SurnameAttributes = $this->_SurnameAttributes;
+        $this->Parent->Surname->Value = $Header->Surname;
+        $this->Parent->Surname->Attributes->RestoreFromArray($Header->_SurnameAttributes);
+        $this->FirstName = $Header->FirstName;
+        $Header->_FirstNameAttributes = $this->_FirstNameAttributes;
+        $this->Parent->FirstName->Value = $Header->FirstName;
+        $this->Parent->FirstName->Attributes->RestoreFromArray($Header->_FirstNameAttributes);
+        $this->YearID = $Header->YearID;
+        $Header->_YearIDAttributes = $this->_YearIDAttributes;
+        $this->Parent->YearID->Value = $Header->YearID;
+        $this->Parent->YearID->Attributes->RestoreFromArray($Header->_YearIDAttributes);
+        $this->ScannedSALN = $Header->ScannedSALN;
+        $this->_ScannedSALNPage = $Header->_ScannedSALNPage;
+        $this->_ScannedSALNParameters = $Header->_ScannedSALNParameters;
+        $Header->_ScannedSALNAttributes = $this->_ScannedSALNAttributes;
+        $this->Parent->ScannedSALN->Value = $Header->ScannedSALN;
+        $this->Parent->ScannedSALN->Attributes->RestoreFromArray($Header->_ScannedSALNAttributes);
+    }
+    function ChangeTotalControls() {
+        $this->Report_TotalRecords = $this->Parent->Report_TotalRecords->GetValue();
+        $this->Sum_YearID2 = $this->Parent->Sum_YearID2->GetValue();
+        $this->Sum_YearID1 = $this->Parent->Sum_YearID1->GetValue();
+        $this->Sum_YearID = $this->Parent->Sum_YearID->GetValue();
+        $this->TotalSum_YearID = $this->Parent->TotalSum_YearID->GetValue();
+    }
+}
+//End saln_employee ReportGroup class
+
+//saln_employee GroupsCollection class @2-55CCB325
+class clsGroupsCollectionsaln_employee {
+    var $Groups;
+    var $mPageCurrentHeaderIndex;
+    var $mEmployeeIDNoCurrentHeaderIndex;
+    var $mSurnameCurrentHeaderIndex;
+    var $mFirstNameCurrentHeaderIndex;
+    var $PageSize;
+    var $TotalPages = 0;
+    var $TotalRows = 0;
+    var $CurrentPageSize = 0;
+    var $Pages;
+    var $Parent;
+    var $LastDetailIndex;
+
+    function clsGroupsCollectionsaln_employee(& $parent) {
+        $this->Parent = & $parent;
+        $this->Groups = array();
+        $this->Pages  = array();
+        $this->mEmployeeIDNoCurrentHeaderIndex = 1;
+        $this->mSurnameCurrentHeaderIndex = 2;
+        $this->mFirstNameCurrentHeaderIndex = 3;
+        $this->mReportTotalIndex = 0;
+        $this->mPageTotalIndex = 1;
+    }
+
+    function & InitGroup() {
+        $group = new clsReportGroupsaln_employee($this->Parent);
+        $group->RowNumber = $this->TotalRows + 1;
+        $group->PageNumber = $this->TotalPages;
+        $group->PageTotalIndex = $this->mPageCurrentHeaderIndex;
+        $group->EmployeeIDNoTotalIndex = $this->mEmployeeIDNoCurrentHeaderIndex;
+        $group->SurnameTotalIndex = $this->mSurnameCurrentHeaderIndex;
+        $group->FirstNameTotalIndex = $this->mFirstNameCurrentHeaderIndex;
+        return $group;
+    }
+
+    function RestoreValues() {
+        $this->Parent->Report_TotalRecords->Value = $this->Parent->Report_TotalRecords->initialValue;
+        $this->Parent->EmployeeIDNo->Value = $this->Parent->EmployeeIDNo->initialValue;
+        $this->Parent->Surname->Value = $this->Parent->Surname->initialValue;
+        $this->Parent->FirstName->Value = $this->Parent->FirstName->initialValue;
+        $this->Parent->YearID->Value = $this->Parent->YearID->initialValue;
+        $this->Parent->ScannedSALN->Value = $this->Parent->ScannedSALN->initialValue;
+        $this->Parent->Sum_YearID2->Value = $this->Parent->Sum_YearID2->initialValue;
+        $this->Parent->Sum_YearID1->Value = $this->Parent->Sum_YearID1->initialValue;
+        $this->Parent->Sum_YearID->Value = $this->Parent->Sum_YearID->initialValue;
+        $this->Parent->TotalSum_YearID->Value = $this->Parent->TotalSum_YearID->initialValue;
+    }
+
+    function OpenPage() {
+        $this->TotalPages++;
+        $Group = & $this->InitGroup();
+        $this->Parent->Page_Header->CCSEventResult = CCGetEvent($this->Parent->Page_Header->CCSEvents, "OnInitialize", $this->Parent->Page_Header);
+        if ($this->Parent->Page_Header->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Page_Header->Height;
+        $Group->SetTotalControls("GetNextValue");
+        $this->Parent->Page_Header->CCSEventResult = CCGetEvent($this->Parent->Page_Header->CCSEvents, "OnCalculate", $this->Parent->Page_Header);
+        $Group->SetControls();
+        $Group->Mode = 1;
+        $Group->GroupType = "Page";
+        $Group->PageTotalIndex = count($this->Groups);
+        $this->mPageCurrentHeaderIndex = count($this->Groups);
+        $this->Groups[] =  & $Group;
+        $this->Pages[] =  count($this->Groups) == 2 ? 0 : count($this->Groups) - 1;
+    }
+
+    function OpenGroup($groupName) {
+        $Group = "";
+        $OpenFlag = false;
+        if ($groupName == "Report") {
+            $Group = & $this->InitGroup(true);
+            $this->Parent->Report_Header->CCSEventResult = CCGetEvent($this->Parent->Report_Header->CCSEvents, "OnInitialize", $this->Parent->Report_Header);
+            if ($this->Parent->Report_Header->Visible) 
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Report_Header->Height;
+                $Group->SetTotalControls("GetNextValue");
+            $this->Parent->Report_Header->CCSEventResult = CCGetEvent($this->Parent->Report_Header->CCSEvents, "OnCalculate", $this->Parent->Report_Header);
+            $Group->SetControls();
+            $Group->Mode = 1;
+            $Group->GroupType = "Report";
+            $this->Groups[] = & $Group;
+            $this->OpenPage();
+        }
+        if ($groupName == "EmployeeIDNo") {
+            $GroupEmployeeIDNo = & $this->InitGroup(true);
+            $this->Parent->EmployeeIDNo_Header->CCSEventResult = CCGetEvent($this->Parent->EmployeeIDNo_Header->CCSEvents, "OnInitialize", $this->Parent->EmployeeIDNo_Header);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->EmployeeIDNo_Header->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->EmployeeIDNo_Header->Height;
+            if (($this->PageSize > 0) and $this->Parent->EmployeeIDNo_Header->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            if ($this->Parent->EmployeeIDNo_Header->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->EmployeeIDNo_Header->Height;
+                $GroupEmployeeIDNo->SetTotalControls("GetNextValue");
+            $this->Parent->EmployeeIDNo_Header->CCSEventResult = CCGetEvent($this->Parent->EmployeeIDNo_Header->CCSEvents, "OnCalculate", $this->Parent->EmployeeIDNo_Header);
+            $GroupEmployeeIDNo->SetControls();
+            $GroupEmployeeIDNo->Mode = 1;
+            $OpenFlag = true;
+            $GroupEmployeeIDNo->GroupType = "EmployeeIDNo";
+            $this->mEmployeeIDNoCurrentHeaderIndex = count($this->Groups);
+            $this->Groups[] = & $GroupEmployeeIDNo;
+            $this->Parent->Sum_YearID->Reset();
+        }
+        if ($groupName == "Surname" or $OpenFlag) {
+            $GroupSurname = & $this->InitGroup(true);
+            $this->Parent->Surname_Header->CCSEventResult = CCGetEvent($this->Parent->Surname_Header->CCSEvents, "OnInitialize", $this->Parent->Surname_Header);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->Surname_Header->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->Surname_Header->Height;
+            if (($this->PageSize > 0) and $this->Parent->Surname_Header->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            if ($this->Parent->Surname_Header->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Surname_Header->Height;
+                $GroupSurname->SetTotalControls("GetNextValue");
+            $this->Parent->Surname_Header->CCSEventResult = CCGetEvent($this->Parent->Surname_Header->CCSEvents, "OnCalculate", $this->Parent->Surname_Header);
+            $GroupSurname->SetControls();
+            $GroupSurname->Mode = 1;
+            $OpenFlag = true;
+            $GroupSurname->GroupType = "Surname";
+            $this->mSurnameCurrentHeaderIndex = count($this->Groups);
+            $this->Groups[] = & $GroupSurname;
+            $this->Parent->Sum_YearID1->Reset();
+        }
+        if ($groupName == "FirstName" or $OpenFlag) {
+            $GroupFirstName = & $this->InitGroup(true);
+            $this->Parent->FirstName_Header->CCSEventResult = CCGetEvent($this->Parent->FirstName_Header->CCSEvents, "OnInitialize", $this->Parent->FirstName_Header);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->FirstName_Header->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->FirstName_Header->Height;
+            if (($this->PageSize > 0) and $this->Parent->FirstName_Header->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            if ($this->Parent->FirstName_Header->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->FirstName_Header->Height;
+                $GroupFirstName->SetTotalControls("GetNextValue");
+            $this->Parent->FirstName_Header->CCSEventResult = CCGetEvent($this->Parent->FirstName_Header->CCSEvents, "OnCalculate", $this->Parent->FirstName_Header);
+            $GroupFirstName->SetControls();
+            $GroupFirstName->Mode = 1;
+            $GroupFirstName->GroupType = "FirstName";
+            $this->mFirstNameCurrentHeaderIndex = count($this->Groups);
+            $this->Groups[] = & $GroupFirstName;
+            $this->Parent->Sum_YearID2->Reset();
+        }
+    }
+
+    function ClosePage() {
+        $Group = & $this->InitGroup();
+        $this->Parent->Page_Footer->CCSEventResult = CCGetEvent($this->Parent->Page_Footer->CCSEvents, "OnInitialize", $this->Parent->Page_Footer);
+        $Group->SetTotalControls("GetPrevValue");
+        $Group->SyncWithHeader($this->Groups[$this->mPageCurrentHeaderIndex]);
+        $this->Parent->Page_Footer->CCSEventResult = CCGetEvent($this->Parent->Page_Footer->CCSEvents, "OnCalculate", $this->Parent->Page_Footer);
+        $Group->SetControls();
+        $this->RestoreValues();
+        $this->CurrentPageSize = 0;
+        $Group->Mode = 2;
+        $Group->GroupType = "Page";
+        $this->Groups[] = & $Group;
+    }
+
+    function CloseGroup($groupName)
+    {
+        $Group = "";
+        if ($groupName == "Report") {
+            $Group = & $this->InitGroup(true);
+            $this->Parent->Report_Footer->CCSEventResult = CCGetEvent($this->Parent->Report_Footer->CCSEvents, "OnInitialize", $this->Parent->Report_Footer);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->Report_Footer->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->Report_Footer->Height;
+            if (($this->PageSize > 0) and $this->Parent->Report_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            $Group->SetTotalControls("GetPrevValue");
+            $Group->SyncWithHeader($this->Groups[0]);
+            if ($this->Parent->Report_Footer->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Report_Footer->Height;
+            $this->Parent->Report_Footer->CCSEventResult = CCGetEvent($this->Parent->Report_Footer->CCSEvents, "OnCalculate", $this->Parent->Report_Footer);
+            $Group->SetControls();
+            $this->RestoreValues();
+            $Group->Mode = 2;
+            $Group->GroupType = "Report";
+            $this->Groups[] = & $Group;
+            $this->ClosePage();
+            return;
+        }
+        $GroupFirstName = & $this->InitGroup(true);
+        $this->Parent->FirstName_Footer->CCSEventResult = CCGetEvent($this->Parent->FirstName_Footer->CCSEvents, "OnInitialize", $this->Parent->FirstName_Footer);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->FirstName_Footer->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->FirstName_Footer->Height;
+        if (($this->PageSize > 0) and $this->Parent->FirstName_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $GroupFirstName->SetTotalControls("GetPrevValue");
+        $GroupFirstName->SyncWithHeader($this->Groups[$this->mFirstNameCurrentHeaderIndex]);
+        if ($this->Parent->FirstName_Footer->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->FirstName_Footer->Height;
+        $this->Parent->FirstName_Footer->CCSEventResult = CCGetEvent($this->Parent->FirstName_Footer->CCSEvents, "OnCalculate", $this->Parent->FirstName_Footer);
+        $GroupFirstName->SetControls();
+        $this->Parent->Sum_YearID2->Reset();
+        $this->RestoreValues();
+        $GroupFirstName->Mode = 2;
+        $GroupFirstName->GroupType ="FirstName";
+        $this->Groups[] = & $GroupFirstName;
+        if ($groupName == "FirstName") return;
+        $GroupSurname = & $this->InitGroup(true);
+        $this->Parent->Surname_Footer->CCSEventResult = CCGetEvent($this->Parent->Surname_Footer->CCSEvents, "OnInitialize", $this->Parent->Surname_Footer);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->Surname_Footer->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->Surname_Footer->Height;
+        if (($this->PageSize > 0) and $this->Parent->Surname_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $GroupSurname->SetTotalControls("GetPrevValue");
+        $GroupSurname->SyncWithHeader($this->Groups[$this->mSurnameCurrentHeaderIndex]);
+        if ($this->Parent->Surname_Footer->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Surname_Footer->Height;
+        $this->Parent->Surname_Footer->CCSEventResult = CCGetEvent($this->Parent->Surname_Footer->CCSEvents, "OnCalculate", $this->Parent->Surname_Footer);
+        $GroupSurname->SetControls();
+        $this->Parent->Sum_YearID1->Reset();
+        $this->RestoreValues();
+        $GroupSurname->Mode = 2;
+        $GroupSurname->GroupType ="Surname";
+        $this->Groups[] = & $GroupSurname;
+        if ($groupName == "Surname") return;
+        $GroupEmployeeIDNo = & $this->InitGroup(true);
+        $this->Parent->EmployeeIDNo_Footer->CCSEventResult = CCGetEvent($this->Parent->EmployeeIDNo_Footer->CCSEvents, "OnInitialize", $this->Parent->EmployeeIDNo_Footer);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->EmployeeIDNo_Footer->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->EmployeeIDNo_Footer->Height;
+        if (($this->PageSize > 0) and $this->Parent->EmployeeIDNo_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $GroupEmployeeIDNo->SetTotalControls("GetPrevValue");
+        $GroupEmployeeIDNo->SyncWithHeader($this->Groups[$this->mEmployeeIDNoCurrentHeaderIndex]);
+        if ($this->Parent->EmployeeIDNo_Footer->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->EmployeeIDNo_Footer->Height;
+        $this->Parent->EmployeeIDNo_Footer->CCSEventResult = CCGetEvent($this->Parent->EmployeeIDNo_Footer->CCSEvents, "OnCalculate", $this->Parent->EmployeeIDNo_Footer);
+        $GroupEmployeeIDNo->SetControls();
+        $this->Parent->Sum_YearID->Reset();
+        $this->RestoreValues();
+        $GroupEmployeeIDNo->Mode = 2;
+        $GroupEmployeeIDNo->GroupType ="EmployeeIDNo";
+        $this->Groups[] = & $GroupEmployeeIDNo;
+    }
+
+    function AddItem()
+    {
+        $Group = & $this->InitGroup(true);
+        $this->Parent->Detail->CCSEventResult = CCGetEvent($this->Parent->Detail->CCSEvents, "OnInitialize", $this->Parent->Detail);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->Detail->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->Detail->Height;
+        if (($this->PageSize > 0) and $this->Parent->Detail->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $this->TotalRows++;
+        if ($this->LastDetailIndex)
+            $PrevGroup = & $this->Groups[$this->LastDetailIndex];
+        else
+            $PrevGroup = "";
+        $Group->SetTotalControls("", $PrevGroup);
+        if ($this->Parent->Detail->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Detail->Height;
+        $this->Parent->Detail->CCSEventResult = CCGetEvent($this->Parent->Detail->CCSEvents, "OnCalculate", $this->Parent->Detail);
+        $Group->SetControls($PrevGroup);
+        $this->LastDetailIndex = count($this->Groups);
+        $this->Groups[] = & $Group;
+    }
+}
+//End saln_employee GroupsCollection class
+
+class clsReportsaln_employee { //saln_employee Class @2-4698DB9A
+
+//saln_employee Variables @2-568E339F
+
+    var $ComponentType = "Report";
+    var $PageSize;
+    var $ComponentName;
+    var $Visible;
+    var $Errors;
+    var $CCSEvents = array();
+    var $CCSEventResult;
+    var $RelativePath = "";
+    var $ViewMode = "Web";
+    var $TemplateBlock;
+    var $PageNumber;
+    var $RowNumber;
+    var $TotalRows;
+    var $TotalPages;
+    var $ControlsVisible = array();
+    var $IsEmpty;
+    var $Attributes;
+    var $DetailBlock, $Detail;
+    var $Report_FooterBlock, $Report_Footer;
+    var $Report_HeaderBlock, $Report_Header;
+    var $Page_FooterBlock, $Page_Footer;
+    var $Page_HeaderBlock, $Page_Header;
+    var $EmployeeIDNo_HeaderBlock, $EmployeeIDNo_Header;
+    var $EmployeeIDNo_FooterBlock, $EmployeeIDNo_Footer;
+    var $Surname_HeaderBlock, $Surname_Header;
+    var $Surname_FooterBlock, $Surname_Footer;
+    var $FirstName_HeaderBlock, $FirstName_Header;
+    var $FirstName_FooterBlock, $FirstName_Footer;
+    var $SorterName, $SorterDirection;
+
+    var $ds;
+    var $DataSource;
+    var $UseClientPaging = false;
+
+    //Report Controls
+    var $StaticControls, $RowControls, $Report_FooterControls, $Report_HeaderControls;
+    var $Page_FooterControls, $Page_HeaderControls;
+    var $EmployeeIDNo_HeaderControls, $EmployeeIDNo_FooterControls;
+    var $Surname_HeaderControls, $Surname_FooterControls;
+    var $FirstName_HeaderControls, $FirstName_FooterControls;
+    var $Sorter_YearID;
+    var $Sorter_ScannedSALN;
+//End saln_employee Variables
+
+//Class_Initialize Event @2-D8414B28
+    function clsReportsaln_employee($RelativePath = "", & $Parent)
+    {
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->ComponentName = "saln_employee";
+        $this->Visible = True;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Attributes = new clsAttributes($this->ComponentName . ":");
+        $this->Detail = new clsSection($this);
+        $MinPageSize = 0;
+        $MaxSectionSize = 0;
+        $this->Detail->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->Detail->Height);
+        $this->Report_Footer = new clsSection($this);
+        $this->Report_Footer->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->Report_Footer->Height);
+        $this->Report_Header = new clsSection($this);
+        $this->Page_Footer = new clsSection($this);
+        $this->Page_Footer->Height = 2;
+        $MinPageSize += $this->Page_Footer->Height;
+        $this->Page_Header = new clsSection($this);
+        $this->Page_Header->Height = 1;
+        $MinPageSize += $this->Page_Header->Height;
+        $this->EmployeeIDNo_Footer = new clsSection($this);
+        $this->EmployeeIDNo_Footer->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->EmployeeIDNo_Footer->Height);
+        $this->EmployeeIDNo_Header = new clsSection($this);
+        $this->EmployeeIDNo_Header->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->EmployeeIDNo_Header->Height);
+        $this->Surname_Footer = new clsSection($this);
+        $this->Surname_Footer->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->Surname_Footer->Height);
+        $this->Surname_Header = new clsSection($this);
+        $this->Surname_Header->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->Surname_Header->Height);
+        $this->FirstName_Footer = new clsSection($this);
+        $this->FirstName_Footer->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->FirstName_Footer->Height);
+        $this->FirstName_Header = new clsSection($this);
+        $this->FirstName_Header->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->FirstName_Header->Height);
+        $this->Errors = new clsErrors();
+        $this->DataSource = new clssaln_employeeDataSource($this);
+        $this->ds = & $this->DataSource;
+        $this->ViewMode = CCGetParam("ViewMode", "Web");
+        $PageSize = CCGetParam($this->ComponentName . "PageSize", "");
+        if(is_numeric($PageSize) && $PageSize > 0) {
+            $this->PageSize = $PageSize;
+        } else if($this->ViewMode == "Print") {
+            if (!is_numeric($PageSize) || $PageSize < 0)
+                $this->PageSize = 50;
+             else if ($PageSize == "0")
+                $this->PageSize = 0;
+             else 
+                $this->PageSize = $PageSize;
+        } else {
+            if (!is_numeric($PageSize) || $PageSize < 0)
+                $this->PageSize = 40;
+             else if ($PageSize == "0")
+                $this->PageSize = 100;
+             else 
+                $this->PageSize = min(100, $PageSize);
+        }
+        $MinPageSize += $MaxSectionSize;
+        if ($this->PageSize && $MinPageSize && $this->PageSize < $MinPageSize)
+            $this->PageSize = $MinPageSize;
+        $this->PageNumber = $this->ViewMode == "Print" ? 1 : intval(CCGetParam($this->ComponentName . "Page", 1));
+        if ($this->PageNumber <= 0 ) {
+            $this->PageNumber = 1;
+        }
+        $this->SorterName = CCGetParam("saln_employeeOrder", "");
+        $this->SorterDirection = CCGetParam("saln_employeeDir", "");
+
+        $this->Report_TotalRecords = & new clsControl(ccsReportLabel, "Report_TotalRecords", "Report_TotalRecords", ccsText, "", 0, $this);
+        $this->Report_TotalRecords->TotalFunction = "Count";
+        $this->Report_TotalRecords->IsEmptySource = true;
+        $this->Sorter_YearID = & new clsSorter($this->ComponentName, "Sorter_YearID", $FileName, $this);
+        $this->Sorter_ScannedSALN = & new clsSorter($this->ComponentName, "Sorter_ScannedSALN", $FileName, $this);
+        $this->EmployeeIDNo = & new clsControl(ccsReportLabel, "EmployeeIDNo", "EmployeeIDNo", ccsText, "", "", $this);
+        $this->EmployeeIDNo->HTML = true;
+        $this->EmployeeIDNo->EmptyText = "&nbsp;";
+        $this->Surname = & new clsControl(ccsReportLabel, "Surname", "Surname", ccsText, "", "", $this);
+        $this->Surname->HTML = true;
+        $this->Surname->EmptyText = "&nbsp;";
+        $this->FirstName = & new clsControl(ccsReportLabel, "FirstName", "FirstName", ccsText, "", "", $this);
+        $this->FirstName->HTML = true;
+        $this->FirstName->EmptyText = "&nbsp;";
+        $this->YearID = & new clsControl(ccsReportLabel, "YearID", "YearID", ccsInteger, "", "", $this);
+        $this->YearID->HTML = true;
+        $this->YearID->EmptyText = "&nbsp;";
+        $this->ScannedSALN = & new clsControl(ccsLink, "ScannedSALN", "ScannedSALN", ccsText, "", CCGetRequestParam("ScannedSALN", ccsGet, NULL), $this);
+        $this->ScannedSALN->HTML = true;
+        $this->ScannedSALN->Page = "SALNoutput.php";
+        $this->Sum_YearID2 = & new clsControl(ccsReportLabel, "Sum_YearID2", "Sum_YearID2", ccsInteger, "", "", $this);
+        $this->Sum_YearID2->HTML = true;
+        $this->Sum_YearID2->TotalFunction = "Sum";
+        $this->Sum_YearID2->EmptyText = "&nbsp;";
+        $this->Sum_YearID1 = & new clsControl(ccsReportLabel, "Sum_YearID1", "Sum_YearID1", ccsInteger, "", "", $this);
+        $this->Sum_YearID1->HTML = true;
+        $this->Sum_YearID1->TotalFunction = "Sum";
+        $this->Sum_YearID1->EmptyText = "&nbsp;";
+        $this->Sum_YearID = & new clsControl(ccsReportLabel, "Sum_YearID", "Sum_YearID", ccsInteger, "", "", $this);
+        $this->Sum_YearID->HTML = true;
+        $this->Sum_YearID->TotalFunction = "Sum";
+        $this->Sum_YearID->EmptyText = "&nbsp;";
+        $this->NoRecords = & new clsPanel("NoRecords", $this);
+        $this->TotalSum_YearID = & new clsControl(ccsReportLabel, "TotalSum_YearID", "TotalSum_YearID", ccsInteger, "", "", $this);
+        $this->TotalSum_YearID->HTML = true;
+        $this->TotalSum_YearID->TotalFunction = "Sum";
+        $this->TotalSum_YearID->EmptyText = "&nbsp;";
+        $this->PageBreak = & new clsPanel("PageBreak", $this);
+        $this->Report_CurrentDate = & new clsControl(ccsReportLabel, "Report_CurrentDate", "Report_CurrentDate", ccsText, array('ShortDate'), "", $this);
+        $this->Report_CurrentDate->HTML = true;
+        $this->Report_CurrentDate->EmptyText = "&nbsp;";
+        $this->Navigator = & new clsNavigator($this->ComponentName, "Navigator", $FileName, 10, tpCentered, $this);
+        $this->Navigator->PageSizes = array("1", "5", "10", "25", "50");
+    }
+//End Class_Initialize Event
+
+//Initialize Method @2-6C59EE65
+    function Initialize()
+    {
+        if(!$this->Visible) return;
+
+        $this->DataSource->PageSize = $this->PageSize;
+        $this->DataSource->AbsolutePage = $this->PageNumber;
+        $this->DataSource->SetOrder($this->SorterName, $this->SorterDirection);
+    }
+//End Initialize Method
+
+//CheckErrors Method @2-CEFE64A4
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->Report_TotalRecords->Errors->Count());
+        $errors = ($errors || $this->EmployeeIDNo->Errors->Count());
+        $errors = ($errors || $this->Surname->Errors->Count());
+        $errors = ($errors || $this->FirstName->Errors->Count());
+        $errors = ($errors || $this->YearID->Errors->Count());
+        $errors = ($errors || $this->ScannedSALN->Errors->Count());
+        $errors = ($errors || $this->Sum_YearID2->Errors->Count());
+        $errors = ($errors || $this->Sum_YearID1->Errors->Count());
+        $errors = ($errors || $this->Sum_YearID->Errors->Count());
+        $errors = ($errors || $this->TotalSum_YearID->Errors->Count());
+        $errors = ($errors || $this->Report_CurrentDate->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        $errors = ($errors || $this->DataSource->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//GetErrors Method @2-F49D3F1E
+    function GetErrors()
+    {
+        $errors = "";
+        $errors = ComposeStrings($errors, $this->Report_TotalRecords->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->EmployeeIDNo->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Surname->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->FirstName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->YearID->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->ScannedSALN->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Sum_YearID2->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Sum_YearID1->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Sum_YearID->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->TotalSum_YearID->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Report_CurrentDate->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DataSource->Errors->ToString());
+        return $errors;
+    }
+//End GetErrors Method
+
+//Show Method @2-6C8DCBD6
+    function Show()
+    {
+        global $Tpl;
+        global $CCSLocales;
+        if(!$this->Visible) return;
+
+        $ShownRecords = 0;
+
+        $this->DataSource->Parameters["urls_EmployeeIDNo"] = CCGetFromGet("s_EmployeeIDNo", NULL);
+        $this->DataSource->Parameters["urls_Surname"] = CCGetFromGet("s_Surname", NULL);
+        $this->DataSource->Parameters["urls_FirstName"] = CCGetFromGet("s_FirstName", NULL);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $this->DataSource->Prepare();
+        $this->DataSource->Open();
+
+        $EmployeeIDNoKey = "";
+        $SurnameKey = "";
+        $FirstNameKey = "";
+        $Groups = new clsGroupsCollectionsaln_employee($this);
+        $Groups->PageSize = $this->PageSize > 0 ? $this->PageSize : 0;
+
+        $is_next_record = $this->DataSource->next_record();
+        $this->IsEmpty = ! $is_next_record;
+        while($is_next_record) {
+            $this->DataSource->SetValues();
+            $this->EmployeeIDNo->SetValue($this->DataSource->EmployeeIDNo->GetValue());
+            $this->Surname->SetValue($this->DataSource->Surname->GetValue());
+            $this->FirstName->SetValue($this->DataSource->FirstName->GetValue());
+            $this->YearID->SetValue($this->DataSource->YearID->GetValue());
+            $this->ScannedSALN->SetValue($this->DataSource->ScannedSALN->GetValue());
+            $this->Sum_YearID2->SetValue($this->DataSource->Sum_YearID2->GetValue());
+            $this->Sum_YearID1->SetValue($this->DataSource->Sum_YearID1->GetValue());
+            $this->Sum_YearID->SetValue($this->DataSource->Sum_YearID->GetValue());
+            $this->TotalSum_YearID->SetValue($this->DataSource->TotalSum_YearID->GetValue());
+            $this->ScannedSALN->Parameters = CCGetQueryString("QueryString", array("ccsForm"));
+            $this->ScannedSALN->Parameters = CCAddParam($this->ScannedSALN->Parameters, "EmployeeIDNo", $this->DataSource->f("EmployeeIDNo"));
+            $this->Report_TotalRecords->SetValue(1);
+            if (count($Groups->Groups) == 0) $Groups->OpenGroup("Report");
+            if (count($Groups->Groups) == 2 or $EmployeeIDNoKey != $this->DataSource->f("EmployeeIDNo")) {
+                $Groups->OpenGroup("EmployeeIDNo");
+            } elseif ($SurnameKey != $this->DataSource->f("Surname")) {
+                $Groups->OpenGroup("Surname");
+            } elseif ($FirstNameKey != $this->DataSource->f("FirstName")) {
+                $Groups->OpenGroup("FirstName");
+            }
+            $Groups->AddItem();
+            $EmployeeIDNoKey = $this->DataSource->f("EmployeeIDNo");
+            $SurnameKey = $this->DataSource->f("Surname");
+            $FirstNameKey = $this->DataSource->f("FirstName");
+            $is_next_record = $this->DataSource->next_record();
+            if (!$is_next_record || $EmployeeIDNoKey != $this->DataSource->f("EmployeeIDNo")) {
+                $Groups->CloseGroup("EmployeeIDNo");
+            } elseif ($SurnameKey != $this->DataSource->f("Surname")) {
+                $Groups->CloseGroup("Surname");
+            } elseif ($FirstNameKey != $this->DataSource->f("FirstName")) {
+                $Groups->CloseGroup("FirstName");
+            }
+        }
+        if (!count($Groups->Groups)) 
+            $Groups->OpenGroup("Report");
+        else
+            $this->NoRecords->Visible = false;
+        $Groups->CloseGroup("Report");
+        $this->TotalPages = $Groups->TotalPages;
+        $this->TotalRows = $Groups->TotalRows;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        if(!$this->Visible) return;
+
+        $this->Attributes->Show();
+        $ReportBlock = "Report " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+
+        if($this->CheckErrors()) {
+            $Tpl->replaceblock("", $this->GetErrors());
+            $Tpl->block_path = $ParentPath;
+            return;
+        } else {
+            $items = & $Groups->Groups;
+            $i = $Groups->Pages[min($this->PageNumber, $Groups->TotalPages) - 1];
+            $this->ControlsVisible["EmployeeIDNo"] = $this->EmployeeIDNo->Visible;
+            $this->ControlsVisible["Surname"] = $this->Surname->Visible;
+            $this->ControlsVisible["FirstName"] = $this->FirstName->Visible;
+            $this->ControlsVisible["YearID"] = $this->YearID->Visible;
+            $this->ControlsVisible["ScannedSALN"] = $this->ScannedSALN->Visible;
+            $this->ControlsVisible["Sum_YearID2"] = $this->Sum_YearID2->Visible;
+            $this->ControlsVisible["Sum_YearID1"] = $this->Sum_YearID1->Visible;
+            $this->ControlsVisible["Sum_YearID"] = $this->Sum_YearID->Visible;
+            do {
+                $this->Attributes->RestoreFromArray($items[$i]->Attributes);
+                $this->RowNumber = $items[$i]->RowNumber;
+                switch ($items[$i]->GroupType) {
+                    Case "":
+                        $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Detail";
+                        $this->YearID->SetValue($items[$i]->YearID);
+                        $this->YearID->Attributes->RestoreFromArray($items[$i]->_YearIDAttributes);
+                        $this->ScannedSALN->SetValue($items[$i]->ScannedSALN);
+                        $this->ScannedSALN->Page = $items[$i]->_ScannedSALNPage;
+                        $this->ScannedSALN->Parameters = $items[$i]->_ScannedSALNParameters;
+                        $this->ScannedSALN->Attributes->RestoreFromArray($items[$i]->_ScannedSALNAttributes);
+                        $this->Detail->CCSEventResult = CCGetEvent($this->Detail->CCSEvents, "BeforeShow", $this->Detail);
+                        $this->Attributes->Show();
+                        $this->YearID->Show();
+                        $this->ScannedSALN->Show();
+                        $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                        if ($this->Detail->Visible)
+                            $Tpl->parseto("Section Detail", true, "Section Detail");
+                        break;
+                    case "Report":
+                        if ($items[$i]->Mode == 1) {
+                            $this->Report_TotalRecords->SetValue($items[$i]->Report_TotalRecords);
+                            $this->Report_TotalRecords->Attributes->RestoreFromArray($items[$i]->_Report_TotalRecordsAttributes);
+                            $this->Report_Header->CCSEventResult = CCGetEvent($this->Report_Header->CCSEvents, "BeforeShow", $this->Report_Header);
+                            if ($this->Report_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Report_Header";
+                                $this->Attributes->Show();
+                                $this->Report_TotalRecords->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Report_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->TotalSum_YearID->SetValue($items[$i]->TotalSum_YearID);
+                            $this->TotalSum_YearID->Attributes->RestoreFromArray($items[$i]->_TotalSum_YearIDAttributes);
+                            $this->Report_Footer->CCSEventResult = CCGetEvent($this->Report_Footer->CCSEvents, "BeforeShow", $this->Report_Footer);
+                            if ($this->Report_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Report_Footer";
+                                $this->NoRecords->Show();
+                                $this->TotalSum_YearID->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Report_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "Page":
+                        if ($items[$i]->Mode == 1) {
+                            $this->Page_Header->CCSEventResult = CCGetEvent($this->Page_Header->CCSEvents, "BeforeShow", $this->Page_Header);
+                            if ($this->Page_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Page_Header";
+                                $this->Attributes->Show();
+                                $this->Sorter_YearID->Show();
+                                $this->Sorter_ScannedSALN->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Page_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2 && !$this->UseClientPaging || $items[$i]->Mode == 1 && $this->UseClientPaging) {
+                            $this->PageBreak->Visible = (($i < count($items) - 1) && ($this->ViewMode == "Print"));
+                            $this->Report_CurrentDate->SetValue(CCFormatDate(CCGetDateArray(), $this->Report_CurrentDate->Format));
+                            $this->Report_CurrentDate->Attributes->RestoreFromArray($items[$i]->_Report_CurrentDateAttributes);
+                            $this->Navigator->PageNumber = $items[$i]->PageNumber;
+                            $this->Navigator->TotalPages = $Groups->TotalPages;
+                            $this->Navigator->Visible = ("Print" != $this->ViewMode);
+                            $this->Page_Footer->CCSEventResult = CCGetEvent($this->Page_Footer->CCSEvents, "BeforeShow", $this->Page_Footer);
+                            if ($this->Page_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Page_Footer";
+                                $this->PageBreak->Show();
+                                $this->Report_CurrentDate->Show();
+                                $this->Navigator->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Page_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "EmployeeIDNo":
+                        if ($items[$i]->Mode == 1) {
+                            $this->EmployeeIDNo->SetValue($items[$i]->EmployeeIDNo);
+                            $this->EmployeeIDNo->Attributes->RestoreFromArray($items[$i]->_EmployeeIDNoAttributes);
+                            $this->EmployeeIDNo_Header->CCSEventResult = CCGetEvent($this->EmployeeIDNo_Header->CCSEvents, "BeforeShow", $this->EmployeeIDNo_Header);
+                            if ($this->EmployeeIDNo_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section EmployeeIDNo_Header";
+                                $this->Attributes->Show();
+                                $this->EmployeeIDNo->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section EmployeeIDNo_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->Sum_YearID->SetValue($items[$i]->Sum_YearID);
+                            $this->Sum_YearID->Attributes->RestoreFromArray($items[$i]->_Sum_YearIDAttributes);
+                            $this->EmployeeIDNo_Footer->CCSEventResult = CCGetEvent($this->EmployeeIDNo_Footer->CCSEvents, "BeforeShow", $this->EmployeeIDNo_Footer);
+                            if ($this->EmployeeIDNo_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section EmployeeIDNo_Footer";
+                                $this->Sum_YearID->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section EmployeeIDNo_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "Surname":
+                        if ($items[$i]->Mode == 1) {
+                            $this->Surname->SetValue($items[$i]->Surname);
+                            $this->Surname->Attributes->RestoreFromArray($items[$i]->_SurnameAttributes);
+                            $this->Surname_Header->CCSEventResult = CCGetEvent($this->Surname_Header->CCSEvents, "BeforeShow", $this->Surname_Header);
+                            if ($this->Surname_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Surname_Header";
+                                $this->Attributes->Show();
+                                $this->Surname->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Surname_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->Sum_YearID1->SetValue($items[$i]->Sum_YearID1);
+                            $this->Sum_YearID1->Attributes->RestoreFromArray($items[$i]->_Sum_YearID1Attributes);
+                            $this->Surname_Footer->CCSEventResult = CCGetEvent($this->Surname_Footer->CCSEvents, "BeforeShow", $this->Surname_Footer);
+                            if ($this->Surname_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Surname_Footer";
+                                $this->Sum_YearID1->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Surname_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "FirstName":
+                        if ($items[$i]->Mode == 1) {
+                            $this->FirstName->SetValue($items[$i]->FirstName);
+                            $this->FirstName->Attributes->RestoreFromArray($items[$i]->_FirstNameAttributes);
+                            $this->FirstName_Header->CCSEventResult = CCGetEvent($this->FirstName_Header->CCSEvents, "BeforeShow", $this->FirstName_Header);
+                            if ($this->FirstName_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section FirstName_Header";
+                                $this->Attributes->Show();
+                                $this->FirstName->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section FirstName_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->Sum_YearID2->SetValue($items[$i]->Sum_YearID2);
+                            $this->Sum_YearID2->Attributes->RestoreFromArray($items[$i]->_Sum_YearID2Attributes);
+                            $this->FirstName_Footer->CCSEventResult = CCGetEvent($this->FirstName_Footer->CCSEvents, "BeforeShow", $this->FirstName_Footer);
+                            if ($this->FirstName_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section FirstName_Footer";
+                                $this->Sum_YearID2->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section FirstName_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                }
+                $i++;
+            } while ($i < count($items) && ($this->ViewMode == "Print" ||  !($i > 1 && $items[$i]->GroupType == 'Page' && $items[$i]->Mode == 1)));
+            $Tpl->block_path = $ParentPath;
+            $Tpl->parse($ReportBlock);
+            $this->DataSource->close();
+        }
+
+    }
+//End Show Method
+
+} //End saln_employee Class @2-FCB6E20C
+
+class clssaln_employeeDataSource extends clsDBConnection1 {  //saln_employeeDataSource Class @2-CB8B3742
+
+//DataSource Variables @2-B3A35879
+    var $Parent = "";
+    var $CCSEvents = "";
+    var $CCSEventResult;
+    var $ErrorBlock;
+    var $CmdExecution;
+
+    var $wp;
+
+
+    // Datasource fields
+    var $EmployeeIDNo;
+    var $Surname;
+    var $FirstName;
+    var $YearID;
+    var $ScannedSALN;
+    var $Sum_YearID2;
+    var $Sum_YearID1;
+    var $Sum_YearID;
+    var $TotalSum_YearID;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @2-A7563BEB
+    function clssaln_employeeDataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Report saln_employee";
+        $this->Initialize();
+        $this->EmployeeIDNo = new clsField("EmployeeIDNo", ccsText, "");
+        
+        $this->Surname = new clsField("Surname", ccsText, "");
+        
+        $this->FirstName = new clsField("FirstName", ccsText, "");
+        
+        $this->YearID = new clsField("YearID", ccsInteger, "");
+        
+        $this->ScannedSALN = new clsField("ScannedSALN", ccsText, "");
+        
+        $this->Sum_YearID2 = new clsField("Sum_YearID2", ccsInteger, "");
+        
+        $this->Sum_YearID1 = new clsField("Sum_YearID1", ccsInteger, "");
+        
+        $this->Sum_YearID = new clsField("Sum_YearID", ccsInteger, "");
+        
+        $this->TotalSum_YearID = new clsField("TotalSum_YearID", ccsInteger, "");
+        
+
+    }
+//End DataSourceClass_Initialize Event
+
+//SetOrder Method @2-32EDBF8E
+    function SetOrder($SorterName, $SorterDirection)
+    {
+        $this->Order = "";
+        $this->Order = CCGetOrder($this->Order, $SorterName, $SorterDirection, 
+            array("Sorter_YearID" => array("YearID", ""), 
+            "Sorter_ScannedSALN" => array("ScannedSALN", "")));
+    }
+//End SetOrder Method
+
+//Prepare Method @2-167C80C8
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->wp = new clsSQLParameters($this->ErrorBlock);
+        $this->wp->AddParameter("1", "urls_EmployeeIDNo", ccsText, "", "", $this->Parameters["urls_EmployeeIDNo"], "", false);
+        $this->wp->AddParameter("2", "urls_Surname", ccsText, "", "", $this->Parameters["urls_Surname"], "", false);
+        $this->wp->AddParameter("3", "urls_FirstName", ccsText, "", "", $this->Parameters["urls_FirstName"], "", false);
+        $this->wp->Criterion[1] = $this->wp->Operation(opContains, "EmployeeIDNo", $this->wp->GetDBValue("1"), $this->ToSQL($this->wp->GetDBValue("1"), ccsText),false);
+        $this->wp->Criterion[2] = $this->wp->Operation(opContains, "Surname", $this->wp->GetDBValue("2"), $this->ToSQL($this->wp->GetDBValue("2"), ccsText),false);
+        $this->wp->Criterion[3] = $this->wp->Operation(opContains, "FirstName", $this->wp->GetDBValue("3"), $this->ToSQL($this->wp->GetDBValue("3"), ccsText),false);
+        $this->Where = $this->wp->opAND(
+             false, $this->wp->opAND(
+             false, 
+             $this->wp->Criterion[1], 
+             $this->wp->Criterion[2]), 
+             $this->wp->Criterion[3]);
+    }
+//End Prepare Method
+
+//Open Method @2-0C5B10CA
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->SQL = "SELECT EmployeeIDNo, Surname, FirstName, ScannedSALN \n\n" .
+        "FROM saln INNER JOIN employee ON\n\n" .
+        "saln.EmployeeID = employee.EmployeeID {SQL_Where} {SQL_OrderBy}";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        $this->query(CCBuildSQL($this->SQL, $this->Where, "employee.EmployeeIDNo asc,employee.Surname asc,employee.FirstName asc" .  ($this->Order ? ", " . $this->Order: "")));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @2-724BC7FC
+    function SetValues()
+    {
+        $this->EmployeeIDNo->SetDBValue($this->f("EmployeeIDNo"));
+        $this->Surname->SetDBValue($this->f("Surname"));
+        $this->FirstName->SetDBValue($this->f("FirstName"));
+        $this->YearID->SetDBValue(trim($this->f("YearID")));
+        $this->ScannedSALN->SetDBValue($this->f("ScannedSALN"));
+        $this->Sum_YearID2->SetDBValue(trim($this->f("YearID")));
+        $this->Sum_YearID1->SetDBValue(trim($this->f("YearID")));
+        $this->Sum_YearID->SetDBValue(trim($this->f("YearID")));
+        $this->TotalSum_YearID->SetDBValue(trim($this->f("YearID")));
+    }
+//End SetValues Method
+
+} //End saln_employeeDataSource Class @2-FCB6E20C
+
+class clsRecordemployee_saln { //employee_saln Class @11-09191B07
+
+//Variables @11-D6FF3E86
+
+    // Public variables
+    var $ComponentType = "Record";
+    var $ComponentName;
+    var $Parent;
+    var $HTMLFormAction;
+    var $PressedButton;
+    var $Errors;
+    var $ErrorBlock;
+    var $FormSubmitted;
+    var $FormEnctype;
+    var $Visible;
+    var $IsEmpty;
+
+    var $CCSEvents = "";
+    var $CCSEventResult;
+
+    var $RelativePath = "";
+
+    var $InsertAllowed = false;
+    var $UpdateAllowed = false;
+    var $DeleteAllowed = false;
+    var $ReadAllowed   = false;
+    var $EditMode      = false;
+    var $ds;
+    var $DataSource;
+    var $ValidatingControls;
+    var $Controls;
+    var $Attributes;
+
+    // Class variables
+//End Variables
+
+//Class_Initialize Event @11-31BC3F34
+    function clsRecordemployee_saln($RelativePath, & $Parent)
+    {
+
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->Visible = true;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Record employee_saln/Error";
+        $this->ReadAllowed = true;
+        if($this->Visible)
+        {
+            $this->ComponentName = "employee_saln";
+            $this->Attributes = new clsAttributes($this->ComponentName . ":");
+            $CCSForm = split(":", CCGetFromGet("ccsForm", ""), 2);
+            if(sizeof($CCSForm) == 1)
+                $CCSForm[1] = "";
+            list($FormName, $FormMethod) = $CCSForm;
+            $this->FormEnctype = "application/x-www-form-urlencoded";
+            $this->FormSubmitted = ($FormName == $this->ComponentName);
+            $Method = $this->FormSubmitted ? ccsPost : ccsGet;
+            $this->Button_DoSearch = & new clsButton("Button_DoSearch", $Method, $this);
+            $this->s_EmployeeIDNo = & new clsControl(ccsTextBox, "s_EmployeeIDNo", "s_EmployeeIDNo", ccsText, "", CCGetRequestParam("s_EmployeeIDNo", $Method, NULL), $this);
+            $this->s_Surname = & new clsControl(ccsTextBox, "s_Surname", "s_Surname", ccsText, "", CCGetRequestParam("s_Surname", $Method, NULL), $this);
+            $this->s_FirstName = & new clsControl(ccsTextBox, "s_FirstName", "s_FirstName", ccsText, "", CCGetRequestParam("s_FirstName", $Method, NULL), $this);
+        }
+    }
+//End Class_Initialize Event
+
+//Validate Method @11-BCDFF45F
+    function Validate()
+    {
+        global $CCSLocales;
+        $Validation = true;
+        $Where = "";
+        $Validation = ($this->s_EmployeeIDNo->Validate() && $Validation);
+        $Validation = ($this->s_Surname->Validate() && $Validation);
+        $Validation = ($this->s_FirstName->Validate() && $Validation);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "OnValidate", $this);
+        $Validation =  $Validation && ($this->s_EmployeeIDNo->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_Surname->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_FirstName->Errors->Count() == 0);
+        return (($this->Errors->Count() == 0) && $Validation);
+    }
+//End Validate Method
+
+//CheckErrors Method @11-F36109DD
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->s_EmployeeIDNo->Errors->Count());
+        $errors = ($errors || $this->s_Surname->Errors->Count());
+        $errors = ($errors || $this->s_FirstName->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//MasterDetail @11-ED598703
+function SetPrimaryKeys($keyArray)
+{
+    $this->PrimaryKeys = $keyArray;
+}
+function GetPrimaryKeys()
+{
+    return $this->PrimaryKeys;
+}
+function GetPrimaryKey($keyName)
+{
+    return $this->PrimaryKeys[$keyName];
+}
+//End MasterDetail
+
+//Operation Method @11-A05B63B1
+    function Operation()
+    {
+        if(!$this->Visible)
+            return;
+
+        global $Redirect;
+        global $FileName;
+
+        if(!$this->FormSubmitted) {
+            return;
+        }
+
+        if($this->FormSubmitted) {
+            $this->PressedButton = "Button_DoSearch";
+            if($this->Button_DoSearch->Pressed) {
+                $this->PressedButton = "Button_DoSearch";
+            }
+        }
+        $Redirect = "Query_SALN.php";
+        if($this->Validate()) {
+            if($this->PressedButton == "Button_DoSearch") {
+                $Redirect = "Query_SALN.php" . "?" . CCMergeQueryStrings(CCGetQueryString("Form", array("Button_DoSearch", "Button_DoSearch_x", "Button_DoSearch_y")));
+                if(!CCGetEvent($this->Button_DoSearch->CCSEvents, "OnClick", $this->Button_DoSearch)) {
+                    $Redirect = "";
+                }
+            }
+        } else {
+            $Redirect = "";
+        }
+    }
+//End Operation Method
+
+//Show Method @11-8DCC6AA4
+    function Show()
+    {
+        global $CCSUseAmp;
+        global $Tpl;
+        global $FileName;
+        global $CCSLocales;
+        $Error = "";
+
+        if(!$this->Visible)
+            return;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $RecordBlock = "Record " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $RecordBlock;
+        $this->EditMode = $this->EditMode && $this->ReadAllowed;
+        if (!$this->FormSubmitted) {
+        }
+
+        if($this->FormSubmitted || $this->CheckErrors()) {
+            $Error = "";
+            $Error = ComposeStrings($Error, $this->s_EmployeeIDNo->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_Surname->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_FirstName->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Errors->ToString());
+            $Tpl->SetVar("Error", $Error);
+            $Tpl->Parse("Error", false);
+        }
+        $CCSForm = $this->EditMode ? $this->ComponentName . ":" . "Edit" : $this->ComponentName;
+        $this->HTMLFormAction = $FileName . "?" . CCAddParam(CCGetQueryString("QueryString", ""), "ccsForm", $CCSForm);
+        $Tpl->SetVar("Action", !$CCSUseAmp ? $this->HTMLFormAction : str_replace("&", "&amp;", $this->HTMLFormAction));
+        $Tpl->SetVar("HTMLFormName", $this->ComponentName);
+        $Tpl->SetVar("HTMLFormEnctype", $this->FormEnctype);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        $this->Attributes->Show();
+        if(!$this->Visible) {
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+
+        $this->Button_DoSearch->Show();
+        $this->s_EmployeeIDNo->Show();
+        $this->s_Surname->Show();
+        $this->s_FirstName->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+    }
+//End Show Method
+
+} //End employee_saln Class @11-FCB6E20C
+
+//Initialize Page @1-5B09C4E9
+// Variables
+$FileName = "";
+$Redirect = "";
+$Tpl = "";
+$TemplateFileName = "";
+$BlockToParse = "";
+$ComponentName = "";
+$Attributes = "";
+
+// Events;
+$CCSEvents = "";
+$CCSEventResult = "";
+
+$FileName = FileName;
+$Redirect = "";
+$TemplateFileName = "Query_SALN.html";
+$BlockToParse = "main";
+$TemplateEncoding = "CP1252";
+$ContentType = "text/html";
+$PathToRoot = "./";
+$Charset = $Charset ? $Charset : "windows-1252";
+//End Initialize Page
+
+//Include events file @1-A7542C3D
+include_once("./Query_SALN_events.php");
+//End Include events file
+
+//Before Initialize @1-E870CEBC
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeInitialize", $MainPage);
+//End Before Initialize
+
+//Initialize Objects @1-9CBDABD7
+$DBConnection1 = new clsDBConnection1();
+$MainPage->Connections["Connection1"] = & $DBConnection1;
+$Attributes = new clsAttributes("page:");
+$MainPage->Attributes = & $Attributes;
+
+// Controls
+$saln_employee = & new clsReportsaln_employee("", $MainPage);
+$employee_saln = & new clsRecordemployee_saln("", $MainPage);
+$MainPage->saln_employee = & $saln_employee;
+$MainPage->employee_saln = & $employee_saln;
+$saln_employee->Initialize();
+
+BindEvents();
+
+$CCSEventResult = CCGetEvent($CCSEvents, "AfterInitialize", $MainPage);
+
+if ($Charset) {
+    header("Content-Type: " . $ContentType . "; charset=" . $Charset);
+} else {
+    header("Content-Type: " . $ContentType);
+}
+//End Initialize Objects
+
+//Initialize HTML Template @1-E710DB26
+$CCSEventResult = CCGetEvent($CCSEvents, "OnInitializeView", $MainPage);
+$Tpl = new clsTemplate($FileEncoding, $TemplateEncoding);
+$Tpl->LoadTemplate(PathToCurrentPage . $TemplateFileName, $BlockToParse, "CP1252");
+$Tpl->block_path = "/$BlockToParse";
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeShow", $MainPage);
+$Attributes->SetValue("pathToRoot", "");
+$Attributes->Show();
+//End Initialize HTML Template
+
+//Execute Components @1-9DCFA0C0
+$employee_saln->Operation();
+//End Execute Components
+
+//Go to destination page @1-B40EFC0C
+if($Redirect)
+{
+    $CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+    $DBConnection1->close();
+    header("Location: " . $Redirect);
+    unset($saln_employee);
+    unset($employee_saln);
+    unset($Tpl);
+    exit;
+}
+//End Go to destination page
+
+//Show Page @1-911F0E71
+$saln_employee->Show();
+$employee_saln->Show();
+$Tpl->block_path = "";
+$Tpl->Parse($BlockToParse, false);
+if (!isset($main_block)) $main_block = $Tpl->GetVar($BlockToParse);
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeOutput", $MainPage);
+if ($CCSEventResult) echo $main_block;
+//End Show Page
+
+//Unload Page @1-9A0C5D00
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+$DBConnection1->close();
+unset($saln_employee);
+unset($employee_saln);
+unset($Tpl);
+//End Unload Page
+
+
+?>

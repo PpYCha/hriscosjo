@@ -1,0 +1,388 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>CurrentPosition</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-22436A32
+
+var employee1_DatePicker_DetailedDate = new Object(); 
+employee1_DatePicker_DetailedDate.format           = "mm/dd/yyyy";
+employee1_DatePicker_DetailedDate.style            = "Styles/Fresh/Style.css";
+employee1_DatePicker_DetailedDate.relativePathPart = "";
+employee1_DatePicker_DetailedDate.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//employee1Button_Delete_OnClick @36-9D84B75E
+function employee1Button_Delete_OnClick()
+{
+    var result = true;
+//End employee1Button_Delete_OnClick
+
+//Confirmation Message @37-8243B274
+    return confirm('Delete record?');
+//End Confirmation Message
+
+//Close employee1Button_Delete_OnClick @36-BC33A33A
+    return result;
+}
+//End Close employee1Button_Delete_OnClick
+
+//employee1Button_Cancel_OnClick @38-431A3369
+function employee1Button_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End employee1Button_Cancel_OnClick
+
+//bind_events @1-6115F593
+function bind_events() {
+    addEventHandler("employee1Button_Delete", "click", employee1Button_Delete_OnClick);
+    addEventHandler("employee1Button_Cancel", "click", employee1Button_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1">Back</a></p>
+<!-- BEGIN Grid employee -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th"><strong>Current Position</strong></td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">ID</th>
+ 
+          <th scope="col">Employee ID No.</th>
+ 
+          <th scope="col">Surname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">First Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Middle Name&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Ext.</th>
+ 
+          <th scope="col">Date of Birth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: right"><a href="{EmployeeID_Src}" id="employeeEmployeeID_{employee:rowNumber}">{EmployeeID}</a>&nbsp;</td> 
+          <td>{EmployeeIDNo}&nbsp;</td> 
+          <td>{Surname}&nbsp;</td> 
+          <td>{FirstName}&nbsp;</td> 
+          <td>{MiddleName}&nbsp;</td> 
+          <td>{NameExtension}&nbsp;</td> 
+          <td>{BirthMonth}&nbsp;{BirthDay},{BirthYear}</td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="7">No records</td>
+        </tr>
+        <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="7">&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option value="" selected>-</option>
+ {PageSize_Options}
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid employee --><br>
+<!-- BEGIN Record employee1 -->
+<form id="employee1" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Add/Edit Current Position</strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employee1Position">Position</label></td> 
+            <td><input id="employee1Position" maxlength="70" size="50" value="{Position}" name="{Position_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1EffectiveMonth">Effectivity Date</label></td> 
+            <td>
+              <select id="employee1EffectiveMonth" name="{EffectiveMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {EffectiveMonth_Options}
+              </select>
+ 
+              <select id="employee1EffectiveDay" name="{EffectiveDay_Name}">
+                <option value="" selected>Select Value</option>
+                {EffectiveDay_Options}
+              </select>
+ <input id="employee1EffectiveYear" maxlength="4" size="4" value="{EffectiveYear}" name="{EffectiveYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1MonthlySalary">Rate</label></td> 
+            <td><input id="employee1MonthlySalary" maxlength="12" size="12" value="{MonthlySalary}" name="{MonthlySalary_Name}">&nbsp;&nbsp;&nbsp; <label for="employee1TextBox11" style="display: none;"></label><input id="employee1TextBox11" maxlength="100" size="50" value="{TextBox11}" name="{TextBox11_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StatAppt">Status of Appointment</label></td> 
+            <td>
+              <select id="employee1StatAppt" name="{StatAppt_Name}">
+                <option value="" selected>Select Value</option>
+                {StatAppt_Options}
+              </select>
+ &nbsp; 
+              <select id="employee1ListBox2" name="{ListBox2_Name}">
+                <option value="" selected>Select Value</option>
+                {ListBox2_Options}
+              </select>
+ &nbsp; 
+              <select id="employee1ListBox3" name="{ListBox3_Name}">
+                <option value="" selected>Select Value</option>
+                {ListBox3_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1OfficeID">Department/OfficeName</label></td> 
+            <td>
+              <select id="employee1OfficeID" name="{OfficeID_Name}">
+                <option value="" selected>Select Value</option>
+                {OfficeID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1OrigApptMonth">Entrance to Duty (PGNS)</label></td> 
+            <td>
+              <select id="employee1OrigApptMonth" name="{OrigApptMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {OrigApptMonth_Options}
+              </select>
+ 
+              <select id="employee1OrigApptDay" name="{OrigApptDay_Name}">
+                <option value="" selected>Select Value</option>
+                {OrigApptDay_Options}
+              </select>
+ <input id="employee1OrigApptYear" maxlength="4" size="4" value="{OrigApptYear}" name="{OrigApptYear_Name}">&nbsp;<label for="employee1TextBox3" style="display: none;"></label><input id="employee1TextBox3" size="10" value="{TextBox3}" name="{TextBox3_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;Previous Employment (PGNS) </td> 
+            <td><label for="employee1TextBox6" style="display: none;"></label><input id="employee1TextBox6" size="10" value="{TextBox6}" name="{TextBox6_Name}">&nbsp;to <label for="employee1TextBox8" style="display: none;"></label><input id="employee1TextBox8" size="10" value="{TextBox8}" name="{TextBox8_Name}">&nbsp;<em>mm/dd/yyyy</em></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td><label for="employee1TextBox9" style="display: none;"></label><input id="employee1TextBox9" size="10" value="{TextBox9}" name="{TextBox9_Name}">&nbsp;to <input id="employee1TextBox10" size="10" value="{TextBox10}" name="{TextBox10_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td><input id="employee1TextBox12" size="10" value="{TextBox12}" name="{TextBox12_Name}">&nbsp;to <label for="employee1TextBox13" style="display: none;"></label><input id="employee1TextBox13" size="10" value="{TextBox13}" name="{TextBox13_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td><input id="employee1TextBox14" size="10" value="{TextBox14}" name="{TextBox14_Name}">&nbsp;to<font style="BACKGROUND-COLOR: #ffffff">&nbsp;</font><input id="employee1TextBox15" size="10" value="{TextBox15}" name="{TextBox15_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td><label for="employee1TextBox16" style="display: none;"></label><input id="employee1TextBox16" size="10" value="{TextBox16}" name="{TextBox16_Name}">&nbsp;to <label for="employee1TextBox17" style="display: none;"></label><input id="employee1TextBox17" size="10" value="{TextBox17}" name="{TextBox17_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1PromotedDay"></label></td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1LastServiceMonth">Last Day of Service</label></td> 
+            <td><label for="employee1TextBox1" style="display: none;"></label> 
+              <select id="employee1TextBox1" name="{TextBox1_Name}">
+                <option value="" selected>Select Value</option>
+                {TextBox1_Options}
+              </select>
+ <label for="employee1TextBox2" style="display: none;"></label> 
+              <select id="employee1TextBox2" name="{TextBox2_Name}">
+                <option value="" selected>Select Value</option>
+                {TextBox2_Options}
+              </select>
+ <input id="employee1LastService" maxlength="4" size="4" value="{LastService}" name="{LastService_Name}">&nbsp;&nbsp;&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1ModeSeparatnID">Mode Separation</label></td> 
+            <td>&nbsp; 
+              <select id="employee1ListBox1" name="{ListBox1_Name}">
+                <option value="" selected>Select Value</option>
+                {ListBox1_Options}
+              </select>
+ &nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1DetailedID"><font color="#ff0000">Detailed</font></label></td> 
+            <td><input id="employee1DetailedID" type="checkbox" name="{DetailedID_Name}" {DetailedID}></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1DetailedOffice">Department/Office</label></td> 
+            <td><input id="employee1DetailedOffice" maxlength="50" size="50" value="{DetailedOffice}" name="{DetailedOffice_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1DetailedDate">Date (mm/dd/yyyy)</label></td> 
+            <td><input id="employee1DetailedDate" maxlength="100" size="8" value="{DetailedDate}" name="{DetailedDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_DetailedDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="employee1DatePicker_DetailedDate"><img id="employee1DatePicker_DetailedDate_Image" alt="Show Date Picker" src="Styles/Fresh/Images/DatePicker.gif" border="0"></a><!-- END DatePicker DatePicker_DetailedDate --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1DetailedRemarks">Remarks</label></td> 
+            <td><input id="employee1DetailedRemarks" maxlength="100" size="60" value="{DetailedRemarks}" name="{DetailedRemarks_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;<font color="#ff0000">Reassignment</font></td> 
+            <td><input id="employee1CheckBox1" type="checkbox" name="{CheckBox1_Name}" {CheckBox1}></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;Department/Office</td> 
+            <td>
+              <select id="employee1TextBox4" name="{TextBox4_Name}">
+                <option value="" selected>Select Value</option>
+                {TextBox4_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;<label for="employee1DetailedDate">Date (mm/dd/yyyy)</label></td> 
+            <td><input id="employee1TextBox5" size="8" value="{TextBox5}" name="{TextBox5_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;<label for="employee1DetailedRemarks">Remarks</label></td> 
+            <td><label for="employee1TextBox7" style="display: none;"></label><input id="employee1TextBox7" maxlength="100" size="60" value="{TextBox7}" name="{TextBox7_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;<strong><font color="#ff0000">CERTIFICATION</font></strong></td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><font color="#ff0000"><strong>&nbsp;</strong></font><font style="BACKGROUND-COLOR: #eef1e2" color="#4e5920">Purpose</font></td> 
+            <td>&nbsp; 
+              <select id="employee1ListBox8" name="{ListBox8_Name}">
+                <option value="" selected>Select Value</option>
+                {ListBox8_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><font color="#ff0000"><strong>&nbsp;</strong></font><font style="BACKGROUND-COLOR: #eef1e2" color="#4e5920">Issued Date&nbsp;</font></td> 
+            <td>&nbsp; 
+              <select id="employee1ListBox19" name="{ListBox19_Name}">
+                <option value="" selected>Select Value</option>
+                {ListBox19_Options}
+              </select>
+ 
+              <select id="employee1ListBox18" name="{ListBox18_Name}">
+                <option value="" selected>Select Value</option>
+                {ListBox18_Options}
+              </select>
+ <input id="employee1ListBox20" maxlength="4" size="4" value="{ListBox20}" name="{ListBox20_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td align="right" colspan="2">
+              <!-- BEGIN Button Button_Insert --><input class="Button" id="employee1Button_Insert" type="submit" alt="Add" value="Add" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input class="Button" id="employee1Button_Update" type="submit" alt="Submit" value="Submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input class="Button" id="employee1Button_Delete" type="submit" alt="Delete" value="Delete" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input class="Button" id="employee1Button_Cancel" type="submit" alt="Cancel" value="Cancel" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record employee1 --><br>
+</body>
+</html>

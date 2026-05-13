@@ -1,0 +1,1135 @@
+<?php
+//Include Common Files @1-F19DD457
+define("RelativePath", ".");
+define("PathToCurrentPage", "/");
+define("FileName", "Purpose4_copy2.php");
+include_once(RelativePath . "/Common.php");
+include_once(RelativePath . "/Template.php");
+include_once(RelativePath . "/Sorter.php");
+include_once(RelativePath . "/Navigator.php");
+//End Include Common Files
+
+class clsGridemployee { //employee class @2-25A9BC51
+
+//Variables @2-AC1EDBB9
+
+    // Public variables
+    var $ComponentType = "Grid";
+    var $ComponentName;
+    var $Visible;
+    var $Errors;
+    var $ErrorBlock;
+    var $ds;
+    var $DataSource;
+    var $PageSize;
+    var $IsEmpty;
+    var $ForceIteration = false;
+    var $HasRecord = false;
+    var $SorterName = "";
+    var $SorterDirection = "";
+    var $PageNumber;
+    var $RowNumber;
+    var $ControlsVisible = array();
+
+    var $CCSEvents = "";
+    var $CCSEventResult;
+
+    var $RelativePath = "";
+    var $Attributes;
+
+    // Grid Controls
+    var $StaticControls;
+    var $RowControls;
+//End Variables
+
+//Class_Initialize Event @2-50FE0D1C
+    function clsGridemployee($RelativePath, & $Parent)
+    {
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->ComponentName = "employee";
+        $this->Visible = True;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Grid employee";
+        $this->Attributes = new clsAttributes($this->ComponentName . ":");
+        $this->DataSource = new clsemployeeDataSource($this);
+        $this->ds = & $this->DataSource;
+        $this->PageSize = CCGetParam($this->ComponentName . "PageSize", "");
+        if(!is_numeric($this->PageSize) || !strlen($this->PageSize))
+            $this->PageSize = 10;
+        else
+            $this->PageSize = intval($this->PageSize);
+        if ($this->PageSize > 100)
+            $this->PageSize = 100;
+        if($this->PageSize == 0)
+            $this->Errors->addError("<p>Form: Grid " . $this->ComponentName . "<br>Error: (CCS06) Invalid page size.</p>");
+        $this->PageNumber = intval(CCGetParam($this->ComponentName . "Page", 1));
+        if ($this->PageNumber <= 0) $this->PageNumber = 1;
+
+        $this->Surname = & new clsControl(ccsLink, "Surname", "Surname", ccsText, "", CCGetRequestParam("Surname", ccsGet, NULL), $this);
+        $this->Surname->Page = "Purpose4_copy2.php";
+        $this->FirstName = & new clsControl(ccsLabel, "FirstName", "FirstName", ccsText, "", CCGetRequestParam("FirstName", ccsGet, NULL), $this);
+        $this->MiddleName = & new clsControl(ccsLabel, "MiddleName", "MiddleName", ccsText, "", CCGetRequestParam("MiddleName", ccsGet, NULL), $this);
+        $this->SecRecPurposeID = & new clsControl(ccsLabel, "SecRecPurposeID", "SecRecPurposeID", ccsText, "", CCGetRequestParam("SecRecPurposeID", ccsGet, NULL), $this);
+        $this->CertDay = & new clsControl(ccsLabel, "CertDay", "CertDay", ccsText, "", CCGetRequestParam("CertDay", ccsGet, NULL), $this);
+        $this->CertMonth = & new clsControl(ccsLabel, "CertMonth", "CertMonth", ccsText, "", CCGetRequestParam("CertMonth", ccsGet, NULL), $this);
+        $this->CertYear = & new clsControl(ccsLabel, "CertYear", "CertYear", ccsText, "", CCGetRequestParam("CertYear", ccsGet, NULL), $this);
+        $this->employee_Insert = & new clsControl(ccsLink, "employee_Insert", "employee_Insert", ccsText, "", CCGetRequestParam("employee_Insert", ccsGet, NULL), $this);
+        $this->employee_Insert->Parameters = CCGetQueryString("QueryString", array("EmployeeID", "ccsForm"));
+        $this->employee_Insert->Page = "Purpose4_copy2.php";
+        $this->Navigator = & new clsNavigator($this->ComponentName, "Navigator", $FileName, 10, tpCentered, $this);
+        $this->Navigator->PageSizes = array("1", "5", "10", "25", "50");
+    }
+//End Class_Initialize Event
+
+//Initialize Method @2-90E704C5
+    function Initialize()
+    {
+        if(!$this->Visible) return;
+
+        $this->DataSource->PageSize = & $this->PageSize;
+        $this->DataSource->AbsolutePage = & $this->PageNumber;
+        $this->DataSource->SetOrder($this->SorterName, $this->SorterDirection);
+    }
+//End Initialize Method
+
+//Show Method @2-32ECC225
+    function Show()
+    {
+        global $Tpl;
+        global $CCSLocales;
+        if(!$this->Visible) return;
+
+        $this->RowNumber = 0;
+
+        $this->DataSource->Parameters["urls_Surname"] = CCGetFromGet("s_Surname", NULL);
+        $this->DataSource->Parameters["urls_FirstName"] = CCGetFromGet("s_FirstName", NULL);
+        $this->DataSource->Parameters["urls_MiddleName"] = CCGetFromGet("s_MiddleName", NULL);
+        $this->DataSource->Parameters["urlEmployeeID"] = CCGetFromGet("EmployeeID", NULL);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $this->DataSource->Prepare();
+        $this->DataSource->Open();
+        $this->HasRecord = $this->DataSource->has_next_record();
+        $this->IsEmpty = ! $this->HasRecord;
+        $this->Attributes->Show();
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        if(!$this->Visible) return;
+
+        $GridBlock = "Grid " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $GridBlock;
+
+
+        if (!$this->IsEmpty) {
+            $this->ControlsVisible["Surname"] = $this->Surname->Visible;
+            $this->ControlsVisible["FirstName"] = $this->FirstName->Visible;
+            $this->ControlsVisible["MiddleName"] = $this->MiddleName->Visible;
+            $this->ControlsVisible["SecRecPurposeID"] = $this->SecRecPurposeID->Visible;
+            $this->ControlsVisible["CertDay"] = $this->CertDay->Visible;
+            $this->ControlsVisible["CertMonth"] = $this->CertMonth->Visible;
+            $this->ControlsVisible["CertYear"] = $this->CertYear->Visible;
+            while ($this->ForceIteration || (($this->RowNumber < $this->PageSize) &&  ($this->HasRecord = $this->DataSource->has_next_record()))) {
+                $this->RowNumber++;
+                if ($this->HasRecord) {
+                    $this->DataSource->next_record();
+                    $this->DataSource->SetValues();
+                }
+                $Tpl->block_path = $ParentPath . "/" . $GridBlock . "/Row";
+                $this->Surname->SetValue($this->DataSource->Surname->GetValue());
+                $this->Surname->Parameters = CCGetQueryString("QueryString", array("ccsForm"));
+                $this->Surname->Parameters = CCAddParam($this->Surname->Parameters, "EmployeeID", $this->DataSource->f("EmployeeID"));
+                $this->FirstName->SetValue($this->DataSource->FirstName->GetValue());
+                $this->MiddleName->SetValue($this->DataSource->MiddleName->GetValue());
+                $this->SecRecPurposeID->SetValue($this->DataSource->SecRecPurposeID->GetValue());
+                $this->CertDay->SetValue($this->DataSource->CertDay->GetValue());
+                $this->CertMonth->SetValue($this->DataSource->CertMonth->GetValue());
+                $this->CertYear->SetValue($this->DataSource->CertYear->GetValue());
+                $this->Attributes->SetValue("rowNumber", $this->RowNumber);
+                $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShowRow", $this);
+                $this->Attributes->Show();
+                $this->Surname->Show();
+                $this->FirstName->Show();
+                $this->MiddleName->Show();
+                $this->SecRecPurposeID->Show();
+                $this->CertDay->Show();
+                $this->CertMonth->Show();
+                $this->CertYear->Show();
+                $Tpl->block_path = $ParentPath . "/" . $GridBlock;
+                $Tpl->parse("Row", true);
+            }
+        }
+        else { // Show NoRecords block if no records are found
+            $this->Attributes->Show();
+            $Tpl->parse("NoRecords", false);
+        }
+
+        $errors = $this->GetErrors();
+        if(strlen($errors))
+        {
+            $Tpl->replaceblock("", $errors);
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+        $this->Navigator->PageNumber = $this->DataSource->AbsolutePage;
+        $this->Navigator->PageSize = $this->PageSize;
+        if ($this->DataSource->RecordsCount == "CCS not counted")
+            $this->Navigator->TotalPages = $this->DataSource->AbsolutePage + ($this->DataSource->next_record() ? 1 : 0);
+        else
+            $this->Navigator->TotalPages = $this->DataSource->PageCount();
+        if ($this->Navigator->TotalPages <= 1) {
+            $this->Navigator->Visible = false;
+        }
+        $this->employee_Insert->Show();
+        $this->Navigator->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+        $this->DataSource->close();
+    }
+//End Show Method
+
+//GetErrors Method @2-A5EFD0DD
+    function GetErrors()
+    {
+        $errors = "";
+        $errors = ComposeStrings($errors, $this->Surname->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->FirstName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->MiddleName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->SecRecPurposeID->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->CertDay->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->CertMonth->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->CertYear->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DataSource->Errors->ToString());
+        return $errors;
+    }
+//End GetErrors Method
+
+} //End employee Class @2-FCB6E20C
+
+class clsemployeeDataSource extends clsDBConnection1 {  //employeeDataSource Class @2-3A1764EA
+
+//DataSource Variables @2-E553A318
+    var $Parent = "";
+    var $CCSEvents = "";
+    var $CCSEventResult;
+    var $ErrorBlock;
+    var $CmdExecution;
+
+    var $CountSQL;
+    var $wp;
+
+
+    // Datasource fields
+    var $Surname;
+    var $FirstName;
+    var $MiddleName;
+    var $SecRecPurposeID;
+    var $CertDay;
+    var $CertMonth;
+    var $CertYear;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @2-93EE8E1F
+    function clsemployeeDataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Grid employee";
+        $this->Initialize();
+        $this->Surname = new clsField("Surname", ccsText, "");
+        
+        $this->FirstName = new clsField("FirstName", ccsText, "");
+        
+        $this->MiddleName = new clsField("MiddleName", ccsText, "");
+        
+        $this->SecRecPurposeID = new clsField("SecRecPurposeID", ccsText, "");
+        
+        $this->CertDay = new clsField("CertDay", ccsText, "");
+        
+        $this->CertMonth = new clsField("CertMonth", ccsText, "");
+        
+        $this->CertYear = new clsField("CertYear", ccsText, "");
+        
+
+    }
+//End DataSourceClass_Initialize Event
+
+//SetOrder Method @2-9E1383D1
+    function SetOrder($SorterName, $SorterDirection)
+    {
+        $this->Order = "";
+        $this->Order = CCGetOrder($this->Order, $SorterName, $SorterDirection, 
+            "");
+    }
+//End SetOrder Method
+
+//Prepare Method @2-658212B8
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->wp = new clsSQLParameters($this->ErrorBlock);
+        $this->wp->AddParameter("1", "urls_Surname", ccsText, "", "", $this->Parameters["urls_Surname"], "", false);
+        $this->wp->AddParameter("2", "urls_FirstName", ccsText, "", "", $this->Parameters["urls_FirstName"], "", false);
+        $this->wp->AddParameter("3", "urls_MiddleName", ccsText, "", "", $this->Parameters["urls_MiddleName"], "", false);
+        $this->wp->AddParameter("4", "urlEmployeeID", ccsInteger, "", "", $this->Parameters["urlEmployeeID"], "", false);
+        $this->wp->Criterion[1] = $this->wp->Operation(opContains, "employee.Surname", $this->wp->GetDBValue("1"), $this->ToSQL($this->wp->GetDBValue("1"), ccsText),false);
+        $this->wp->Criterion[2] = $this->wp->Operation(opContains, "employee.FirstName", $this->wp->GetDBValue("2"), $this->ToSQL($this->wp->GetDBValue("2"), ccsText),false);
+        $this->wp->Criterion[3] = $this->wp->Operation(opContains, "employee.MiddleName", $this->wp->GetDBValue("3"), $this->ToSQL($this->wp->GetDBValue("3"), ccsText),false);
+        $this->wp->Criterion[4] = $this->wp->Operation(opEqual, "employee.EmployeeID", $this->wp->GetDBValue("4"), $this->ToSQL($this->wp->GetDBValue("4"), ccsInteger),false);
+        $this->Where = $this->wp->opAND(
+             false, $this->wp->opAND(
+             false, $this->wp->opAND(
+             false, 
+             $this->wp->Criterion[1], 
+             $this->wp->Criterion[2]), 
+             $this->wp->Criterion[3]), 
+             $this->wp->Criterion[4]);
+    }
+//End Prepare Method
+
+//Open Method @2-B8D1EF37
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->CountSQL = "SELECT COUNT(*)\n\n" .
+        "FROM employee LEFT JOIN lut_servicerecpurpose ON\n\n" .
+        "employee.SecRecPurposeID = lut_servicerecpurpose.SecRecPurposeID";
+        $this->SQL = "SELECT EmployeeID, Surname, FirstName, MiddleName, employee.SecRecPurposeID AS employee_SecRecPurposeID, CertDay, CertMonth, CertYear,\n\n" .
+        "lut_servicerecpurpose.* \n\n" .
+        "FROM employee LEFT JOIN lut_servicerecpurpose ON\n\n" .
+        "employee.SecRecPurposeID = lut_servicerecpurpose.SecRecPurposeID {SQL_Where} {SQL_OrderBy}";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        if ($this->CountSQL) 
+            $this->RecordsCount = CCGetDBValue(CCBuildSQL($this->CountSQL, $this->Where, ""), $this);
+        else
+            $this->RecordsCount = "CCS not counted";
+        $this->query($this->OptimizeSQL(CCBuildSQL($this->SQL, $this->Where, $this->Order)));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @2-DD192014
+    function SetValues()
+    {
+        $this->Surname->SetDBValue($this->f("Surname"));
+        $this->FirstName->SetDBValue($this->f("FirstName"));
+        $this->MiddleName->SetDBValue($this->f("MiddleName"));
+        $this->SecRecPurposeID->SetDBValue($this->f("ServiceRecPurpose"));
+        $this->CertDay->SetDBValue($this->f("CertDay"));
+        $this->CertMonth->SetDBValue($this->f("CertMonth"));
+        $this->CertYear->SetDBValue($this->f("CertYear"));
+    }
+//End SetValues Method
+
+} //End employeeDataSource Class @2-FCB6E20C
+
+class clsRecordemployeeSearch { //employeeSearch Class @4-4066B21E
+
+//Variables @4-D6FF3E86
+
+    // Public variables
+    var $ComponentType = "Record";
+    var $ComponentName;
+    var $Parent;
+    var $HTMLFormAction;
+    var $PressedButton;
+    var $Errors;
+    var $ErrorBlock;
+    var $FormSubmitted;
+    var $FormEnctype;
+    var $Visible;
+    var $IsEmpty;
+
+    var $CCSEvents = "";
+    var $CCSEventResult;
+
+    var $RelativePath = "";
+
+    var $InsertAllowed = false;
+    var $UpdateAllowed = false;
+    var $DeleteAllowed = false;
+    var $ReadAllowed   = false;
+    var $EditMode      = false;
+    var $ds;
+    var $DataSource;
+    var $ValidatingControls;
+    var $Controls;
+    var $Attributes;
+
+    // Class variables
+//End Variables
+
+//Class_Initialize Event @4-F3A0B78A
+    function clsRecordemployeeSearch($RelativePath, & $Parent)
+    {
+
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->Visible = true;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Record employeeSearch/Error";
+        $this->ReadAllowed = true;
+        if($this->Visible)
+        {
+            $this->ComponentName = "employeeSearch";
+            $this->Attributes = new clsAttributes($this->ComponentName . ":");
+            $CCSForm = split(":", CCGetFromGet("ccsForm", ""), 2);
+            if(sizeof($CCSForm) == 1)
+                $CCSForm[1] = "";
+            list($FormName, $FormMethod) = $CCSForm;
+            $this->FormEnctype = "application/x-www-form-urlencoded";
+            $this->FormSubmitted = ($FormName == $this->ComponentName);
+            $Method = $this->FormSubmitted ? ccsPost : ccsGet;
+            $this->ClearParameters = & new clsControl(ccsLink, "ClearParameters", "ClearParameters", ccsText, "", CCGetRequestParam("ClearParameters", $Method, NULL), $this);
+            $this->ClearParameters->Parameters = CCGetQueryString("QueryString", array("s_Surname", "s_FirstName", "s_MiddleName", "ccsForm"));
+            $this->ClearParameters->Page = "Purpose4_copy2.php";
+            $this->Button_DoSearch = & new clsButton("Button_DoSearch", $Method, $this);
+            $this->s_Surname = & new clsControl(ccsTextBox, "s_Surname", "s_Surname", ccsText, "", CCGetRequestParam("s_Surname", $Method, NULL), $this);
+            $this->s_FirstName = & new clsControl(ccsTextBox, "s_FirstName", "s_FirstName", ccsText, "", CCGetRequestParam("s_FirstName", $Method, NULL), $this);
+            $this->s_MiddleName = & new clsControl(ccsTextBox, "s_MiddleName", "s_MiddleName", ccsText, "", CCGetRequestParam("s_MiddleName", $Method, NULL), $this);
+        }
+    }
+//End Class_Initialize Event
+
+//Validate Method @4-554AF7CD
+    function Validate()
+    {
+        global $CCSLocales;
+        $Validation = true;
+        $Where = "";
+        $Validation = ($this->s_Surname->Validate() && $Validation);
+        $Validation = ($this->s_FirstName->Validate() && $Validation);
+        $Validation = ($this->s_MiddleName->Validate() && $Validation);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "OnValidate", $this);
+        $Validation =  $Validation && ($this->s_Surname->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_FirstName->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->s_MiddleName->Errors->Count() == 0);
+        return (($this->Errors->Count() == 0) && $Validation);
+    }
+//End Validate Method
+
+//CheckErrors Method @4-847FC0E3
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->ClearParameters->Errors->Count());
+        $errors = ($errors || $this->s_Surname->Errors->Count());
+        $errors = ($errors || $this->s_FirstName->Errors->Count());
+        $errors = ($errors || $this->s_MiddleName->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//MasterDetail @4-ED598703
+function SetPrimaryKeys($keyArray)
+{
+    $this->PrimaryKeys = $keyArray;
+}
+function GetPrimaryKeys()
+{
+    return $this->PrimaryKeys;
+}
+function GetPrimaryKey($keyName)
+{
+    return $this->PrimaryKeys[$keyName];
+}
+//End MasterDetail
+
+//Operation Method @4-D66A6059
+    function Operation()
+    {
+        if(!$this->Visible)
+            return;
+
+        global $Redirect;
+        global $FileName;
+
+        if(!$this->FormSubmitted) {
+            return;
+        }
+
+        if($this->FormSubmitted) {
+            $this->PressedButton = "Button_DoSearch";
+            if($this->Button_DoSearch->Pressed) {
+                $this->PressedButton = "Button_DoSearch";
+            }
+        }
+        $Redirect = "Purpose4_copy2.php";
+        if($this->Validate()) {
+            if($this->PressedButton == "Button_DoSearch") {
+                $Redirect = "Purpose4_copy2.php" . "?" . CCMergeQueryStrings(CCGetQueryString("Form", array("Button_DoSearch", "Button_DoSearch_x", "Button_DoSearch_y")));
+                if(!CCGetEvent($this->Button_DoSearch->CCSEvents, "OnClick", $this->Button_DoSearch)) {
+                    $Redirect = "";
+                }
+            }
+        } else {
+            $Redirect = "";
+        }
+    }
+//End Operation Method
+
+//Show Method @4-5A1B6DC8
+    function Show()
+    {
+        global $CCSUseAmp;
+        global $Tpl;
+        global $FileName;
+        global $CCSLocales;
+        $Error = "";
+
+        if(!$this->Visible)
+            return;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $RecordBlock = "Record " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $RecordBlock;
+        $this->EditMode = $this->EditMode && $this->ReadAllowed;
+        if (!$this->FormSubmitted) {
+        }
+
+        if($this->FormSubmitted || $this->CheckErrors()) {
+            $Error = "";
+            $Error = ComposeStrings($Error, $this->ClearParameters->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_Surname->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_FirstName->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->s_MiddleName->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Errors->ToString());
+            $Tpl->SetVar("Error", $Error);
+            $Tpl->Parse("Error", false);
+        }
+        $CCSForm = $this->EditMode ? $this->ComponentName . ":" . "Edit" : $this->ComponentName;
+        $this->HTMLFormAction = $FileName . "?" . CCAddParam(CCGetQueryString("QueryString", ""), "ccsForm", $CCSForm);
+        $Tpl->SetVar("Action", !$CCSUseAmp ? $this->HTMLFormAction : str_replace("&", "&amp;", $this->HTMLFormAction));
+        $Tpl->SetVar("HTMLFormName", $this->ComponentName);
+        $Tpl->SetVar("HTMLFormEnctype", $this->FormEnctype);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        $this->Attributes->Show();
+        if(!$this->Visible) {
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+
+        $this->ClearParameters->Show();
+        $this->Button_DoSearch->Show();
+        $this->s_Surname->Show();
+        $this->s_FirstName->Show();
+        $this->s_MiddleName->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+    }
+//End Show Method
+
+} //End employeeSearch Class @4-FCB6E20C
+
+class clsRecordemployee1 { //employee1 Class @38-BD315ADE
+
+//Variables @38-D6FF3E86
+
+    // Public variables
+    var $ComponentType = "Record";
+    var $ComponentName;
+    var $Parent;
+    var $HTMLFormAction;
+    var $PressedButton;
+    var $Errors;
+    var $ErrorBlock;
+    var $FormSubmitted;
+    var $FormEnctype;
+    var $Visible;
+    var $IsEmpty;
+
+    var $CCSEvents = "";
+    var $CCSEventResult;
+
+    var $RelativePath = "";
+
+    var $InsertAllowed = false;
+    var $UpdateAllowed = false;
+    var $DeleteAllowed = false;
+    var $ReadAllowed   = false;
+    var $EditMode      = false;
+    var $ds;
+    var $DataSource;
+    var $ValidatingControls;
+    var $Controls;
+    var $Attributes;
+
+    // Class variables
+//End Variables
+
+//Class_Initialize Event @38-D6455B78
+    function clsRecordemployee1($RelativePath, & $Parent)
+    {
+
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->Visible = true;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Record employee1/Error";
+        $this->DataSource = new clsemployee1DataSource($this);
+        $this->ds = & $this->DataSource;
+        $this->InsertAllowed = true;
+        $this->UpdateAllowed = true;
+        $this->DeleteAllowed = true;
+        $this->ReadAllowed = true;
+        if($this->Visible)
+        {
+            $this->ComponentName = "employee1";
+            $this->Attributes = new clsAttributes($this->ComponentName . ":");
+            $CCSForm = split(":", CCGetFromGet("ccsForm", ""), 2);
+            if(sizeof($CCSForm) == 1)
+                $CCSForm[1] = "";
+            list($FormName, $FormMethod) = $CCSForm;
+            $this->EditMode = ($FormMethod == "Edit");
+            $this->FormEnctype = "application/x-www-form-urlencoded";
+            $this->FormSubmitted = ($FormName == $this->ComponentName);
+            $Method = $this->FormSubmitted ? ccsPost : ccsGet;
+            $this->Button_Insert = & new clsButton("Button_Insert", $Method, $this);
+            $this->Button_Update = & new clsButton("Button_Update", $Method, $this);
+            $this->Button_Delete = & new clsButton("Button_Delete", $Method, $this);
+            $this->Button_Cancel = & new clsButton("Button_Cancel", $Method, $this);
+            $this->SecRecPurposeID = & new clsControl(ccsListBox, "SecRecPurposeID", "Sec Rec Purpose ID", ccsInteger, "", CCGetRequestParam("SecRecPurposeID", $Method, NULL), $this);
+            $this->SecRecPurposeID->DSType = dsTable;
+            $this->SecRecPurposeID->DataSource = new clsDBConnection1();
+            $this->SecRecPurposeID->ds = & $this->SecRecPurposeID->DataSource;
+            $this->SecRecPurposeID->DataSource->SQL = "SELECT * \n" .
+"FROM lut_servicerecpurpose {SQL_Where} {SQL_OrderBy}";
+            $this->SecRecPurposeID->DataSource->Order = "ServiceRecPurpose";
+            list($this->SecRecPurposeID->BoundColumn, $this->SecRecPurposeID->TextColumn, $this->SecRecPurposeID->DBFormat) = array("SecRecPurposeID", "ServiceRecPurpose", "");
+            $this->SecRecPurposeID->DataSource->Order = "ServiceRecPurpose";
+            $this->CertDay = & new clsControl(ccsListBox, "CertDay", "Cert Day", ccsText, "", CCGetRequestParam("CertDay", $Method, NULL), $this);
+            $this->CertDay->DSType = dsTable;
+            $this->CertDay->DataSource = new clsDBConnection1();
+            $this->CertDay->ds = & $this->CertDay->DataSource;
+            $this->CertDay->DataSource->SQL = "SELECT * \n" .
+"FROM lut_days {SQL_Where} {SQL_OrderBy}";
+            list($this->CertDay->BoundColumn, $this->CertDay->TextColumn, $this->CertDay->DBFormat) = array("day", "day", "");
+            $this->CertMonth = & new clsControl(ccsListBox, "CertMonth", "Cert Month", ccsText, "", CCGetRequestParam("CertMonth", $Method, NULL), $this);
+            $this->CertMonth->DSType = dsTable;
+            $this->CertMonth->DataSource = new clsDBConnection1();
+            $this->CertMonth->ds = & $this->CertMonth->DataSource;
+            $this->CertMonth->DataSource->SQL = "SELECT * \n" .
+"FROM lut_month {SQL_Where} {SQL_OrderBy}";
+            list($this->CertMonth->BoundColumn, $this->CertMonth->TextColumn, $this->CertMonth->DBFormat) = array("Month", "Month", "");
+            $this->CertYear = & new clsControl(ccsTextBox, "CertYear", "Cert Year", ccsText, "", CCGetRequestParam("CertYear", $Method, NULL), $this);
+        }
+    }
+//End Class_Initialize Event
+
+//Initialize Method @38-AAA85980
+    function Initialize()
+    {
+
+        if(!$this->Visible)
+            return;
+
+        $this->DataSource->Parameters["urlEmployeeID"] = CCGetFromGet("EmployeeID", NULL);
+    }
+//End Initialize Method
+
+//Validate Method @38-3A450A95
+    function Validate()
+    {
+        global $CCSLocales;
+        $Validation = true;
+        $Where = "";
+        $Validation = ($this->SecRecPurposeID->Validate() && $Validation);
+        $Validation = ($this->CertDay->Validate() && $Validation);
+        $Validation = ($this->CertMonth->Validate() && $Validation);
+        $Validation = ($this->CertYear->Validate() && $Validation);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "OnValidate", $this);
+        $Validation =  $Validation && ($this->SecRecPurposeID->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->CertDay->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->CertMonth->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->CertYear->Errors->Count() == 0);
+        return (($this->Errors->Count() == 0) && $Validation);
+    }
+//End Validate Method
+
+//CheckErrors Method @38-73FEBD56
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->SecRecPurposeID->Errors->Count());
+        $errors = ($errors || $this->CertDay->Errors->Count());
+        $errors = ($errors || $this->CertMonth->Errors->Count());
+        $errors = ($errors || $this->CertYear->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        $errors = ($errors || $this->DataSource->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//MasterDetail @38-ED598703
+function SetPrimaryKeys($keyArray)
+{
+    $this->PrimaryKeys = $keyArray;
+}
+function GetPrimaryKeys()
+{
+    return $this->PrimaryKeys;
+}
+function GetPrimaryKey($keyName)
+{
+    return $this->PrimaryKeys[$keyName];
+}
+//End MasterDetail
+
+//Operation Method @38-288F0419
+    function Operation()
+    {
+        if(!$this->Visible)
+            return;
+
+        global $Redirect;
+        global $FileName;
+
+        $this->DataSource->Prepare();
+        if(!$this->FormSubmitted) {
+            $this->EditMode = $this->DataSource->AllParametersSet;
+            return;
+        }
+
+        if($this->FormSubmitted) {
+            $this->PressedButton = $this->EditMode ? "Button_Update" : "Button_Insert";
+            if($this->Button_Insert->Pressed) {
+                $this->PressedButton = "Button_Insert";
+            } else if($this->Button_Update->Pressed) {
+                $this->PressedButton = "Button_Update";
+            } else if($this->Button_Delete->Pressed) {
+                $this->PressedButton = "Button_Delete";
+            } else if($this->Button_Cancel->Pressed) {
+                $this->PressedButton = "Button_Cancel";
+            }
+        }
+        $Redirect = $FileName . "?" . CCGetQueryString("QueryString", array("ccsForm"));
+        if($this->PressedButton == "Button_Delete") {
+            if(!CCGetEvent($this->Button_Delete->CCSEvents, "OnClick", $this->Button_Delete) || !$this->DeleteRow()) {
+                $Redirect = "";
+            }
+        } else if($this->PressedButton == "Button_Cancel") {
+            if(!CCGetEvent($this->Button_Cancel->CCSEvents, "OnClick", $this->Button_Cancel)) {
+                $Redirect = "";
+            }
+        } else if($this->Validate()) {
+            if($this->PressedButton == "Button_Insert") {
+                if(!CCGetEvent($this->Button_Insert->CCSEvents, "OnClick", $this->Button_Insert) || !$this->InsertRow()) {
+                    $Redirect = "";
+                }
+            } else if($this->PressedButton == "Button_Update") {
+                if(!CCGetEvent($this->Button_Update->CCSEvents, "OnClick", $this->Button_Update) || !$this->UpdateRow()) {
+                    $Redirect = "";
+                }
+            }
+        } else {
+            $Redirect = "";
+        }
+        if ($Redirect)
+            $this->DataSource->close();
+    }
+//End Operation Method
+
+//InsertRow Method @38-D1DF049E
+    function InsertRow()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeInsert", $this);
+        if(!$this->InsertAllowed) return false;
+        $this->DataSource->SecRecPurposeID->SetValue($this->SecRecPurposeID->GetValue(true));
+        $this->DataSource->CertDay->SetValue($this->CertDay->GetValue(true));
+        $this->DataSource->CertMonth->SetValue($this->CertMonth->GetValue(true));
+        $this->DataSource->CertYear->SetValue($this->CertYear->GetValue(true));
+        $this->DataSource->Insert();
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterInsert", $this);
+        return (!$this->CheckErrors());
+    }
+//End InsertRow Method
+
+//UpdateRow Method @38-2A7EB2D1
+    function UpdateRow()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeUpdate", $this);
+        if(!$this->UpdateAllowed) return false;
+        $this->DataSource->SecRecPurposeID->SetValue($this->SecRecPurposeID->GetValue(true));
+        $this->DataSource->CertDay->SetValue($this->CertDay->GetValue(true));
+        $this->DataSource->CertMonth->SetValue($this->CertMonth->GetValue(true));
+        $this->DataSource->CertYear->SetValue($this->CertYear->GetValue(true));
+        $this->DataSource->Update();
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterUpdate", $this);
+        return (!$this->CheckErrors());
+    }
+//End UpdateRow Method
+
+//DeleteRow Method @38-299D98C3
+    function DeleteRow()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeDelete", $this);
+        if(!$this->DeleteAllowed) return false;
+        $this->DataSource->Delete();
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterDelete", $this);
+        return (!$this->CheckErrors());
+    }
+//End DeleteRow Method
+
+//Show Method @38-630D5977
+    function Show()
+    {
+        global $CCSUseAmp;
+        global $Tpl;
+        global $FileName;
+        global $CCSLocales;
+        $Error = "";
+
+        if(!$this->Visible)
+            return;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+        $this->SecRecPurposeID->Prepare();
+        $this->CertDay->Prepare();
+        $this->CertMonth->Prepare();
+
+        $RecordBlock = "Record " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $RecordBlock;
+        $this->EditMode = $this->EditMode && $this->ReadAllowed;
+        if($this->EditMode) {
+            if($this->DataSource->Errors->Count()){
+                $this->Errors->AddErrors($this->DataSource->Errors);
+                $this->DataSource->Errors->clear();
+            }
+            $this->DataSource->Open();
+            if($this->DataSource->Errors->Count() == 0 && $this->DataSource->next_record()) {
+                $this->DataSource->SetValues();
+                if(!$this->FormSubmitted){
+                    $this->SecRecPurposeID->SetValue($this->DataSource->SecRecPurposeID->GetValue());
+                    $this->CertDay->SetValue($this->DataSource->CertDay->GetValue());
+                    $this->CertMonth->SetValue($this->DataSource->CertMonth->GetValue());
+                    $this->CertYear->SetValue($this->DataSource->CertYear->GetValue());
+                }
+            } else {
+                $this->EditMode = false;
+            }
+        }
+
+        if($this->FormSubmitted || $this->CheckErrors()) {
+            $Error = "";
+            $Error = ComposeStrings($Error, $this->SecRecPurposeID->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->CertDay->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->CertMonth->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->CertYear->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->DataSource->Errors->ToString());
+            $Tpl->SetVar("Error", $Error);
+            $Tpl->Parse("Error", false);
+        }
+        $CCSForm = $this->EditMode ? $this->ComponentName . ":" . "Edit" : $this->ComponentName;
+        $this->HTMLFormAction = $FileName . "?" . CCAddParam(CCGetQueryString("QueryString", ""), "ccsForm", $CCSForm);
+        $Tpl->SetVar("Action", !$CCSUseAmp ? $this->HTMLFormAction : str_replace("&", "&amp;", $this->HTMLFormAction));
+        $Tpl->SetVar("HTMLFormName", $this->ComponentName);
+        $Tpl->SetVar("HTMLFormEnctype", $this->FormEnctype);
+        $this->Button_Insert->Visible = !$this->EditMode && $this->InsertAllowed;
+        $this->Button_Update->Visible = $this->EditMode && $this->UpdateAllowed;
+        $this->Button_Delete->Visible = $this->EditMode && $this->DeleteAllowed;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        $this->Attributes->Show();
+        if(!$this->Visible) {
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+
+        $this->Button_Insert->Show();
+        $this->Button_Update->Show();
+        $this->Button_Delete->Show();
+        $this->Button_Cancel->Show();
+        $this->SecRecPurposeID->Show();
+        $this->CertDay->Show();
+        $this->CertMonth->Show();
+        $this->CertYear->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+        $this->DataSource->close();
+    }
+//End Show Method
+
+} //End employee1 Class @38-FCB6E20C
+
+class clsemployee1DataSource extends clsDBConnection1 {  //employee1DataSource Class @38-BDA765D5
+
+//DataSource Variables @38-38FFC976
+    var $Parent = "";
+    var $CCSEvents = "";
+    var $CCSEventResult;
+    var $ErrorBlock;
+    var $CmdExecution;
+
+    var $InsertParameters;
+    var $UpdateParameters;
+    var $DeleteParameters;
+    var $wp;
+    var $AllParametersSet;
+
+    var $InsertFields = array();
+    var $UpdateFields = array();
+
+    // Datasource fields
+    var $SecRecPurposeID;
+    var $CertDay;
+    var $CertMonth;
+    var $CertYear;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @38-CA70AE9A
+    function clsemployee1DataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Record employee1/Error";
+        $this->Initialize();
+        $this->SecRecPurposeID = new clsField("SecRecPurposeID", ccsInteger, "");
+        
+        $this->CertDay = new clsField("CertDay", ccsText, "");
+        
+        $this->CertMonth = new clsField("CertMonth", ccsText, "");
+        
+        $this->CertYear = new clsField("CertYear", ccsText, "");
+        
+
+        $this->InsertFields["SecRecPurposeID"] = array("Name" => "SecRecPurposeID", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["CertDay"] = array("Name" => "CertDay", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->InsertFields["CertMonth"] = array("Name" => "CertMonth", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->InsertFields["CertYear"] = array("Name" => "CertYear", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["SecRecPurposeID"] = array("Name" => "SecRecPurposeID", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["CertDay"] = array("Name" => "CertDay", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["CertMonth"] = array("Name" => "CertMonth", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["CertYear"] = array("Name" => "CertYear", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+    }
+//End DataSourceClass_Initialize Event
+
+//Prepare Method @38-361705F1
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->wp = new clsSQLParameters($this->ErrorBlock);
+        $this->wp->AddParameter("1", "urlEmployeeID", ccsInteger, "", "", $this->Parameters["urlEmployeeID"], "", false);
+        $this->AllParametersSet = $this->wp->AllParamsSet();
+        $this->wp->Criterion[1] = $this->wp->Operation(opEqual, "EmployeeID", $this->wp->GetDBValue("1"), $this->ToSQL($this->wp->GetDBValue("1"), ccsInteger),false);
+        $this->Where = 
+             $this->wp->Criterion[1];
+    }
+//End Prepare Method
+
+//Open Method @38-FDA4A403
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->SQL = "SELECT * \n\n" .
+        "FROM employee {SQL_Where} {SQL_OrderBy}";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        $this->PageSize = 1;
+        $this->query($this->OptimizeSQL(CCBuildSQL($this->SQL, $this->Where, $this->Order)));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @38-197DF8D3
+    function SetValues()
+    {
+        $this->SecRecPurposeID->SetDBValue(trim($this->f("SecRecPurposeID")));
+        $this->CertDay->SetDBValue($this->f("CertDay"));
+        $this->CertMonth->SetDBValue($this->f("CertMonth"));
+        $this->CertYear->SetDBValue($this->f("CertYear"));
+    }
+//End SetValues Method
+
+//Insert Method @38-61493374
+    function Insert()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->CmdExecution = true;
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildInsert", $this->Parent);
+        $this->InsertFields["SecRecPurposeID"]["Value"] = $this->SecRecPurposeID->GetDBValue(true);
+        $this->InsertFields["CertDay"]["Value"] = $this->CertDay->GetDBValue(true);
+        $this->InsertFields["CertMonth"]["Value"] = $this->CertMonth->GetDBValue(true);
+        $this->InsertFields["CertYear"]["Value"] = $this->CertYear->GetDBValue(true);
+        $this->SQL = CCBuildInsert("employee", $this->InsertFields, $this);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteInsert", $this->Parent);
+        if($this->Errors->Count() == 0 && $this->CmdExecution) {
+            $this->query($this->SQL);
+            $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteInsert", $this->Parent);
+        }
+    }
+//End Insert Method
+
+//Update Method @38-E71148F1
+    function Update()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->CmdExecution = true;
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildUpdate", $this->Parent);
+        $this->UpdateFields["SecRecPurposeID"]["Value"] = $this->SecRecPurposeID->GetDBValue(true);
+        $this->UpdateFields["CertDay"]["Value"] = $this->CertDay->GetDBValue(true);
+        $this->UpdateFields["CertMonth"]["Value"] = $this->CertMonth->GetDBValue(true);
+        $this->UpdateFields["CertYear"]["Value"] = $this->CertYear->GetDBValue(true);
+        $this->SQL = CCBuildUpdate("employee", $this->UpdateFields, $this);
+        $this->SQL = CCBuildSQL($this->SQL, $this->Where, "");
+        if (!strlen($this->Where) && $this->Errors->Count() == 0) 
+            $this->Errors->addError($CCSLocales->GetText("CCS_CustomOperationError_MissingParameters"));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteUpdate", $this->Parent);
+        if($this->Errors->Count() == 0 && $this->CmdExecution) {
+            $this->query($this->SQL);
+            $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteUpdate", $this->Parent);
+        }
+    }
+//End Update Method
+
+//Delete Method @38-C822B971
+    function Delete()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->CmdExecution = true;
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildDelete", $this->Parent);
+        $this->SQL = "DELETE FROM employee";
+        $this->SQL = CCBuildSQL($this->SQL, $this->Where, "");
+        if (!strlen($this->Where) && $this->Errors->Count() == 0) 
+            $this->Errors->addError($CCSLocales->GetText("CCS_CustomOperationError_MissingParameters"));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteDelete", $this->Parent);
+        if($this->Errors->Count() == 0 && $this->CmdExecution) {
+            $this->query($this->SQL);
+            $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteDelete", $this->Parent);
+        }
+    }
+//End Delete Method
+
+} //End employee1DataSource Class @38-FCB6E20C
+
+//Initialize Page @1-B70465A1
+// Variables
+$FileName = "";
+$Redirect = "";
+$Tpl = "";
+$TemplateFileName = "";
+$BlockToParse = "";
+$ComponentName = "";
+$Attributes = "";
+
+// Events;
+$CCSEvents = "";
+$CCSEventResult = "";
+
+$FileName = FileName;
+$Redirect = "";
+$TemplateFileName = "Purpose4_copy2.html";
+$BlockToParse = "main";
+$TemplateEncoding = "CP1252";
+$ContentType = "text/html";
+$PathToRoot = "./";
+$Charset = $Charset ? $Charset : "windows-1252";
+//End Initialize Page
+
+//Before Initialize @1-E870CEBC
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeInitialize", $MainPage);
+//End Before Initialize
+
+//Initialize Objects @1-27DB99C7
+$DBConnection1 = new clsDBConnection1();
+$MainPage->Connections["Connection1"] = & $DBConnection1;
+$Attributes = new clsAttributes("page:");
+$MainPage->Attributes = & $Attributes;
+
+// Controls
+$employee = & new clsGridemployee("", $MainPage);
+$employeeSearch = & new clsRecordemployeeSearch("", $MainPage);
+$employee1 = & new clsRecordemployee1("", $MainPage);
+$Link1 = & new clsControl(ccsLink, "Link1", "Link1", ccsText, "", CCGetRequestParam("Link1", ccsGet, NULL), $MainPage);
+$Link1->Parameters = CCGetQueryString("QueryString", array("ccsForm"));
+$Link1->Page = "SRreport.php";
+$MainPage->employee = & $employee;
+$MainPage->employeeSearch = & $employeeSearch;
+$MainPage->employee1 = & $employee1;
+$MainPage->Link1 = & $Link1;
+$employee->Initialize();
+$employee1->Initialize();
+
+$CCSEventResult = CCGetEvent($CCSEvents, "AfterInitialize", $MainPage);
+
+if ($Charset) {
+    header("Content-Type: " . $ContentType . "; charset=" . $Charset);
+} else {
+    header("Content-Type: " . $ContentType);
+}
+//End Initialize Objects
+
+//Initialize HTML Template @1-E710DB26
+$CCSEventResult = CCGetEvent($CCSEvents, "OnInitializeView", $MainPage);
+$Tpl = new clsTemplate($FileEncoding, $TemplateEncoding);
+$Tpl->LoadTemplate(PathToCurrentPage . $TemplateFileName, $BlockToParse, "CP1252");
+$Tpl->block_path = "/$BlockToParse";
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeShow", $MainPage);
+$Attributes->SetValue("pathToRoot", "");
+$Attributes->Show();
+//End Initialize HTML Template
+
+//Execute Components @1-48519A34
+$employeeSearch->Operation();
+$employee1->Operation();
+//End Execute Components
+
+//Go to destination page @1-F924D7C2
+if($Redirect)
+{
+    $CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+    $DBConnection1->close();
+    header("Location: " . $Redirect);
+    unset($employee);
+    unset($employeeSearch);
+    unset($employee1);
+    unset($Tpl);
+    exit;
+}
+//End Go to destination page
+
+//Show Page @1-297C1245
+$employee->Show();
+$employeeSearch->Show();
+$employee1->Show();
+$Link1->Show();
+$Tpl->block_path = "";
+$Tpl->Parse($BlockToParse, false);
+if (!isset($main_block)) $main_block = $Tpl->GetVar($BlockToParse);
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeOutput", $MainPage);
+if ($CCSEventResult) echo $main_block;
+//End Show Page
+
+//Unload Page @1-A9531CE6
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+$DBConnection1->close();
+unset($employee);
+unset($employeeSearch);
+unset($employee1);
+unset($Tpl);
+//End Unload Page
+
+
+?>

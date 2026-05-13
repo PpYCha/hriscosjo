@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Training</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//employee_training1Button_Delete_OnClick @33-E34CD817
+function employee_training1Button_Delete_OnClick()
+{
+    var result = true;
+//End employee_training1Button_Delete_OnClick
+
+//Confirmation Message @34-8243B274
+    return confirm('Delete record?');
+//End Confirmation Message
+
+//Close employee_training1Button_Delete_OnClick @33-BC33A33A
+    return result;
+}
+//End Close employee_training1Button_Delete_OnClick
+
+//employee_training1Button_Cancel_OnClick @35-F63A897F
+function employee_training1Button_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End employee_training1Button_Cancel_OnClick
+
+//bind_events @1-404B532B
+function bind_events() {
+    addEventHandler("employee_training1Button_Delete", "click", employee_training1Button_Delete_OnClick);
+    addEventHandler("employee_training1Button_Cancel", "click", employee_training1Button_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/Fresh/Style_doctype.css">
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1">Back</a></p>
+<!-- BEGIN Grid employee_training -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th"><strong>List of Employee Training Programs</strong></td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+        </tr>
+ 
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Row">
+          <td colspan="7">Total Training Programs Attended:&nbsp;{employee_training_TotalRecords}</td> 
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">Employee ID</th>
+ 
+          <th scope="col">Title of Training Programs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Date From&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Date To&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">No. of Hours&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Type of Training&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Conducted/Sponsored by&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: right"><a href="{EmployeeID_Src}" id="employee_trainingEmployeeID_{employee_training:rowNumber}">{EmployeeID}</a>&nbsp;</td> 
+          <td>{TrainingTitle}&nbsp;</td> 
+          <td>{DateFrom}&nbsp;</td> 
+          <td>{DateTo}&nbsp;</td> 
+          <td>{NoOfHours}&nbsp;</td> 
+          <td>{TrainingCategory}&nbsp;</td> 
+          <td>{ConductedBy}&nbsp;</td> 
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="7">No records</td> 
+        </tr>
+ <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="7">
+            <p align="left"><a href="{employee_training_Insert_Src}" id="employee_trainingemployee_training_Insert">Add New</a>&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option value="" selected>-</option>
+ {PageSize_Options} 
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</p>
+ </td> 
+        </tr>
+ 
+      </table>
+ </td> 
+  </tr>
+</table>
+<!-- END Grid employee_training --><br>
+<!-- BEGIN Record employee_training1 -->
+<form id="employee_training1" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Add/Edit Training Programs</strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employee_training1EmployeeID">Employee ID</label></td> 
+            <td><input id="employee_training1EmployeeID" maxlength="10" size="10" value="{EmployeeID}" name="{EmployeeID_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_training1TrainingTitle">Title ofTraining Programs</label></td> 
+            <td><input id="employee_training1TrainingTitle" maxlength="150" size="50" value="{TrainingTitle}" name="{TrainingTitle_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_training1DateFrom">Date From (mm/dd/yyyy)</label></td> 
+            <td><input id="employee_training1DateFrom" maxlength="10" size="10" value="{DateFrom}" name="{DateFrom_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_training1DateTo">Date To (mm/dd/yyyy)</label></td> 
+            <td><input id="employee_training1DateTo" maxlength="10" size="10" value="{DateTo}" name="{DateTo_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_training1NoOfHours">Number of Hours</label></td> 
+            <td><input id="employee_training1NoOfHours" maxlength="5" size="5" value="{NoOfHours}" name="{NoOfHours_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_training1TrainingCategory">Type of Training</label></td> 
+            <td>
+              <select id="employee_training1TrainingCategory" name="{TrainingCategory_Name}">
+                <option value="" selected>Select Value</option>
+ {TrainingCategory_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_training1ConductedBy">Conducted/Sponsored by</label></td> 
+            <td><input id="employee_training1ConductedBy" maxlength="200" size="50" value="{ConductedBy}" name="{ConductedBy_Name}"></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td align="right" colspan="2">
+              <!-- BEGIN Button Button_Insert --><input class="Button" id="employee_training1Button_Insert" type="submit" alt="Add" value="Add" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input class="Button" id="employee_training1Button_Update" type="submit" alt="Submit" value="Submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input class="Button" id="employee_training1Button_Delete" type="submit" alt="Delete" value="Delete" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input class="Button" id="employee_training1Button_Cancel" type="submit" alt="Cancel" value="Cancel" name="{Button_Name}"><!-- END Button Button_Cancel --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record employee_training1 --><br>
+</body>
+</html>

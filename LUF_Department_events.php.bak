@@ -1,0 +1,29 @@
+<?php
+//BindEvents Method @1-96EDE771
+function BindEvents()
+{
+    global $departmentoffice_employee1;
+    $departmentoffice_employee1->departmentoffice_employee1_TotalRecords->CCSEvents["BeforeShow"] = "departmentoffice_employee1_departmentoffice_employee1_TotalRecords_BeforeShow";
+}
+//End BindEvents Method
+
+//departmentoffice_employee1_departmentoffice_employee1_TotalRecords_BeforeShow @22-7CF04649
+function departmentoffice_employee1_departmentoffice_employee1_TotalRecords_BeforeShow(& $sender)
+{
+    $departmentoffice_employee1_departmentoffice_employee1_TotalRecords_BeforeShow = true;
+    $Component = & $sender;
+    $Container = & CCGetParentContainer($sender);
+    global $departmentoffice_employee1; //Compatibility
+//End departmentoffice_employee1_departmentoffice_employee1_TotalRecords_BeforeShow
+
+//Retrieve number of records @23-ABE656B4
+    $Component->SetValue($Container->DataSource->RecordsCount);
+//End Retrieve number of records
+
+//Close departmentoffice_employee1_departmentoffice_employee1_TotalRecords_BeforeShow @22-61222BFF
+    return $departmentoffice_employee1_departmentoffice_employee1_TotalRecords_BeforeShow;
+}
+//End Close departmentoffice_employee1_departmentoffice_employee1_TotalRecords_BeforeShow
+
+
+?>

@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>ServiceRecord3</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-E9F45FF7
+
+var employee_servicerecord1_DatePicker_DateFrom = new Object(); 
+employee_servicerecord1_DatePicker_DateFrom.format           = "mm/dd/yyyy";
+employee_servicerecord1_DatePicker_DateFrom.style            = "Styles/Fresh/Style.css";
+employee_servicerecord1_DatePicker_DateFrom.relativePathPart = "";
+employee_servicerecord1_DatePicker_DateFrom.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//employee_servicerecord1Button_Delete_OnClick @42-316AE6E0
+function employee_servicerecord1Button_Delete_OnClick()
+{
+    var result = true;
+//End employee_servicerecord1Button_Delete_OnClick
+
+//Confirmation Message @43-8243B274
+    return confirm('Delete record?');
+//End Confirmation Message
+
+//Close employee_servicerecord1Button_Delete_OnClick @42-BC33A33A
+    return result;
+}
+//End Close employee_servicerecord1Button_Delete_OnClick
+
+//employee_servicerecord1Button_Cancel_OnClick @44-6771D7E1
+function employee_servicerecord1Button_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End employee_servicerecord1Button_Cancel_OnClick
+
+//bind_events @1-964A52D7
+function bind_events() {
+    addEventHandler("employee_servicerecord1Button_Delete", "click", employee_servicerecord1Button_Delete_OnClick);
+    addEventHandler("employee_servicerecord1Button_Cancel", "click", employee_servicerecord1Button_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1">Back</a></p>
+<!-- BEGIN Grid employee_servicerecord -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th"><strong>Service Record </strong></td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+        </tr>
+ 
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Row">
+          <td colspan="11">Total Records:&nbsp;{employee_servicerecord_TotalRecords}</td> 
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">&nbsp;</th>
+ 
+          <th scope="col">&nbsp;</th>
+ 
+          <th scope="col">&nbsp;</th>
+ 
+          <th scope="col">&nbsp;</th>
+ 
+          <th scope="col">&nbsp;</th>
+ 
+          <th scope="col">&nbsp;</th>
+ 
+          <th scope="col">&nbsp;</th>
+ 
+          <th scope="col">Station/Place </th>
+ 
+          <th scope="col"></th>
+ 
+          <th scope="col">L/V ABS</th>
+ 
+          <th scope="col">&nbsp;</th>
+ 
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">Emloyee ID</th>
+ 
+          <th scope="col">Date From</th>
+ 
+          <th scope="col">Date To</th>
+ 
+          <th scope="col">Designation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </th>
+ 
+          <th scope="col">Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; </th>
+ 
+          <th scope="col">
+          <p align="right">Salary&nbsp; </p>
+ </th>
+ 
+          <th scope="col">&nbsp;</th>
+ 
+          <th scope="col">of Assignment</th>
+ 
+          <th scope="col">Branch</th>
+ 
+          <th scope="col">W/O Pay</th>
+ 
+          <th scope="col">Separation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: right"><a href="{EmployeeID_Src}" id="employee_servicerecordEmployeeID_{employee_servicerecord:rowNumber}">{EmployeeID}</a>&nbsp;</td> 
+          <td>{DateFrom}&nbsp;</td> 
+          <td>
+            <div align="right">
+              {DateTo} 
+            </div>
+ &nbsp;</td> 
+          <td>{Designation}&nbsp;</td> 
+          <td>{StatofAppt}&nbsp;</td> 
+          <td style="TEXT-ALIGN: right">{AnnualSalary}&nbsp;</td> 
+          <td style="TEXT-ALIGN: right">{Label1}</td> 
+          <td>{OfficeStatn}&nbsp;</td> 
+          <td>{Branch}</td> 
+          <td>{AbsenceWOPay}</td> 
+          <td>{Separation}&nbsp;</td> 
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="11">No records</td> 
+        </tr>
+ <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="11"><a href="{employee_servicerecord_Insert_Src}" id="employee_servicerecordemployee_servicerecord_Insert">Add New</a>&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option value="" selected>-</option>
+ {PageSize_Options} 
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td> 
+        </tr>
+ 
+      </table>
+ </td> 
+  </tr>
+</table>
+<!-- END Grid employee_servicerecord --><br>
+<!-- BEGIN Record employee_servicerecord1 -->
+<form id="employee_servicerecord1" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Add/Edit Service Record </strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employee_servicerecord1EmployeeID">Employee ID</label></td> 
+            <td><input id="employee_servicerecord1EmployeeID" maxlength="10" size="10" value="{EmployeeID}" name="{EmployeeID_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_servicerecord1DateFrom">Date From/To</label></td> 
+            <td><input id="employee_servicerecord1DateFrom" maxlength="100" size="8" value="{DateFrom}" name="{DateFrom_Name}">
+              <!-- BEGIN DatePicker DatePicker_DateFrom --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="employee_servicerecord1DatePicker_DateFrom"><img id="employee_servicerecord1DatePicker_DateFrom_Image" alt="Show Date Picker" src="Styles/Fresh/Images/DatePicker.gif" border="0"></a><!-- END DatePicker DatePicker_DateFrom -->- <input id="employee_servicerecord1DateTo" maxlength="10" size="10" value="{DateTo}" name="{DateTo_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_servicerecord1Designation">Designation</label></td> 
+            <td><input id="employee_servicerecord1Designation" style="WIDTH: 240px; HEIGHT: 22px" maxlength="90" size="36" value="{Designation}" name="{Designation_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_servicerecord1StatofAppt">Status</label></td> 
+            <td><input id="employee_servicerecord1StatofAppt" maxlength="25" size="25" value="{StatofAppt}" name="{StatofAppt_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_servicerecord1AnnualSalary">Salary</label></td> 
+            <td><input id="employee_servicerecord1AnnualSalary" maxlength="12" size="12" value="{AnnualSalary}" name="{AnnualSalary_Name}">&nbsp;<label for="employee_servicerecord1TextBox1" style="display: none;"></label><input id="employee_servicerecord1TextBox1" style="WIDTH: 21px; HEIGHT: 14px" size="2" value="{TextBox1}" name="{TextBox1_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_servicerecord1OfficeStatn">Station/Office</label></td> 
+            <td><input id="employee_servicerecord1OfficeStatn" maxlength="80" size="50" value="{OfficeStatn}" name="{OfficeStatn_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_servicerecord1Branch">Branch</label></td> 
+            <td><input id="employee_servicerecord1Branch" maxlength="25" size="25" value="{Branch}" name="{Branch_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_servicerecord1AbsenceWOPay">Absence W/O Pay</label></td> 
+            <td><input id="employee_servicerecord1AbsenceWOPay" maxlength="35" size="35" value="{AbsenceWOPay}" name="{AbsenceWOPay_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_servicerecord1Separation">Separation</label></td> 
+            <td><input id="employee_servicerecord1Separation" maxlength="250" size="60" value="{Separation}" name="{Separation_Name}"></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td align="right" colspan="2">
+              <!-- BEGIN Button Button_Insert --><input class="Button" id="employee_servicerecord1Button_Insert" type="submit" alt="Add" value="Add" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input class="Button" id="employee_servicerecord1Button_Update" type="submit" alt="Submit" value="Submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input class="Button" id="employee_servicerecord1Button_Delete" type="submit" alt="Delete" value="Delete" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input class="Button" id="employee_servicerecord1Button_Cancel" type="submit" alt="Cancel" value="Cancel" name="{Button_Name}"><!-- END Button Button_Cancel --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record employee_servicerecord1 --><br>
+</body>
+</html>

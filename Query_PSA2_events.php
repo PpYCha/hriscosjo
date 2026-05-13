@@ -1,0 +1,78 @@
+<?php
+//BindEvents Method @1-090036B4
+function BindEvents()
+{
+    global $employee_departmentoffice;
+    global $departmentoffice_employee;
+    global $Report_Print;
+    $employee_departmentoffice->Navigator->CCSEvents["BeforeShow"] = "employee_departmentoffice_Navigator_BeforeShow";
+    $departmentoffice_employee->CCSEvents["BeforeShow"] = "departmentoffice_employee_BeforeShow";
+    $Report_Print->CCSEvents["BeforeShow"] = "Report_Print_BeforeShow";
+}
+//End BindEvents Method
+
+//employee_departmentoffice_Navigator_BeforeShow @40-647ABD4B
+function employee_departmentoffice_Navigator_BeforeShow(& $sender)
+{
+    $employee_departmentoffice_Navigator_BeforeShow = true;
+    $Component = & $sender;
+    $Container = & CCGetParentContainer($sender);
+    global $employee_departmentoffice; //Compatibility
+//End employee_departmentoffice_Navigator_BeforeShow
+
+//Hide-Show Component @41-286333C6
+    $Parameter1 = $Container->TotalPages;
+    $Parameter2 = 2;
+    if (((is_array($Parameter1) || strlen($Parameter1)) && (is_array($Parameter2) || strlen($Parameter2))) && 0 >  CCCompareValues($Parameter1, $Parameter2, ccsInteger))
+        $Component->Visible = false;
+//End Hide-Show Component
+
+//Close employee_departmentoffice_Navigator_BeforeShow @40-D64BB01E
+    return $employee_departmentoffice_Navigator_BeforeShow;
+}
+//End Close employee_departmentoffice_Navigator_BeforeShow
+
+//departmentoffice_employee_BeforeShow @20-D32924BE
+function departmentoffice_employee_BeforeShow(& $sender)
+{
+    $departmentoffice_employee_BeforeShow = true;
+    $Component = & $sender;
+    $Container = & CCGetParentContainer($sender);
+    global $departmentoffice_employee; //Compatibility
+//End departmentoffice_employee_BeforeShow
+
+//Hide-Show Component @26-286F3E6C
+    $Parameter1 = CCGetFromGet("ViewMode", "");
+    $Parameter2 = "Print";
+    if (0 == CCCompareValues($Parameter1, $Parameter2, ccsText))
+        $Component->Visible = false;
+//End Hide-Show Component
+
+//Close departmentoffice_employee_BeforeShow @20-554DD2D7
+    return $departmentoffice_employee_BeforeShow;
+}
+//End Close departmentoffice_employee_BeforeShow
+
+//Report_Print_BeforeShow @23-6CD7E3F9
+function Report_Print_BeforeShow(& $sender)
+{
+    $Report_Print_BeforeShow = true;
+    $Component = & $sender;
+    $Container = & CCGetParentContainer($sender);
+    global $Report_Print; //Compatibility
+//End Report_Print_BeforeShow
+
+//Hide-Show Component @25-286F3E6C
+    $Parameter1 = CCGetFromGet("ViewMode", "");
+    $Parameter2 = "Print";
+    if (0 == CCCompareValues($Parameter1, $Parameter2, ccsText))
+        $Component->Visible = false;
+//End Hide-Show Component
+
+//Close Report_Print_BeforeShow @23-0DD1CC60
+    return $Report_Print_BeforeShow;
+}
+//End Close Report_Print_BeforeShow
+
+
+?>

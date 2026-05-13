@@ -1,0 +1,703 @@
+<?php
+//Include Common Files @1-3F849B4F
+define("RelativePath", ".");
+define("PathToCurrentPage", "/");
+define("FileName", "QEligibility.php");
+include_once(RelativePath . "/Common.php");
+include_once(RelativePath . "/Template.php");
+include_once(RelativePath . "/Sorter.php");
+include_once(RelativePath . "/Navigator.php");
+//End Include Common Files
+
+//employee_eligibility ReportGroup class @2-319B7784
+class clsReportGroupemployee_eligibility {
+    var $GroupType;
+    var $mode; //1 - open, 2 - close
+    var $CareerService, $_CareerServiceAttributes;
+    var $Rating, $_RatingAttributes;
+    var $DateOfExam, $_DateOfExamAttributes;
+    var $PlaceOfExam, $_PlaceOfExamAttributes;
+    var $LicenseNo, $_LicenseNoAttributes;
+    var $DateOfValidity, $_DateOfValidityAttributes;
+    var $Attributes;
+    var $ReportTotalIndex = 0;
+    var $PageTotalIndex;
+    var $PageNumber;
+    var $RowNumber;
+    var $Parent;
+
+    function clsReportGroupemployee_eligibility(& $parent) {
+        $this->Parent = & $parent;
+        $this->Attributes = $this->Parent->Attributes->GetAsArray();
+    }
+    function SetControls($PrevGroup = "") {
+        $this->CareerService = $this->Parent->CareerService->Value;
+        $this->Rating = $this->Parent->Rating->Value;
+        $this->DateOfExam = $this->Parent->DateOfExam->Value;
+        $this->PlaceOfExam = $this->Parent->PlaceOfExam->Value;
+        $this->LicenseNo = $this->Parent->LicenseNo->Value;
+        $this->DateOfValidity = $this->Parent->DateOfValidity->Value;
+    }
+
+    function SetTotalControls($mode = "", $PrevGroup = "") {
+        $this->_CareerServiceAttributes = $this->Parent->CareerService->Attributes->GetAsArray();
+        $this->_RatingAttributes = $this->Parent->Rating->Attributes->GetAsArray();
+        $this->_DateOfExamAttributes = $this->Parent->DateOfExam->Attributes->GetAsArray();
+        $this->_PlaceOfExamAttributes = $this->Parent->PlaceOfExam->Attributes->GetAsArray();
+        $this->_LicenseNoAttributes = $this->Parent->LicenseNo->Attributes->GetAsArray();
+        $this->_DateOfValidityAttributes = $this->Parent->DateOfValidity->Attributes->GetAsArray();
+        $this->_NavigatorAttributes = $this->Parent->Navigator->Attributes->GetAsArray();
+    }
+    function SyncWithHeader(& $Header) {
+        $this->CareerService = $Header->CareerService;
+        $Header->_CareerServiceAttributes = $this->_CareerServiceAttributes;
+        $this->Parent->CareerService->Value = $Header->CareerService;
+        $this->Parent->CareerService->Attributes->RestoreFromArray($Header->_CareerServiceAttributes);
+        $this->Rating = $Header->Rating;
+        $Header->_RatingAttributes = $this->_RatingAttributes;
+        $this->Parent->Rating->Value = $Header->Rating;
+        $this->Parent->Rating->Attributes->RestoreFromArray($Header->_RatingAttributes);
+        $this->DateOfExam = $Header->DateOfExam;
+        $Header->_DateOfExamAttributes = $this->_DateOfExamAttributes;
+        $this->Parent->DateOfExam->Value = $Header->DateOfExam;
+        $this->Parent->DateOfExam->Attributes->RestoreFromArray($Header->_DateOfExamAttributes);
+        $this->PlaceOfExam = $Header->PlaceOfExam;
+        $Header->_PlaceOfExamAttributes = $this->_PlaceOfExamAttributes;
+        $this->Parent->PlaceOfExam->Value = $Header->PlaceOfExam;
+        $this->Parent->PlaceOfExam->Attributes->RestoreFromArray($Header->_PlaceOfExamAttributes);
+        $this->LicenseNo = $Header->LicenseNo;
+        $Header->_LicenseNoAttributes = $this->_LicenseNoAttributes;
+        $this->Parent->LicenseNo->Value = $Header->LicenseNo;
+        $this->Parent->LicenseNo->Attributes->RestoreFromArray($Header->_LicenseNoAttributes);
+        $this->DateOfValidity = $Header->DateOfValidity;
+        $Header->_DateOfValidityAttributes = $this->_DateOfValidityAttributes;
+        $this->Parent->DateOfValidity->Value = $Header->DateOfValidity;
+        $this->Parent->DateOfValidity->Attributes->RestoreFromArray($Header->_DateOfValidityAttributes);
+    }
+    function ChangeTotalControls() {
+    }
+}
+//End employee_eligibility ReportGroup class
+
+//employee_eligibility GroupsCollection class @2-F5CF52AB
+class clsGroupsCollectionemployee_eligibility {
+    var $Groups;
+    var $mPageCurrentHeaderIndex;
+    var $PageSize;
+    var $TotalPages = 0;
+    var $TotalRows = 0;
+    var $CurrentPageSize = 0;
+    var $Pages;
+    var $Parent;
+    var $LastDetailIndex;
+
+    function clsGroupsCollectionemployee_eligibility(& $parent) {
+        $this->Parent = & $parent;
+        $this->Groups = array();
+        $this->Pages  = array();
+        $this->mReportTotalIndex = 0;
+        $this->mPageTotalIndex = 1;
+    }
+
+    function & InitGroup() {
+        $group = new clsReportGroupemployee_eligibility($this->Parent);
+        $group->RowNumber = $this->TotalRows + 1;
+        $group->PageNumber = $this->TotalPages;
+        $group->PageTotalIndex = $this->mPageCurrentHeaderIndex;
+        return $group;
+    }
+
+    function RestoreValues() {
+        $this->Parent->CareerService->Value = $this->Parent->CareerService->initialValue;
+        $this->Parent->Rating->Value = $this->Parent->Rating->initialValue;
+        $this->Parent->DateOfExam->Value = $this->Parent->DateOfExam->initialValue;
+        $this->Parent->PlaceOfExam->Value = $this->Parent->PlaceOfExam->initialValue;
+        $this->Parent->LicenseNo->Value = $this->Parent->LicenseNo->initialValue;
+        $this->Parent->DateOfValidity->Value = $this->Parent->DateOfValidity->initialValue;
+    }
+
+    function OpenPage() {
+        $this->TotalPages++;
+        $Group = & $this->InitGroup();
+        $this->Parent->Page_Header->CCSEventResult = CCGetEvent($this->Parent->Page_Header->CCSEvents, "OnInitialize", $this->Parent->Page_Header);
+        if ($this->Parent->Page_Header->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Page_Header->Height;
+        $Group->SetTotalControls("GetNextValue");
+        $this->Parent->Page_Header->CCSEventResult = CCGetEvent($this->Parent->Page_Header->CCSEvents, "OnCalculate", $this->Parent->Page_Header);
+        $Group->SetControls();
+        $Group->Mode = 1;
+        $Group->GroupType = "Page";
+        $Group->PageTotalIndex = count($this->Groups);
+        $this->mPageCurrentHeaderIndex = count($this->Groups);
+        $this->Groups[] =  & $Group;
+        $this->Pages[] =  count($this->Groups) == 2 ? 0 : count($this->Groups) - 1;
+    }
+
+    function OpenGroup($groupName) {
+        $Group = "";
+        $OpenFlag = false;
+        if ($groupName == "Report") {
+            $Group = & $this->InitGroup(true);
+            $this->Parent->Report_Header->CCSEventResult = CCGetEvent($this->Parent->Report_Header->CCSEvents, "OnInitialize", $this->Parent->Report_Header);
+            if ($this->Parent->Report_Header->Visible) 
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Report_Header->Height;
+                $Group->SetTotalControls("GetNextValue");
+            $this->Parent->Report_Header->CCSEventResult = CCGetEvent($this->Parent->Report_Header->CCSEvents, "OnCalculate", $this->Parent->Report_Header);
+            $Group->SetControls();
+            $Group->Mode = 1;
+            $Group->GroupType = "Report";
+            $this->Groups[] = & $Group;
+            $this->OpenPage();
+        }
+    }
+
+    function ClosePage() {
+        $Group = & $this->InitGroup();
+        $this->Parent->Page_Footer->CCSEventResult = CCGetEvent($this->Parent->Page_Footer->CCSEvents, "OnInitialize", $this->Parent->Page_Footer);
+        $Group->SetTotalControls("GetPrevValue");
+        $Group->SyncWithHeader($this->Groups[$this->mPageCurrentHeaderIndex]);
+        $this->Parent->Page_Footer->CCSEventResult = CCGetEvent($this->Parent->Page_Footer->CCSEvents, "OnCalculate", $this->Parent->Page_Footer);
+        $Group->SetControls();
+        $this->RestoreValues();
+        $this->CurrentPageSize = 0;
+        $Group->Mode = 2;
+        $Group->GroupType = "Page";
+        $this->Groups[] = & $Group;
+    }
+
+    function CloseGroup($groupName)
+    {
+        $Group = "";
+        if ($groupName == "Report") {
+            $Group = & $this->InitGroup(true);
+            $this->Parent->Report_Footer->CCSEventResult = CCGetEvent($this->Parent->Report_Footer->CCSEvents, "OnInitialize", $this->Parent->Report_Footer);
+            if ($this->Parent->Page_Footer->Visible) 
+                $OverSize = $this->Parent->Report_Footer->Height + $this->Parent->Page_Footer->Height;
+            else
+                $OverSize = $this->Parent->Report_Footer->Height;
+            if (($this->PageSize > 0) and $this->Parent->Report_Footer->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+                $this->ClosePage();
+                $this->OpenPage();
+            }
+            $Group->SetTotalControls("GetPrevValue");
+            $Group->SyncWithHeader($this->Groups[0]);
+            if ($this->Parent->Report_Footer->Visible)
+                $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Report_Footer->Height;
+            $this->Parent->Report_Footer->CCSEventResult = CCGetEvent($this->Parent->Report_Footer->CCSEvents, "OnCalculate", $this->Parent->Report_Footer);
+            $Group->SetControls();
+            $this->RestoreValues();
+            $Group->Mode = 2;
+            $Group->GroupType = "Report";
+            $this->Groups[] = & $Group;
+            $this->ClosePage();
+            return;
+        }
+    }
+
+    function AddItem()
+    {
+        $Group = & $this->InitGroup(true);
+        $this->Parent->Detail->CCSEventResult = CCGetEvent($this->Parent->Detail->CCSEvents, "OnInitialize", $this->Parent->Detail);
+        if ($this->Parent->Page_Footer->Visible) 
+            $OverSize = $this->Parent->Detail->Height + $this->Parent->Page_Footer->Height;
+        else
+            $OverSize = $this->Parent->Detail->Height;
+        if (($this->PageSize > 0) and $this->Parent->Detail->Visible and ($this->CurrentPageSize + $OverSize > $this->PageSize)) {
+            $this->ClosePage();
+            $this->OpenPage();
+        }
+        $this->TotalRows++;
+        if ($this->LastDetailIndex)
+            $PrevGroup = & $this->Groups[$this->LastDetailIndex];
+        else
+            $PrevGroup = "";
+        $Group->SetTotalControls("", $PrevGroup);
+        if ($this->Parent->Detail->Visible)
+            $this->CurrentPageSize = $this->CurrentPageSize + $this->Parent->Detail->Height;
+        $this->Parent->Detail->CCSEventResult = CCGetEvent($this->Parent->Detail->CCSEvents, "OnCalculate", $this->Parent->Detail);
+        $Group->SetControls($PrevGroup);
+        $this->LastDetailIndex = count($this->Groups);
+        $this->Groups[] = & $Group;
+    }
+}
+//End employee_eligibility GroupsCollection class
+
+class clsReportemployee_eligibility { //employee_eligibility Class @2-FA66B7E3
+
+//employee_eligibility Variables @2-87F7EA53
+
+    var $ComponentType = "Report";
+    var $PageSize;
+    var $ComponentName;
+    var $Visible;
+    var $Errors;
+    var $CCSEvents = array();
+    var $CCSEventResult;
+    var $RelativePath = "";
+    var $ViewMode = "Web";
+    var $TemplateBlock;
+    var $PageNumber;
+    var $RowNumber;
+    var $TotalRows;
+    var $TotalPages;
+    var $ControlsVisible = array();
+    var $IsEmpty;
+    var $Attributes;
+    var $DetailBlock, $Detail;
+    var $Report_FooterBlock, $Report_Footer;
+    var $Report_HeaderBlock, $Report_Header;
+    var $Page_FooterBlock, $Page_Footer;
+    var $Page_HeaderBlock, $Page_Header;
+    var $SorterName, $SorterDirection;
+
+    var $ds;
+    var $DataSource;
+    var $UseClientPaging = false;
+
+    //Report Controls
+    var $StaticControls, $RowControls, $Report_FooterControls, $Report_HeaderControls;
+    var $Page_FooterControls, $Page_HeaderControls;
+//End employee_eligibility Variables
+
+//Class_Initialize Event @2-B6AA8614
+    function clsReportemployee_eligibility($RelativePath = "", & $Parent)
+    {
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->ComponentName = "employee_eligibility";
+        $this->Visible = True;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Attributes = new clsAttributes($this->ComponentName . ":");
+        $this->Detail = new clsSection($this);
+        $MinPageSize = 0;
+        $MaxSectionSize = 0;
+        $this->Detail->Height = 1;
+        $MaxSectionSize = max($MaxSectionSize, $this->Detail->Height);
+        $this->Report_Footer = new clsSection($this);
+        $this->Report_Header = new clsSection($this);
+        $this->Page_Footer = new clsSection($this);
+        $this->Page_Footer->Height = 1;
+        $MinPageSize += $this->Page_Footer->Height;
+        $this->Page_Header = new clsSection($this);
+        $this->Page_Header->Height = 1;
+        $MinPageSize += $this->Page_Header->Height;
+        $this->Errors = new clsErrors();
+        $this->DataSource = new clsemployee_eligibilityDataSource($this);
+        $this->ds = & $this->DataSource;
+        $PageSize = CCGetParam($this->ComponentName . "PageSize", "");
+        if(is_numeric($PageSize) && $PageSize > 0) {
+            $this->PageSize = $PageSize;
+        } else {
+            if (!is_numeric($PageSize) || $PageSize < 0)
+                $this->PageSize = 40;
+             else if ($PageSize == "0")
+                $this->PageSize = 100;
+             else 
+                $this->PageSize = min(100, $PageSize);
+        }
+        $MinPageSize += $MaxSectionSize;
+        if ($this->PageSize && $MinPageSize && $this->PageSize < $MinPageSize)
+            $this->PageSize = $MinPageSize;
+        $this->PageNumber = $this->ViewMode == "Print" ? 1 : intval(CCGetParam($this->ComponentName . "Page", 1));
+        if ($this->PageNumber <= 0 ) {
+            $this->PageNumber = 1;
+        }
+
+        $this->CareerService = & new clsControl(ccsReportLabel, "CareerService", "CareerService", ccsText, "", "", $this);
+        $this->Rating = & new clsControl(ccsReportLabel, "Rating", "Rating", ccsText, "", "", $this);
+        $this->DateOfExam = & new clsControl(ccsReportLabel, "DateOfExam", "DateOfExam", ccsDate, $DefaultDateFormat, "", $this);
+        $this->PlaceOfExam = & new clsControl(ccsReportLabel, "PlaceOfExam", "PlaceOfExam", ccsText, "", "", $this);
+        $this->LicenseNo = & new clsControl(ccsReportLabel, "LicenseNo", "LicenseNo", ccsText, "", "", $this);
+        $this->DateOfValidity = & new clsControl(ccsReportLabel, "DateOfValidity", "DateOfValidity", ccsDate, $DefaultDateFormat, "", $this);
+        $this->NoRecords = & new clsPanel("NoRecords", $this);
+        $this->Navigator = & new clsNavigator($this->ComponentName, "Navigator", $FileName, 10, tpCentered, $this);
+        $this->Navigator->PageSizes = array("1", "5", "10", "25", "50");
+    }
+//End Class_Initialize Event
+
+//Initialize Method @2-6C59EE65
+    function Initialize()
+    {
+        if(!$this->Visible) return;
+
+        $this->DataSource->PageSize = $this->PageSize;
+        $this->DataSource->AbsolutePage = $this->PageNumber;
+        $this->DataSource->SetOrder($this->SorterName, $this->SorterDirection);
+    }
+//End Initialize Method
+
+//CheckErrors Method @2-00D6FD0E
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->CareerService->Errors->Count());
+        $errors = ($errors || $this->Rating->Errors->Count());
+        $errors = ($errors || $this->DateOfExam->Errors->Count());
+        $errors = ($errors || $this->PlaceOfExam->Errors->Count());
+        $errors = ($errors || $this->LicenseNo->Errors->Count());
+        $errors = ($errors || $this->DateOfValidity->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        $errors = ($errors || $this->DataSource->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//GetErrors Method @2-7C02C0D9
+    function GetErrors()
+    {
+        $errors = "";
+        $errors = ComposeStrings($errors, $this->CareerService->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Rating->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DateOfExam->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->PlaceOfExam->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->LicenseNo->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DateOfValidity->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DataSource->Errors->ToString());
+        return $errors;
+    }
+//End GetErrors Method
+
+//Show Method @2-4A16637E
+    function Show()
+    {
+        global $Tpl;
+        global $CCSLocales;
+        if(!$this->Visible) return;
+
+        $ShownRecords = 0;
+
+        $this->DataSource->Parameters["urlEmployeeID"] = CCGetFromGet("EmployeeID", NULL);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $this->DataSource->Prepare();
+        $this->DataSource->Open();
+
+        $Groups = new clsGroupsCollectionemployee_eligibility($this);
+        $Groups->PageSize = $this->PageSize > 0 ? $this->PageSize : 0;
+
+        $is_next_record = $this->DataSource->next_record();
+        $this->IsEmpty = ! $is_next_record;
+        while($is_next_record) {
+            $this->DataSource->SetValues();
+            $this->CareerService->SetValue($this->DataSource->CareerService->GetValue());
+            $this->Rating->SetValue($this->DataSource->Rating->GetValue());
+            $this->DateOfExam->SetValue($this->DataSource->DateOfExam->GetValue());
+            $this->PlaceOfExam->SetValue($this->DataSource->PlaceOfExam->GetValue());
+            $this->LicenseNo->SetValue($this->DataSource->LicenseNo->GetValue());
+            $this->DateOfValidity->SetValue($this->DataSource->DateOfValidity->GetValue());
+            if (count($Groups->Groups) == 0) $Groups->OpenGroup("Report");
+            $Groups->AddItem();
+            $is_next_record = $this->DataSource->next_record();
+        }
+        if (!count($Groups->Groups)) 
+            $Groups->OpenGroup("Report");
+        else
+            $this->NoRecords->Visible = false;
+        $Groups->CloseGroup("Report");
+        $this->TotalPages = $Groups->TotalPages;
+        $this->TotalRows = $Groups->TotalRows;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        if(!$this->Visible) return;
+
+        $this->Attributes->Show();
+        $ReportBlock = "Report " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+
+        if($this->CheckErrors()) {
+            $Tpl->replaceblock("", $this->GetErrors());
+            $Tpl->block_path = $ParentPath;
+            return;
+        } else {
+            $items = & $Groups->Groups;
+            $i = $Groups->Pages[min($this->PageNumber, $Groups->TotalPages) - 1];
+            $this->ControlsVisible["CareerService"] = $this->CareerService->Visible;
+            $this->ControlsVisible["Rating"] = $this->Rating->Visible;
+            $this->ControlsVisible["DateOfExam"] = $this->DateOfExam->Visible;
+            $this->ControlsVisible["PlaceOfExam"] = $this->PlaceOfExam->Visible;
+            $this->ControlsVisible["LicenseNo"] = $this->LicenseNo->Visible;
+            $this->ControlsVisible["DateOfValidity"] = $this->DateOfValidity->Visible;
+            do {
+                $this->Attributes->RestoreFromArray($items[$i]->Attributes);
+                $this->RowNumber = $items[$i]->RowNumber;
+                switch ($items[$i]->GroupType) {
+                    Case "":
+                        $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Detail";
+                        $this->CareerService->SetValue($items[$i]->CareerService);
+                        $this->CareerService->Attributes->RestoreFromArray($items[$i]->_CareerServiceAttributes);
+                        $this->Rating->SetValue($items[$i]->Rating);
+                        $this->Rating->Attributes->RestoreFromArray($items[$i]->_RatingAttributes);
+                        $this->DateOfExam->SetValue($items[$i]->DateOfExam);
+                        $this->DateOfExam->Attributes->RestoreFromArray($items[$i]->_DateOfExamAttributes);
+                        $this->PlaceOfExam->SetValue($items[$i]->PlaceOfExam);
+                        $this->PlaceOfExam->Attributes->RestoreFromArray($items[$i]->_PlaceOfExamAttributes);
+                        $this->LicenseNo->SetValue($items[$i]->LicenseNo);
+                        $this->LicenseNo->Attributes->RestoreFromArray($items[$i]->_LicenseNoAttributes);
+                        $this->DateOfValidity->SetValue($items[$i]->DateOfValidity);
+                        $this->DateOfValidity->Attributes->RestoreFromArray($items[$i]->_DateOfValidityAttributes);
+                        $this->Detail->CCSEventResult = CCGetEvent($this->Detail->CCSEvents, "BeforeShow", $this->Detail);
+                        $this->Attributes->Show();
+                        $this->CareerService->Show();
+                        $this->Rating->Show();
+                        $this->DateOfExam->Show();
+                        $this->PlaceOfExam->Show();
+                        $this->LicenseNo->Show();
+                        $this->DateOfValidity->Show();
+                        $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                        if ($this->Detail->Visible)
+                            $Tpl->parseto("Section Detail", true, "Section Detail");
+                        break;
+                    case "Report":
+                        if ($items[$i]->Mode == 1) {
+                            $this->Report_Header->CCSEventResult = CCGetEvent($this->Report_Header->CCSEvents, "BeforeShow", $this->Report_Header);
+                            if ($this->Report_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Report_Header";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Report_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2) {
+                            $this->Report_Footer->CCSEventResult = CCGetEvent($this->Report_Footer->CCSEvents, "BeforeShow", $this->Report_Footer);
+                            if ($this->Report_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Report_Footer";
+                                $this->NoRecords->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Report_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                    case "Page":
+                        if ($items[$i]->Mode == 1) {
+                            $this->Page_Header->CCSEventResult = CCGetEvent($this->Page_Header->CCSEvents, "BeforeShow", $this->Page_Header);
+                            if ($this->Page_Header->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Page_Header";
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Page_Header", true, "Section Detail");
+                            }
+                        }
+                        if ($items[$i]->Mode == 2 && !$this->UseClientPaging || $items[$i]->Mode == 1 && $this->UseClientPaging) {
+                            $this->Navigator->PageNumber = $items[$i]->PageNumber;
+                            $this->Navigator->TotalPages = $Groups->TotalPages;
+                            $this->Navigator->Visible = ("Print" != $this->ViewMode);
+                            $this->Page_Footer->CCSEventResult = CCGetEvent($this->Page_Footer->CCSEvents, "BeforeShow", $this->Page_Footer);
+                            if ($this->Page_Footer->Visible) {
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock . "/Section Page_Footer";
+                                $this->Navigator->Show();
+                                $this->Attributes->Show();
+                                $Tpl->block_path = $ParentPath . "/" . $ReportBlock;
+                                $Tpl->parseto("Section Page_Footer", true, "Section Detail");
+                            }
+                        }
+                        break;
+                }
+                $i++;
+            } while ($i < count($items) && ($this->ViewMode == "Print" ||  !($i > 1 && $items[$i]->GroupType == 'Page' && $items[$i]->Mode == 1)));
+            $Tpl->block_path = $ParentPath;
+            $Tpl->parse($ReportBlock);
+            $this->DataSource->close();
+        }
+
+    }
+//End Show Method
+
+} //End employee_eligibility Class @2-FCB6E20C
+
+class clsemployee_eligibilityDataSource extends clsDBConnection1 {  //employee_eligibilityDataSource Class @2-290E4A2F
+
+//DataSource Variables @2-3A0D3FCD
+    var $Parent = "";
+    var $CCSEvents = "";
+    var $CCSEventResult;
+    var $ErrorBlock;
+    var $CmdExecution;
+
+    var $wp;
+
+
+    // Datasource fields
+    var $CareerService;
+    var $Rating;
+    var $DateOfExam;
+    var $PlaceOfExam;
+    var $LicenseNo;
+    var $DateOfValidity;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @2-EBA3AA7E
+    function clsemployee_eligibilityDataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Report employee_eligibility";
+        $this->Initialize();
+        $this->CareerService = new clsField("CareerService", ccsText, "");
+        
+        $this->Rating = new clsField("Rating", ccsText, "");
+        
+        $this->DateOfExam = new clsField("DateOfExam", ccsDate, $this->DateFormat);
+        
+        $this->PlaceOfExam = new clsField("PlaceOfExam", ccsText, "");
+        
+        $this->LicenseNo = new clsField("LicenseNo", ccsText, "");
+        
+        $this->DateOfValidity = new clsField("DateOfValidity", ccsDate, $this->DateFormat);
+        
+
+    }
+//End DataSourceClass_Initialize Event
+
+//SetOrder Method @2-95F5B551
+    function SetOrder($SorterName, $SorterDirection)
+    {
+        $this->Order = "EligibilityID";
+        $this->Order = CCGetOrder($this->Order, $SorterName, $SorterDirection, 
+            "");
+    }
+//End SetOrder Method
+
+//Prepare Method @2-532AFE75
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->wp = new clsSQLParameters($this->ErrorBlock);
+        $this->wp->AddParameter("1", "urlEmployeeID", ccsInteger, "", "", $this->Parameters["urlEmployeeID"], "", false);
+        $this->wp->Criterion[1] = $this->wp->Operation(opEqual, "EmployeeID", $this->wp->GetDBValue("1"), $this->ToSQL($this->wp->GetDBValue("1"), ccsInteger),false);
+        $this->Where = 
+             $this->wp->Criterion[1];
+    }
+//End Prepare Method
+
+//Open Method @2-0A47E346
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->SQL = "SELECT * \n\n" .
+        "FROM employee_eligibility {SQL_Where} {SQL_OrderBy}";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        $this->query(CCBuildSQL($this->SQL, $this->Where, $this->Order));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @2-950620C7
+    function SetValues()
+    {
+        $this->CareerService->SetDBValue($this->f("CareerService"));
+        $this->Rating->SetDBValue($this->f("Rating"));
+        $this->DateOfExam->SetDBValue(trim($this->f("DateOfExam")));
+        $this->PlaceOfExam->SetDBValue($this->f("PlaceOfExam"));
+        $this->LicenseNo->SetDBValue($this->f("LicenseNo"));
+        $this->DateOfValidity->SetDBValue(trim($this->f("DateOfValidity")));
+    }
+//End SetValues Method
+
+} //End employee_eligibilityDataSource Class @2-FCB6E20C
+
+//Initialize Page @1-6A1B512C
+// Variables
+$FileName = "";
+$Redirect = "";
+$Tpl = "";
+$TemplateFileName = "";
+$BlockToParse = "";
+$ComponentName = "";
+$Attributes = "";
+
+// Events;
+$CCSEvents = "";
+$CCSEventResult = "";
+
+$FileName = FileName;
+$Redirect = "";
+$TemplateFileName = "QEligibility.html";
+$BlockToParse = "main";
+$TemplateEncoding = "CP1252";
+$ContentType = "text/html";
+$PathToRoot = "./";
+$Charset = $Charset ? $Charset : "windows-1252";
+//End Initialize Page
+
+//Include events file @1-EA240DDB
+include_once("./QEligibility_events.php");
+//End Include events file
+
+//Before Initialize @1-E870CEBC
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeInitialize", $MainPage);
+//End Before Initialize
+
+//Initialize Objects @1-216FAE5A
+$DBConnection1 = new clsDBConnection1();
+$MainPage->Connections["Connection1"] = & $DBConnection1;
+$Attributes = new clsAttributes("page:");
+$MainPage->Attributes = & $Attributes;
+
+// Controls
+$employee_eligibility = & new clsReportemployee_eligibility("", $MainPage);
+$Link1 = & new clsControl(ccsLink, "Link1", "Link1", ccsText, "", CCGetRequestParam("Link1", ccsGet, NULL), $MainPage);
+$Link1->Parameters = CCGetQueryString("QueryString", array("ccsForm"));
+$Link1->Page = "Q2.php";
+$MainPage->employee_eligibility = & $employee_eligibility;
+$MainPage->Link1 = & $Link1;
+$employee_eligibility->Initialize();
+
+BindEvents();
+
+$CCSEventResult = CCGetEvent($CCSEvents, "AfterInitialize", $MainPage);
+
+if ($Charset) {
+    header("Content-Type: " . $ContentType . "; charset=" . $Charset);
+} else {
+    header("Content-Type: " . $ContentType);
+}
+//End Initialize Objects
+
+//Initialize HTML Template @1-E710DB26
+$CCSEventResult = CCGetEvent($CCSEvents, "OnInitializeView", $MainPage);
+$Tpl = new clsTemplate($FileEncoding, $TemplateEncoding);
+$Tpl->LoadTemplate(PathToCurrentPage . $TemplateFileName, $BlockToParse, "CP1252");
+$Tpl->block_path = "/$BlockToParse";
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeShow", $MainPage);
+$Attributes->SetValue("pathToRoot", "");
+$Attributes->Show();
+//End Initialize HTML Template
+
+//Go to destination page @1-32A4F798
+if($Redirect)
+{
+    $CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+    $DBConnection1->close();
+    header("Location: " . $Redirect);
+    unset($employee_eligibility);
+    unset($Tpl);
+    exit;
+}
+//End Go to destination page
+
+//Show Page @1-E31AC5D6
+$employee_eligibility->Show();
+$Link1->Show();
+$Tpl->block_path = "";
+$Tpl->Parse($BlockToParse, false);
+if (!isset($main_block)) $main_block = $Tpl->GetVar($BlockToParse);
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeOutput", $MainPage);
+if ($CCSEventResult) echo $main_block;
+//End Show Page
+
+//Unload Page @1-0954CC34
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+$DBConnection1->close();
+unset($employee_eligibility);
+unset($Tpl);
+//End Unload Page
+
+
+?>

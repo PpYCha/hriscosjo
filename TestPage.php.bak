@@ -1,0 +1,379 @@
+<?php
+//Include Common Files @1-37B76B7C
+define("RelativePath", ".");
+define("PathToCurrentPage", "/");
+define("FileName", "TestPage.php");
+include_once(RelativePath . "/Common.php");
+include_once(RelativePath . "/Template.php");
+include_once(RelativePath . "/Sorter.php");
+include_once(RelativePath . "/Navigator.php");
+//End Include Common Files
+
+class clsGridemployee { //employee class @2-25A9BC51
+
+//Variables @2-DF621897
+
+    // Public variables
+    var $ComponentType = "Grid";
+    var $ComponentName;
+    var $Visible;
+    var $Errors;
+    var $ErrorBlock;
+    var $ds;
+    var $DataSource;
+    var $PageSize;
+    var $IsEmpty;
+    var $ForceIteration = false;
+    var $HasRecord = false;
+    var $SorterName = "";
+    var $SorterDirection = "";
+    var $PageNumber;
+    var $RowNumber;
+    var $ControlsVisible = array();
+
+    var $CCSEvents = "";
+    var $CCSEventResult;
+
+    var $RelativePath = "";
+    var $Attributes;
+
+    // Grid Controls
+    var $StaticControls;
+    var $RowControls;
+    var $Sorter_EmployeeIDNo;
+    var $Sorter_Surname;
+    var $Sorter_FirstName;
+    var $Sorter_MiddleName;
+//End Variables
+
+//Class_Initialize Event @2-3DA574E1
+    function clsGridemployee($RelativePath, & $Parent)
+    {
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->ComponentName = "employee";
+        $this->Visible = True;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Grid employee";
+        $this->Attributes = new clsAttributes($this->ComponentName . ":");
+        $this->DataSource = new clsemployeeDataSource($this);
+        $this->ds = & $this->DataSource;
+        $this->PageSize = CCGetParam($this->ComponentName . "PageSize", "");
+        if(!is_numeric($this->PageSize) || !strlen($this->PageSize))
+            $this->PageSize = 10;
+        else
+            $this->PageSize = intval($this->PageSize);
+        if ($this->PageSize > 100)
+            $this->PageSize = 100;
+        if($this->PageSize == 0)
+            $this->Errors->addError("<p>Form: Grid " . $this->ComponentName . "<br>Error: (CCS06) Invalid page size.</p>");
+        $this->PageNumber = intval(CCGetParam($this->ComponentName . "Page", 1));
+        if ($this->PageNumber <= 0) $this->PageNumber = 1;
+        $this->SorterName = CCGetParam("employeeOrder", "");
+        $this->SorterDirection = CCGetParam("employeeDir", "");
+
+        $this->EmployeeIDNo = & new clsControl(ccsLabel, "EmployeeIDNo", "EmployeeIDNo", ccsText, "", CCGetRequestParam("EmployeeIDNo", ccsGet, NULL), $this);
+        $this->Surname = & new clsControl(ccsLabel, "Surname", "Surname", ccsText, "", CCGetRequestParam("Surname", ccsGet, NULL), $this);
+        $this->FirstName = & new clsControl(ccsLabel, "FirstName", "FirstName", ccsText, "", CCGetRequestParam("FirstName", ccsGet, NULL), $this);
+        $this->MiddleName = & new clsControl(ccsLabel, "MiddleName", "MiddleName", ccsText, "", CCGetRequestParam("MiddleName", ccsGet, NULL), $this);
+        $this->Sorter_EmployeeIDNo = & new clsSorter($this->ComponentName, "Sorter_EmployeeIDNo", $FileName, $this);
+        $this->Sorter_Surname = & new clsSorter($this->ComponentName, "Sorter_Surname", $FileName, $this);
+        $this->Sorter_FirstName = & new clsSorter($this->ComponentName, "Sorter_FirstName", $FileName, $this);
+        $this->Sorter_MiddleName = & new clsSorter($this->ComponentName, "Sorter_MiddleName", $FileName, $this);
+        $this->Navigator = & new clsNavigator($this->ComponentName, "Navigator", $FileName, 10, tpCentered, $this);
+        $this->Navigator->PageSizes = array("1", "5", "10", "25", "50");
+    }
+//End Class_Initialize Event
+
+//Initialize Method @2-90E704C5
+    function Initialize()
+    {
+        if(!$this->Visible) return;
+
+        $this->DataSource->PageSize = & $this->PageSize;
+        $this->DataSource->AbsolutePage = & $this->PageNumber;
+        $this->DataSource->SetOrder($this->SorterName, $this->SorterDirection);
+    }
+//End Initialize Method
+
+//Show Method @2-7570AE89
+    function Show()
+    {
+        global $Tpl;
+        global $CCSLocales;
+        if(!$this->Visible) return;
+
+        $this->RowNumber = 0;
+
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $this->DataSource->Prepare();
+        $this->DataSource->Open();
+        $this->HasRecord = $this->DataSource->has_next_record();
+        $this->IsEmpty = ! $this->HasRecord;
+        $this->Attributes->Show();
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        if(!$this->Visible) return;
+
+        $GridBlock = "Grid " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $GridBlock;
+
+
+        if (!$this->IsEmpty) {
+            $this->ControlsVisible["EmployeeIDNo"] = $this->EmployeeIDNo->Visible;
+            $this->ControlsVisible["Surname"] = $this->Surname->Visible;
+            $this->ControlsVisible["FirstName"] = $this->FirstName->Visible;
+            $this->ControlsVisible["MiddleName"] = $this->MiddleName->Visible;
+            while ($this->ForceIteration || (($this->RowNumber < $this->PageSize) &&  ($this->HasRecord = $this->DataSource->has_next_record()))) {
+                $this->RowNumber++;
+                if ($this->HasRecord) {
+                    $this->DataSource->next_record();
+                    $this->DataSource->SetValues();
+                }
+                $Tpl->block_path = $ParentPath . "/" . $GridBlock . "/Row";
+                $this->EmployeeIDNo->SetValue($this->DataSource->EmployeeIDNo->GetValue());
+                $this->Surname->SetValue($this->DataSource->Surname->GetValue());
+                $this->FirstName->SetValue($this->DataSource->FirstName->GetValue());
+                $this->MiddleName->SetValue($this->DataSource->MiddleName->GetValue());
+                $this->Attributes->SetValue("rowNumber", $this->RowNumber);
+                $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShowRow", $this);
+                $this->Attributes->Show();
+                $this->EmployeeIDNo->Show();
+                $this->Surname->Show();
+                $this->FirstName->Show();
+                $this->MiddleName->Show();
+                $Tpl->block_path = $ParentPath . "/" . $GridBlock;
+                $Tpl->parse("Row", true);
+            }
+        }
+        else { // Show NoRecords block if no records are found
+            $this->Attributes->Show();
+            $Tpl->parse("NoRecords", false);
+        }
+
+        $errors = $this->GetErrors();
+        if(strlen($errors))
+        {
+            $Tpl->replaceblock("", $errors);
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+        $this->Navigator->PageNumber = $this->DataSource->AbsolutePage;
+        $this->Navigator->PageSize = $this->PageSize;
+        if ($this->DataSource->RecordsCount == "CCS not counted")
+            $this->Navigator->TotalPages = $this->DataSource->AbsolutePage + ($this->DataSource->next_record() ? 1 : 0);
+        else
+            $this->Navigator->TotalPages = $this->DataSource->PageCount();
+        if ($this->Navigator->TotalPages <= 1) {
+            $this->Navigator->Visible = false;
+        }
+        $this->Sorter_EmployeeIDNo->Show();
+        $this->Sorter_Surname->Show();
+        $this->Sorter_FirstName->Show();
+        $this->Sorter_MiddleName->Show();
+        $this->Navigator->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+        $this->DataSource->close();
+    }
+//End Show Method
+
+//GetErrors Method @2-BD611194
+    function GetErrors()
+    {
+        $errors = "";
+        $errors = ComposeStrings($errors, $this->EmployeeIDNo->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Surname->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->FirstName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->MiddleName->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DataSource->Errors->ToString());
+        return $errors;
+    }
+//End GetErrors Method
+
+} //End employee Class @2-FCB6E20C
+
+class clsemployeeDataSource extends clsDBConnection1 {  //employeeDataSource Class @2-3A1764EA
+
+//DataSource Variables @2-D8949FAE
+    var $Parent = "";
+    var $CCSEvents = "";
+    var $CCSEventResult;
+    var $ErrorBlock;
+    var $CmdExecution;
+
+    var $CountSQL;
+    var $wp;
+
+
+    // Datasource fields
+    var $EmployeeIDNo;
+    var $Surname;
+    var $FirstName;
+    var $MiddleName;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @2-0BFDE12F
+    function clsemployeeDataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Grid employee";
+        $this->Initialize();
+        $this->EmployeeIDNo = new clsField("EmployeeIDNo", ccsText, "");
+        
+        $this->Surname = new clsField("Surname", ccsText, "");
+        
+        $this->FirstName = new clsField("FirstName", ccsText, "");
+        
+        $this->MiddleName = new clsField("MiddleName", ccsText, "");
+        
+
+    }
+//End DataSourceClass_Initialize Event
+
+//SetOrder Method @2-B9B2BF5F
+    function SetOrder($SorterName, $SorterDirection)
+    {
+        $this->Order = "";
+        $this->Order = CCGetOrder($this->Order, $SorterName, $SorterDirection, 
+            array("Sorter_EmployeeIDNo" => array("EmployeeIDNo", ""), 
+            "Sorter_Surname" => array("Surname", ""), 
+            "Sorter_FirstName" => array("FirstName", ""), 
+            "Sorter_MiddleName" => array("MiddleName", "")));
+    }
+//End SetOrder Method
+
+//Prepare Method @2-14D6CD9D
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+    }
+//End Prepare Method
+
+//Open Method @2-F4C3730D
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->CountSQL = "SELECT COUNT(*)\n\n" .
+        "FROM employee";
+        $this->SQL = "SELECT * \n\n" .
+        "FROM employee {SQL_Where} {SQL_OrderBy}";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        if ($this->CountSQL) 
+            $this->RecordsCount = CCGetDBValue(CCBuildSQL($this->CountSQL, $this->Where, ""), $this);
+        else
+            $this->RecordsCount = "CCS not counted";
+        $this->query($this->OptimizeSQL(CCBuildSQL($this->SQL, $this->Where, $this->Order)));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @2-35DF629C
+    function SetValues()
+    {
+        $this->EmployeeIDNo->SetDBValue($this->f("EmployeeIDNo"));
+        $this->Surname->SetDBValue($this->f("Surname"));
+        $this->FirstName->SetDBValue($this->f("FirstName"));
+        $this->MiddleName->SetDBValue($this->f("MiddleName"));
+    }
+//End SetValues Method
+
+} //End employeeDataSource Class @2-FCB6E20C
+
+//Initialize Page @1-7AAE8E3A
+// Variables
+$FileName = "";
+$Redirect = "";
+$Tpl = "";
+$TemplateFileName = "";
+$BlockToParse = "";
+$ComponentName = "";
+$Attributes = "";
+
+// Events;
+$CCSEvents = "";
+$CCSEventResult = "";
+
+$FileName = FileName;
+$Redirect = "";
+$TemplateFileName = "TestPage.html";
+$BlockToParse = "main";
+$TemplateEncoding = "CP1252";
+$ContentType = "text/html";
+$PathToRoot = "./";
+$Charset = $Charset ? $Charset : "windows-1252";
+//End Initialize Page
+
+//Before Initialize @1-E870CEBC
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeInitialize", $MainPage);
+//End Before Initialize
+
+//Initialize Objects @1-90E94C1E
+$DBConnection1 = new clsDBConnection1();
+$MainPage->Connections["Connection1"] = & $DBConnection1;
+$Attributes = new clsAttributes("page:");
+$MainPage->Attributes = & $Attributes;
+
+// Controls
+$employee = & new clsGridemployee("", $MainPage);
+$MainPage->employee = & $employee;
+$employee->Initialize();
+
+$CCSEventResult = CCGetEvent($CCSEvents, "AfterInitialize", $MainPage);
+
+if ($Charset) {
+    header("Content-Type: " . $ContentType . "; charset=" . $Charset);
+} else {
+    header("Content-Type: " . $ContentType);
+}
+//End Initialize Objects
+
+//Initialize HTML Template @1-E710DB26
+$CCSEventResult = CCGetEvent($CCSEvents, "OnInitializeView", $MainPage);
+$Tpl = new clsTemplate($FileEncoding, $TemplateEncoding);
+$Tpl->LoadTemplate(PathToCurrentPage . $TemplateFileName, $BlockToParse, "CP1252");
+$Tpl->block_path = "/$BlockToParse";
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeShow", $MainPage);
+$Attributes->SetValue("pathToRoot", "");
+$Attributes->Show();
+//End Initialize HTML Template
+
+//Go to destination page @1-CDB6DC63
+if($Redirect)
+{
+    $CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+    $DBConnection1->close();
+    header("Location: " . $Redirect);
+    unset($employee);
+    unset($Tpl);
+    exit;
+}
+//End Go to destination page
+
+//Show Page @1-407081AB
+$employee->Show();
+$Tpl->block_path = "";
+$Tpl->Parse($BlockToParse, false);
+if (!isset($main_block)) $main_block = $Tpl->GetVar($BlockToParse);
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeOutput", $MainPage);
+if ($CCSEventResult) echo $main_block;
+//End Show Page
+
+//Unload Page @1-6B533D76
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+$DBConnection1->close();
+unset($employee);
+unset($Tpl);
+//End Unload Page
+
+
+?>

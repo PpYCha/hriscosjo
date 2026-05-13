@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>SRreport</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1">Back</a></p>
+<!-- BEGIN Record employee_employee_service -->
+<form id="employee_employee_service" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Search Employee</strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employee_employee_services_Surname">Surname<font color="#ff0000">*</font></label></td> 
+            <td><input id="employee_employee_services_Surname" style="TEXT-TRANSFORM: uppercase" maxlength="50" size="50" value="{s_Surname}" name="{s_Surname_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_employee_services_FirstName">First Name<font color="#ff0000">*</font></label></td> 
+            <td><input id="employee_employee_services_FirstName" style="TEXT-TRANSFORM: uppercase" maxlength="50" size="50" value="{s_FirstName}" name="{s_FirstName_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_employee_services_MiddleName">Middle Name</label></td> 
+            <td><input id="employee_employee_services_MiddleName" style="TEXT-TRANSFORM: uppercase" maxlength="50" size="50" value="{s_MiddleName}" name="{s_MiddleName_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td><a href="{ClearParameters_Src}" id="employee_employee_serviceClearParameters">Clear</a></td> 
+            <td align="right">&nbsp;<a href="{Link3_Src}" id="employee_employee_serviceLink3" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Purpose of the Request</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+              <!-- BEGIN Button Button_DoSearch --><input class="Button" id="employee_employee_serviceButton_DoSearch" type="submit" alt="Search" value="Search" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record employee_employee_service -->
+<p><br>
+&nbsp;&nbsp;Service Record&nbsp;Printable:&nbsp; 
+<!-- BEGIN Link Report_Print1 --><a href="{Report_Print1_Src}" id="Report_Print1">PHRMDO</a><!-- END Link Report_Print1 -->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<!-- BEGIN Report employee_lut_servicerecpu -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th">
+            <p></p>
+ 
+            <p>
+            <table style="WIDTH: 700px; HEIGHT: 152px">
+              <tr>
+                <td colspan="4">
+                  <h2 align="center"><font face="Times New Roman" color="#000000">S E R V I C E&nbsp; R E C O R D</font></h2>
+                </td>
+              </tr>
+ 
+              <tr>
+                <td>&nbsp;</td> 
+                <td colspan="3">&nbsp;</td>
+              </tr>
+ 
+              <tr>
+                <td><font face="Times New Roman" color="#000000"><font color="#ffffff"><font size="3"><strong><font color="#000000">Name:</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></font></font></font></td> 
+                <td colspan="3"><strong>&nbsp;<font size="4"><font face="Times New Roman"><font color="#ffffff">{Surname},&nbsp;</font>&nbsp; <font color="#ffffff">{FirstName}</font>&nbsp;<font color="#ffffff">{NameExtension}</font>&nbsp;<font color="#ffffff">&nbsp;{MiddleName}&nbsp; </font></font></font></strong></td>
+              </tr>
+ 
+              <tr>
+                <td><font face="Times New Roman" color="#000000"><font size="2">BirthDate/Place:</font></font></td> 
+                <td>&nbsp;<strong><u><font face="Times New Roman" size="3">{BirthMonth} {BirthDay}, {BirthYear}</font></u></strong></td> 
+                <td>
+                  <p align="left">&nbsp;<strong><u><font face="Times New Roman" size="3">{PlaceOfBirth}</font></u></strong></p>
+                </td> 
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+            </p>
+          </td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header --><!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col" colspan="2">
+          <p align="center">&nbsp;&nbsp;SERVICE</p>
+          </th>
+ 
+          <th scope="col" colspan="4">
+          <p align="center">RECORD OF APPOINTMENT</p>
+          </th>
+ 
+          <th scope="col" colspan="2">
+          <p align="center">OFFICE ENTITY DIVISION</p>
+          </th>
+ 
+          <th scope="col">L/V</th>
+ 
+          <th scope="col">
+          <p align="center">&nbsp;SEPARATION</p>
+          </th>
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col" colspan="2">
+          <p align="center">&nbsp;&nbsp;(Inclusive Dates)</p>
+          </th>
+ 
+          <th scope="col" colspan="4">
+          <p align="center">&nbsp;</p>
+          </th>
+ 
+          <th scope="col">
+          <p align="left">Place of</p>
+          </th>
+ 
+          <th scope="col">&nbsp;</th>
+ 
+          <th scope="col">ABS</th>
+ 
+          <th scope="col">&nbsp;</th>
+        </tr>
+ 
+        <tr class="Caption">
+          <th scope="col">&nbsp;From</th>
+ 
+          <th scope="col">&nbsp;To</th>
+ 
+          <th scope="col">Designation</th>
+ 
+          <th scope="col">&nbsp;Status</th>
+ 
+          <th scope="col" colspan="2">&nbsp;Salary&nbsp;</th>
+ 
+          <th scope="col">Assignment</th>
+ 
+          <th scope="col">&nbsp;Branch</th>
+ 
+          <th scope="col">w/o Pay</th>
+ 
+          <th scope="col">&nbsp;Date/Cause</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tr class="Footer">
+          <td style="TEXT-ALIGN: right" colspan="10">Page {Report_CurrentPage} of {Report_TotalPages} 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}">First </a><!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev </a><!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of&nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next </a><!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last </a><!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+        </tr>
+ 
+        <!-- BEGIN Panel PageBreak -->
+      </table>
+    </td>
+  </tr>
+</table>
+<p style="PAGE-BREAK-AFTER: always">&nbsp;</p>
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- END Panel PageBreak --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td><input id="employee_lut_servicerecpuDetailSurname_{employee_lut_servicerecpu:rowNumber}" type="hidden" value="{Surname}" name="{Surname_Name}"><input id="employee_lut_servicerecpuDetailFirstName_{employee_lut_servicerecpu:rowNumber}" type="hidden" value="{FirstName}" name="{FirstName_Name}"><input id="employee_lut_servicerecpuDetailMiddleName_{employee_lut_servicerecpu:rowNumber}" type="hidden" value="{MiddleName}" name="{MiddleName_Name}"><input id="employee_lut_servicerecpuDetailNameExtension_{employee_lut_servicerecpu:rowNumber}" type="hidden" value="{NameExtension}" name="{NameExtension_Name}"><input id="employee_lut_servicerecpuDetailBirthMonth_{employee_lut_servicerecpu:rowNumber}" type="hidden" value="{BirthMonth}" name="{BirthMonth_Name}"><input id="employee_lut_servicerecpuDetailBirthDay_{employee_lut_servicerecpu:rowNumber}" type="hidden" value="{BirthDay}" name="{BirthDay_Name}"><input id="employee_lut_servicerecpuDetailBirthYear_{employee_lut_servicerecpu:rowNumber}" type="hidden" value="{BirthYear}" name="{BirthYear_Name}"><input id="employee_lut_servicerecpuDetailPlaceOfBirth_{employee_lut_servicerecpu:rowNumber}" type="hidden" value="{PlaceOfBirth}" name="{PlaceOfBirth_Name}">{DateFrom}</td> 
+          <td>{DateTo} </td> 
+          <td>{Designation} </td> 
+          <td>{StatofAppt} </td> 
+          <td style="TEXT-ALIGN: right">{AnnualSalary} </td> 
+          <td>{Slash} </td> 
+          <td>{OfficeStatn} </td> 
+          <td>{Branch} </td> 
+          <td>{AbsenceWOPay} </td> 
+          <td>&nbsp;{Separation}<input id="employee_lut_servicerecpuDetailServiceRecPurpose_{employee_lut_servicerecpu:rowNumber}" type="hidden" value="{ServiceRecPurpose}" name="{ServiceRecPurpose_Name}"><input id="employee_lut_servicerecpuDetailOfficeID_{employee_lut_servicerecpu:rowNumber}" type="hidden" value="{OfficeID}" name="{OfficeID_Name}"></td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="10">No records</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report employee_lut_servicerecpu --><br>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Catarman_Casual</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<link href="Styles/Tile/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<!-- BEGIN Record employee_lut_statofappt2 -->
+<form id="employee_lut_statofappt2" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Tile/Images/Spacer.gif" border="0"></td> 
+            <td class="th">
+              <p align="left"><strong>Search Employee</strong></p>
+            </td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Tile/Images/Spacer.gif" border="0"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employee_lut_statofappt2s_PermMunicipality">Municipality</label></td> 
+            <td>
+              <select id="employee_lut_statofappt2s_PermMunicipality" name="{s_PermMunicipality_Name}">
+                <option value="" selected>Select Value</option>
+                {s_PermMunicipality_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_lut_statofappt2s_Position">Position</label></td> 
+            <td><input id="employee_lut_statofappt2s_Position" maxlength="70" size="50" value="{s_Position}" name="{s_Position_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee_lut_statofappt2s_employee_StatAppID">Status of Appointment</label></td> 
+            <td>
+              <!-- BEGIN CheckBoxList CheckBoxList1 --><input id="employee_lut_statofappt2CheckBoxList1_{CheckBoxList1:optionNumber}" type="checkbox" value="{Value}" name="{CheckBoxList1_Name}" {Check}><label for="employee_lut_statofappt2CheckBoxList1_{CheckBoxList1:optionNumber}">{Description}</label><!-- END CheckBoxList CheckBoxList1 --></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td><a href="{ClearParameters_Src}" id="employee_lut_statofappt2ClearParameters">Clear</a></td> 
+            <td align="right">
+              <!-- BEGIN Button Button_DoSearch --><input class="Button" id="employee_lut_statofappt2Button_DoSearch" type="submit" alt="Search" value="Search" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record employee_lut_statofappt2 --><br>
+<!-- BEGIN Link Report_Print -->
+<p align="left"><a href="{Report_Print_Src}" id="Report_Print" target="_blank">Printable version</a></p>
+<!-- END Link Report_Print -->
+<!-- BEGIN Report employee_lut_statofappt3 -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Tile/Images/Spacer.gif" border="0"></td> 
+          <td class="th"><strong></strong></td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Tile/Images/Spacer.gif" border="0"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row">Total Records:&nbsp;{Report_TotalRecords}&nbsp;</caption>
+ <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <thead style="DISPLAY: table-header-group">
+          <tr class="Caption">
+            <th scope="col">#</th>
+ 
+            <th scope="col">&nbsp;LAST NAME</th>
+ 
+            <th scope="col">FIRST NAME</th>
+ 
+            <th scope="col">MIDDLE NAME</th>
+ 
+            <th scope="col">&nbsp;BARANGAY</th>
+ 
+            <th scope="col">&nbsp;MUNICIPALITY</th>
+ 
+            <th scope="col">&nbsp;POSITION</th>
+ 
+            <th scope="col">&nbsp;STATUS OF APPOINTMENT</th>
+          </tr>
+ 
+        </thead>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tfoot style="DISPLAY: table-footer-group">
+          <tr class="Footer">
+            <td>{Report_CurrentDate}</td> 
+            <td colspan="7">
+              <!-- BEGIN Navigator Navigator -->
+              <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+              <!-- BEGIN First_Off -->First <!-- END First_Off -->
+              <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+              <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+              <!-- BEGIN Pages -->
+              <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+              <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+              <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+              <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+              <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+              <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+          </tr>
+        </tfoot>
+ <!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: right">{Report_Row_Number} </td> 
+          <td>{Surname} </td> 
+          <td>{FirstName} </td> 
+          <td>{MiddleName} </td> 
+          <td>{PermBrgy} </td> 
+          <td>{PermMunicipality} </td> 
+          <td>{Position} </td> 
+          <td>{StatApp} </td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="8">No records</td>
+        </tr>
+ <!-- END Panel NoRecords -->
+        <tr class="Total">
+          <td valign="baseline">Grand Total </td> 
+          <td style="TEXT-ALIGN: right" valign="baseline">Count: {TotalCount_Surname} </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td style="TEXT-ALIGN: right">&nbsp; </td>
+        </tr>
+ <!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report employee_lut_statofappt3 --><br>
+</body>
+</html>

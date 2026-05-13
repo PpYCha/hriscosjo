@@ -1,0 +1,578 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>CurrentPosition</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<link href="Styles/Joyful/Style_doctype.css" type="text/css" rel="stylesheet">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-50DCEFB2
+
+var employee1_DatePicker_DetailedDate = new Object(); 
+employee1_DatePicker_DetailedDate.format           = "ShortDate";
+employee1_DatePicker_DetailedDate.style            = "Styles/Joyful/Style.css";
+employee1_DatePicker_DetailedDate.relativePathPart = "";
+employee1_DatePicker_DetailedDate.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//employee1Button_Delete_OnClick @36-9D84B75E
+function employee1Button_Delete_OnClick()
+{
+    var result = true;
+//End employee1Button_Delete_OnClick
+
+//Confirmation Message @37-8243B274
+    return confirm('Delete record?');
+//End Confirmation Message
+
+//Close employee1Button_Delete_OnClick @36-BC33A33A
+    return result;
+}
+//End Close employee1Button_Delete_OnClick
+
+//employee1Button_Cancel_OnClick @38-431A3369
+function employee1Button_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End employee1Button_Cancel_OnClick
+
+//bind_events @1-6115F593
+function bind_events() {
+    addEventHandler("employee1Button_Delete", "click", employee1Button_Delete_OnClick);
+    addEventHandler("employee1Button_Cancel", "click", employee1Button_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1">Back</a></p>
+<!-- BEGIN Grid employee -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Joyful/Images/Spacer.gif" border="0"></td> 
+          <td class="th"><strong>Current Position</strong></td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Joyful/Images/Spacer.gif" border="0"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">ID</th>
+ 
+          <th scope="col">Employee ID No.</th>
+ 
+          <th scope="col">Surname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">First Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Middle Name&nbsp;&nbsp;&nbsp;&nbsp; </th>
+ 
+          <th scope="col">Ext.</th>
+ 
+          <th scope="col">Date of Birth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td style="TEXT-ALIGN: right"><a href="{EmployeeID_Src}" id="employeeEmployeeID_{employee:rowNumber}">{EmployeeID}</a>&nbsp;</td> 
+          <td>{EmployeeIDNo}&nbsp;</td> 
+          <td>{Surname}&nbsp;</td> 
+          <td>{FirstName}&nbsp;</td> 
+          <td>{MiddleName}&nbsp;</td> 
+          <td>{NameExtension}&nbsp;</td> 
+          <td>{BirthMonth}&nbsp;{BirthDay},{BirthYear}</td>
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="7">No records</td>
+        </tr>
+        <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="7"><a href="{employee_Insert_Src}" id="employeeemployee_Insert">Add New</a>&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option value="" selected>-</option>
+ {PageSize_Options}
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Grid employee --><br>
+<!-- BEGIN Record employee1 -->
+<form id="employee1" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Joyful/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Add/Edit Current Position</strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Joyful/Images/Spacer.gif" border="0"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employee1Position">Position</label></td> 
+            <td><input id="employee1Position" maxlength="70" size="50" value="{Position}" name="{Position_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1ItemNo">Item No.</label></td> 
+            <td><input id="employee1ItemNo" maxlength="15" size="15" value="{ItemNo}" name="{ItemNo_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1EffectiveMonth">Effectivity Date</label></td> 
+            <td>
+              <select id="employee1EffectiveMonth" name="{EffectiveMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {EffectiveMonth_Options}
+              </select>
+ 
+              <select id="employee1EffectiveDay" name="{EffectiveDay_Name}">
+                <option value="" selected>Select Value</option>
+                {EffectiveDay_Options}
+              </select>
+ <input id="employee1EffectiveYear" maxlength="4" size="4" value="{EffectiveYear}" name="{EffectiveYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1SalaryGrade">Salary Grade/Step</label></td> 
+            <td>
+              <select id="employee1SalaryGrade" name="{SalaryGrade_Name}">
+                <option value="" selected>Select Value</option>
+                {SalaryGrade_Options}
+              </select>
+ - 
+              <select id="employee1StepIncrement" name="{StepIncrement_Name}">
+                <option value="" selected>Select Value</option>
+                {StepIncrement_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1MonthlySalary">Monthly Salary</label></td> 
+            <td><input id="employee1MonthlySalary" maxlength="12" size="12" value="{MonthlySalary}" name="{MonthlySalary_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StatAppt">Status of Appointment</label></td> 
+            <td>
+              <select id="employee1StatAppt" name="{StatAppt_Name}">
+                <option value="" selected>Select Value</option>
+                {StatAppt_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1OfficeID">Department/OfficeName</label></td> 
+            <td>
+              <select id="employee1OfficeID" name="{OfficeID_Name}">
+                <option value="" selected>Select Value</option>
+                {OfficeID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1OrigApptMonth">Date of Entrance of Duty</label></td> 
+            <td>
+              <select id="employee1OrigApptMonth" name="{OrigApptMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {OrigApptMonth_Options}
+              </select>
+ 
+              <select id="employee1OrigApptDay" name="{OrigApptDay_Name}">
+                <option value="" selected>Select Value</option>
+                {OrigApptDay_Options}
+              </select>
+ <input id="employee1OrigApptYear" maxlength="4" size="4" value="{OrigApptYear}" name="{OrigApptYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1PromotedMonth">Date of Last Promotion</label></td> 
+            <td>
+              <select id="employee1PromotedMonth" name="{PromotedMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {PromotedMonth_Options}
+              </select>
+ 
+              <select id="employee1PromotedDay" name="{PromotedDay_Name}">
+                <option value="" selected>Select Value</option>
+                {PromotedDay_Options}
+              </select>
+ <input id="employee1PromotedYear" maxlength="4" size="4" value="{PromotedYear}" name="{PromotedYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1PromotedDay"></label></td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StepInc1Month">Step Increment 1</label></td> 
+            <td>
+              <select id="employee1StepInc1Month" name="{StepInc1Month_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc1Month_Options}
+              </select>
+ 
+              <select id="employee1StepInc1Day" name="{StepInc1Day_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc1Day_Options}
+              </select>
+ <input id="employee1StepInc1Year" maxlength="4" size="4" value="{StepInc1Year}" name="{StepInc1Year_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StepInc2Month">Step Increment 2</label></td> 
+            <td>
+              <select id="employee1StepInc2Month" name="{StepInc2Month_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc2Month_Options}
+              </select>
+ 
+              <select id="employee1StepInc2Day" name="{StepInc2Day_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc2Day_Options}
+              </select>
+ <input id="employee1StepInc2Year" maxlength="4" size="4" value="{StepInc2Year}" name="{StepInc2Year_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StepInc3Month">Step Increment 3</label></td> 
+            <td>
+              <select id="employee1StepInc3Month" name="{StepInc3Month_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc3Month_Options}
+              </select>
+ 
+              <select id="employee1StepInc3Day" name="{StepInc3Day_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc3Day_Options}
+              </select>
+ <input id="employee1StepInc3Year" maxlength="4" size="4" value="{StepInc3Year}" name="{StepInc3Year_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StepInc4Month">Step Increment 4</label></td> 
+            <td>
+              <select id="employee1StepInc4Month" name="{StepInc4Month_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc4Month_Options}
+              </select>
+ 
+              <select id="employee1StepInc4Day" name="{StepInc4Day_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc4Day_Options}
+              </select>
+ <input id="employee1StepInc4Year" maxlength="4" size="4" value="{StepInc4Year}" name="{StepInc4Year_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StepInc5Month">Step Increment 5</label></td> 
+            <td>
+              <select id="employee1StepInc5Month" name="{StepInc5Month_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc5Month_Options}
+              </select>
+ 
+              <select id="employee1StepInc5Day" name="{StepInc5Day_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc5Day_Options}
+              </select>
+ <input id="employee1StepInc5Year" maxlength="4" size="4" value="{StepInc5Year}" name="{StepInc5Year_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StepInc6Month">Step Increment 6</label></td> 
+            <td>
+              <select id="employee1StepInc6Month" name="{StepInc6Month_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc6Month_Options}
+              </select>
+ 
+              <select id="employee1StepInc6Day" name="{StepInc6Day_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc6Day_Options}
+              </select>
+ <input id="employee1StepInc6Year" maxlength="4" size="4" value="{StepInc6Year}" name="{StepInc6Year_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StepInc7Month">Step Increment 7</label></td> 
+            <td>
+              <select id="employee1StepInc7Month" name="{StepInc7Month_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc7Month_Options}
+              </select>
+ 
+              <select id="employee1StepInc7Day" name="{StepInc7Day_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc7Day_Options}
+              </select>
+ <input id="employee1StepInc7Year" maxlength="4" size="4" value="{StepInc7Year}" name="{StepInc7Year_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StepInc8Month">Step Increment 8</label></td> 
+            <td>
+              <select id="employee1StepInc8Month" name="{StepInc8Month_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc8Month_Options}
+              </select>
+ 
+              <select id="employee1StepInc8Day" name="{StepInc8Day_Name}">
+                <option value="" selected>Select Value</option>
+                {StepInc8Day_Options}
+              </select>
+ <input id="employee1StepInc8Year" maxlength="4" size="4" value="{StepInc8Year}" name="{StepInc8Year_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1StepInc8Day"></label></td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1LastServiceMonth">Last Day of Service</label></td> 
+            <td>
+              <select id="employee1LastServiceMonth" name="{LastServiceMonth_Name}">
+                <option value="" selected>Select Value</option>
+ {LastServiceMonth_Options}
+              </select>
+ 
+              <select id="employee1LastServiceDay" name="{LastServiceDay_Name}">
+                <option value="" selected>Select Value</option>
+ {LastServiceDay_Options}
+              </select>
+ <input id="employee1LastService" maxlength="4" size="4" value="{LastService}" name="{LastService_Name}">&nbsp;&nbsp;&nbsp;<a href="{Link1_Src}" id="employee1Link1" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">ConstantFactor</a></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1LastServiceDay"></label></td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1CompRetireMonth">Compulsory Retirement</label></td> 
+            <td>
+              <select id="employee1CompRetireMonth" name="{CompRetireMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {CompRetireMonth_Options}
+              </select>
+ 
+              <select id="employee1CompRetireDay" name="{CompRetireDay_Name}">
+                <option value="" selected>Select Value</option>
+                {CompRetireDay_Options}
+              </select>
+ <input id="employee1CompRetireYear" maxlength="4" size="4" value="{CompRetireYear}" name="{CompRetireYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1CompRetireDay"></label></td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1SeparationMonth">Date of Separation</label></td> 
+            <td>
+              <select id="employee1SeparationMonth" name="{SeparationMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {SeparationMonth_Options}
+              </select>
+ 
+              <select id="employee1SeparationDay" name="{SeparationDay_Name}">
+                <option value="" selected>Select Value</option>
+                {SeparationDay_Options}
+              </select>
+ <input id="employee1SeparationYear" maxlength="4" size="4" value="{SeparationYear}" name="{SeparationYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1ModeSeparatnID">Mode Separation</label></td> 
+            <td>
+              <select id="employee1ModeSeparatnID" name="{ModeSeparatnID_Name}">
+                <option value="" selected>Select Value</option>
+                {ModeSeparatnID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1DetailedID">Detailed</label></td> 
+            <td><input id="employee1DetailedID" type="checkbox" value="1" name="{DetailedID_Name}" {DetailedID}></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1DetailedOffice">Detailed Department/Office</label></td> 
+            <td><input id="employee1DetailedOffice" maxlength="50" size="50" value="{DetailedOffice}" name="{DetailedOffice_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1DetailedDate">Detailed Date (mm/dd/yyyy)</label></td> 
+            <td><input id="employee1DetailedDate" maxlength="100" size="8" value="{DetailedDate}" name="{DetailedDate_Name}">
+              <!-- BEGIN DatePicker DatePicker_DetailedDate --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="employee1DatePicker_DetailedDate"><img id="employee1DatePicker_DetailedDate_Image" alt="Show Date Picker" src="Styles/Joyful/Images/DatePicker.gif" border="0"></a><!-- END DatePicker DatePicker_DetailedDate --></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1DetailedRemarks">Detailed Remarks</label></td> 
+            <td><input id="employee1DetailedRemarks" maxlength="100" size="50" value="{DetailedRemarks}" name="{DetailedRemarks_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><font color="#ff0000"><strong>NOSA</strong></font></td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1NosaMonth">Effectivity Date</label></td> 
+            <td>
+              <select id="employee1NosaMonth" name="{NosaMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {NosaMonth_Options}
+              </select>
+ 
+              <select id="employee1NosaDay" name="{NosaDay_Name}">
+                <option value="" selected>Select Value</option>
+                {NosaDay_Options}
+              </select>
+ <input id="employee1NosaYear" maxlength="4" size="4" value="{NosaYear}" name="{NosaYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1NosaSalGrade">Salary Grade/Step</label></td> 
+            <td>
+              <select id="employee1NosaSalGrade" name="{NosaSalGrade_Name}">
+                <option value="" selected>Select Value</option>
+                {NosaSalGrade_Options}
+              </select>
+ - 
+              <select id="employee1NosaStepInc" name="{NosaStepInc_Name}">
+                <option value="" selected>Select Value</option>
+                {NosaStepInc_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1NosaSalary">Salary Adjustment</label></td> 
+            <td><input id="employee1NosaSalary" maxlength="12" size="12" value="{NosaSalary}" name="{NosaSalary_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th">&nbsp;</td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><strong><font color="#ff0000">NOSI</font></strong></td> 
+            <td>&nbsp;</td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1NosiMonth">Effectivity Date</label></td> 
+            <td>
+              <select id="employee1NosiMonth" name="{NosiMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {NosiMonth_Options}
+              </select>
+ 
+              <select id="employee1NosiDay" name="{NosiDay_Name}">
+                <option value="" selected>Select Value</option>
+                {NosiDay_Options}
+              </select>
+ <input id="employee1NosiYear" maxlength="4" size="4" value="{NosiYear}" name="{NosiYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1NosiSalGrade">Salary Grade/Step</label></td> 
+            <td>
+              <select id="employee1NosiSalGrade" name="{NosiSalGrade_Name}">
+                <option value="" selected>Select Value</option>
+                {NosiSalGrade_Options}
+              </select>
+ - 
+              <select id="employee1NosiStepInc" name="{NosiStepInc_Name}">
+                <option value="" selected>Select Value</option>
+                {NosiStepInc_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1NosiSalary">Salary Adjustment</label></td> 
+            <td><input id="employee1NosiSalary" maxlength="12" size="12" value="{NosiSalary}" name="{NosiSalary_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td align="right" colspan="2">
+              <!-- BEGIN Button Button_Insert --><input class="Button" id="employee1Button_Insert" type="submit" alt="Add" value="Add" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input class="Button" id="employee1Button_Update" type="submit" alt="Submit" value="Submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input class="Button" id="employee1Button_Delete" type="submit" alt="Delete" value="Delete" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input class="Button" id="employee1Button_Cancel" type="submit" alt="Cancel" value="Cancel" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record employee1 --><br>
+</body>
+</html>

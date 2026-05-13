@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Query_PWD</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1">Back</a></p>
+<!-- BEGIN Record departmentoffice_employee -->
+<form id="departmentoffice_employee" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th">
+              <p align="left"><strong>Search</strong></p>
+            </td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_employee_OfficeID">Department/Office</label></td> 
+            <td>
+              <select id="departmentoffice_employees_employee_OfficeID" name="{s_employee_OfficeID_Name}">
+                <option value="" selected>Select Value</option>
+                {s_employee_OfficeID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_DifferentlyAbled">Person With Disabilities (PWD)</label></td> 
+            <td>
+              <select id="departmentoffice_employees_DifferentlyAbled" name="{s_DifferentlyAbled_Name}">
+                <option value="" selected>Select Value</option>
+                {s_DifferentlyAbled_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td><a href="{ClearParameters_Src}" id="departmentoffice_employeeClearParameters">Clear</a></td> 
+            <td align="right">
+              <!-- BEGIN Button Button_DoSearch --><input class="Button" id="departmentoffice_employeeButton_DoSearch" type="submit" alt="Search" value="Search" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record departmentoffice_employee -->
+<p><br>
+<!-- BEGIN Link Report_Print --><a href="{Report_Print_Src}" id="Report_Print" target="_blank">Printable version</a><!-- END Link Report_Print --></p>
+<!-- BEGIN Report departmentoffice_employee1 -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th">
+            <p align="center"><strong>List of Person With Disabilities (PWD)</strong></p>
+          </td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row">Total Records:&nbsp;{Report_TotalRecords}&nbsp;</caption>
+ <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">Department/Office</th>
+ 
+          <th scope="col">#&nbsp;</th>
+ 
+          <th scope="col">Surname</th>
+ 
+          <th scope="col">First Name</th>
+ 
+          <th scope="col">MiddleName</th>
+ 
+          <th scope="col">PWD ID</th>
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tr class="Footer">
+          <td colspan="6">
+            <p align="left"><font size="1"><font face="Times New Roman">Provincial&nbsp;Government of Northern Samar&nbsp;<em>&copy; by PHRMDO&nbsp;E-mpleyadoS&nbsp;</em></font></font>&nbsp;&nbsp;{Report_CurrentDate}&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator --></p>
+          </td>
+        </tr>
+ 
+        <!-- BEGIN Panel PageBreak -->
+      </table>
+    </td>
+  </tr>
+</table>
+<p style="PAGE-BREAK-AFTER: always">&nbsp;</p>
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- END Panel PageBreak --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section NameOfficeDept_Header -->
+        <tr class="GroupCaption">
+          <th scope="col">{NameOfficeDept} </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+        </tr>
+ <!-- END Section NameOfficeDept_Header -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td>&nbsp; </td> 
+          <td style="TEXT-ALIGN: right">{Report_Row_Number} </td> 
+          <td>{Surname} </td> 
+          <td>{FirstName} </td> 
+          <td>{MiddleName} </td> 
+          <td>{DifferentlyAbledDetails} </td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section NameOfficeDept_Footer --><!-- END Section NameOfficeDept_Footer -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="6">No records</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report departmentoffice_employee1 --><br>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Purpose4</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-D3B5F5BF
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//employee1Button_Delete_OnClick @41-9D84B75E
+function employee1Button_Delete_OnClick()
+{
+    var result = true;
+//End employee1Button_Delete_OnClick
+
+//Confirmation Message @42-8243B274
+    return confirm('Delete record?');
+//End Confirmation Message
+
+//Close employee1Button_Delete_OnClick @41-BC33A33A
+    return result;
+}
+//End Close employee1Button_Delete_OnClick
+
+//employee1Button_Cancel_OnClick @43-431A3369
+function employee1Button_Cancel_OnClick()
+{
+    disableValidation = true;
+}
+//End employee1Button_Cancel_OnClick
+
+//bind_events @1-6115F593
+function bind_events() {
+    addEventHandler("employee1Button_Delete", "click", employee1Button_Delete_OnClick);
+    addEventHandler("employee1Button_Cancel", "click", employee1Button_Cancel_OnClick);
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/Fresh/Style_doctype.css">
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1" target="_parent">Back</a></p>
+<!-- BEGIN Record employeeSearch -->
+<form id="employeeSearch" name="{HTMLFormName}" action="{Action}">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Search</strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employeeSearchs_Surname">Surname<font color="#ff0000">*</font></label></td> 
+            <td><input id="employeeSearchs_Surname" maxlength="50" size="50" value="{s_Surname}" name="{s_Surname_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeeSearchs_FirstName">First Name<font color="#ff0000">*</font></label></td> 
+            <td><input id="employeeSearchs_FirstName" maxlength="50" size="50" value="{s_FirstName}" name="{s_FirstName_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeeSearchs_MiddleName">Middle Name</label></td> 
+            <td><input id="employeeSearchs_MiddleName" maxlength="50" size="50" value="{s_MiddleName}" name="{s_MiddleName_Name}"></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td><a href="{ClearParameters_Src}" id="employeeSearchClearParameters">Clear</a></td> 
+            <td align="right">
+              <!-- BEGIN Button Button_DoSearch --><input class="Button" id="employeeSearchButton_DoSearch" type="submit" alt="Search" value="Search" name="{Button_Name}"><!-- END Button Button_DoSearch --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record employeeSearch --><br>
+<!-- BEGIN Grid employee -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th"><strong>List of Employee </strong></td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+        </tr>
+ 
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <tr class="Caption">
+          <th scope="col">Surname</th>
+ 
+          <th scope="col">&nbsp;First Name</th>
+ 
+          <th scope="col">&nbsp;Middle Name</th>
+ 
+          <th scope="col">&nbsp;Purpose</th>
+ 
+          <th scope="col">Issued Date</th>
+ 
+        </tr>
+ 
+        <!-- BEGIN Row -->
+        <tr class="Row">
+          <td><a href="{Surname_Src}" id="employeeSurname_{employee:rowNumber}">{Surname}</a>&nbsp;</td> 
+          <td>{FirstName}&nbsp;</td> 
+          <td>{MiddleName}&nbsp;</td> 
+          <td style="TEXT-ALIGN: right">
+            <div align="left">
+              {SecRecPurposeID}&nbsp; 
+            </div>
+ </td> 
+          <td>{CertDay}&nbsp;{CertMonth}&nbsp;{CertYear}</td> 
+        </tr>
+ <!-- END Row -->
+        <!-- BEGIN NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="5">No records</td> 
+        </tr>
+ <!-- END NoRecords -->
+        <tr class="Footer">
+          <td colspan="5"><a href="{employee_Insert_Src}" id="employeeemployee_Insert">Add New</a>&nbsp; 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
+            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
+              <option value="" selected>-</option>
+ {PageSize_Options} 
+            </select>
+ 
+            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</td> 
+        </tr>
+ 
+      </table>
+ </td> 
+  </tr>
+</table>
+<!-- END Grid employee --><br>
+<!-- BEGIN Record employee1 -->
+<form id="employee1" name="{HTMLFormName}" action="{Action}" method="post" target="_blank">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Add/Edit Employee </strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employee1SecRecPurposeID">Purpose</label></td> 
+            <td>
+              <select id="employee1SecRecPurposeID" name="{SecRecPurposeID_Name}">
+                <option value="" selected>Select Value</option>
+ {SecRecPurposeID_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employee1CertDay">Issued Date</label></td> 
+            <td>
+              <select id="employee1CertDay" name="{CertDay_Name}">
+                <option value="" selected>Select Value</option>
+ {CertDay_Options} 
+              </select>
+ 
+              <select id="employee1CertMonth" name="{CertMonth_Name}">
+                <option value="" selected>Select Value</option>
+ {CertMonth_Options} 
+              </select>
+ <input id="employee1CertYear" maxlength="4" size="4" value="{CertYear}" name="{CertYear_Name}"></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td align="right" colspan="2">
+              <!-- BEGIN Button Button_Insert --><input class="Button" id="employee1Button_Insert" type="submit" alt="Add" value="Add" name="{Button_Name}"><!-- END Button Button_Insert -->
+              <!-- BEGIN Button Button_Update --><input class="Button" id="employee1Button_Update" type="submit" alt="Submit" value="Submit" name="{Button_Name}"><!-- END Button Button_Update -->
+              <!-- BEGIN Button Button_Delete --><input class="Button" id="employee1Button_Delete" type="submit" alt="Delete" value="Delete" name="{Button_Name}"><!-- END Button Button_Delete -->
+              <!-- BEGIN Button Button_Cancel --><input class="Button" id="employee1Button_Cancel" type="submit" alt="Cancel" value="Cancel" name="{Button_Name}"><!-- END Button Button_Cancel --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record employee1 --><br>
+</body>
+</html>

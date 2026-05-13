@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>QEmp_Consanguinity2</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<p>&nbsp;&nbsp;&nbsp;</p>
+<!-- BEGIN Report employee -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th">
+            <p><strong></strong>&nbsp;</p>
+ 
+            <p><font size="2">Employee ID No. :&nbsp; {EmployeeIDNo}</font></p>
+ 
+            <p><font size="2">Employee Name&nbsp;&nbsp;:&nbsp;&nbsp; {Surname}, {FirstName}&nbsp;{NameExtension} {MiddleName} </font></p>
+          </td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row"></caption>
+ <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tr class="Footer">
+          <td><em>Provincial&nbsp;Government of Northern Samar&nbsp;&copy; by PHRMDO&nbsp;<font face="Times New Roman" size="1">E-mpleyadoS&nbsp;</font>&nbsp;&nbsp; </em>{Report_CurrentDate} 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+        </tr>
+ 
+        <!-- BEGIN Panel PageBreak -->
+      </table>
+    </td>
+  </tr>
+</table>
+<p style="PAGE-BREAK-AFTER: always">&nbsp;</p>
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- END Panel PageBreak --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <th scope="row"></th>
+ 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th scope="row">
+          <p><strong><em><font size="3">VIII. OTHER INFORMATION</font></em></strong></p>
+ 
+          <p>&nbsp;</p>
+ 
+          <p>&nbsp;</p>
+ 
+          <p>&nbsp;</p>
+          </th>
+ 
+          <td>&nbsp; 
+            <p align="center"><img id="employeeDetailReportLabel1_{employee:rowNumber}" height="120" alt="" src="photofolder/{ReportLabel1}"></p>
+          </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">
+          <p>34.&nbsp; a) within the third degree?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If YES, give details:</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b) within the fourth degree (for Local Government Unit - Career Employee?)</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If YES, give details:</p>
+          </th>
+ 
+          <td>
+            <p>{ConsanThird} <input id="employeeDetailNameExtension_{employee:rowNumber}" type="hidden" value="{NameExtension}" name="{NameExtension_Name}"><input id="employeeDetailMiddleName_{employee:rowNumber}" type="hidden" value="{MiddleName}" name="{MiddleName_Name}"></p>
+ 
+            <p>{ConsanThirdDetaila}<input id="employeeDetailEmployeeIDNo_{employee:rowNumber}" type="hidden" value="{EmployeeIDNo}" name="{EmployeeIDNo_Name}"></p>
+ 
+            <p>&nbsp;</p>
+ 
+            <p>{ConsanFourth}<input id="employeeDetailFirstName_{employee:rowNumber}" type="hidden" value="{FirstName}" name="{FirstName_Name}"></p>
+ 
+            <p>{ConsanFourthDetails}<input id="employeeDetailSurname_{employee:rowNumber}" type="hidden" value="{Surname}" name="{Surname_Name}"></p>
+          </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">
+          <p>35.&nbsp; a) Have you ever been found guilty of any administrative offense?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If YES, give details:</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b) Have you been criminally charged before any court?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If YES, give details:</p>
+          </th>
+ 
+          <td>
+            <p>{AdminOffense} </p>
+ 
+            <p>{AdminOffenseDetails}</p>
+ 
+            <p>&nbsp;</p>
+ 
+            <p>{CriminallyCharged}</p>
+ 
+            <p>{CriminallyChargedDetails}</p>
+          </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">
+          <p>36.&nbsp; Have you ever been convicted of any crime or violation of any law, decree, ordinance</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or regulation by any court or tribunal?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If YES, give details:</p>
+          </th>
+ 
+          <td>
+            <p>&nbsp;</p>
+ 
+            <p>{ConvictedOfCrime}</p>
+ 
+            <p>{ConvictedCrimeDetails}</p>
+          </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">
+          <p>37.&nbsp; Have you ever been separated from the service in any of the following modes:</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resignation, retirement, dropped from the rolls, dismissal, termination, end of term,</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; finished contract or phased out (abolition) in the public or private sector?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If YES, give details:</p>
+          </th>
+ 
+          <td>
+            <p>&nbsp;</p>
+ 
+            <p>&nbsp;</p>
+ 
+            <p>{SeparatedFromService}</p>
+ 
+            <p>{SeparatedFromServiceDetails}</p>
+          </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">
+          <p>38.&nbsp; a)&nbsp;Have you ever been&nbsp;a candidate in a national or local election held within the last</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; year (except Barangay election)?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If YES, give details:</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b) Have you resigned from the government service during the three (3)-month period</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; before the last election&nbsp;to promote/actively campaign for a national or local candidate?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If YES, give details:</p>
+          </th>
+ 
+          <td>
+            <p>&nbsp;</p>
+ 
+            <p>{CandidateElection}</p>
+ 
+            <p>{CandidateElectionDetails}</p>
+ 
+            <p>&nbsp;</p>
+ 
+            <p>{ResignedGovService}</p>
+ 
+            <p>{ResignedGovServiceDetails}</p>
+          </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">
+          <p>39.&nbsp; Have you acquired the status of an immigrant or permanent resident of another&nbsp;country?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If YES, give details:</p>
+          </th>
+ 
+          <td>
+            <p>{StatOfImmigrant}</p>
+ 
+            <p>{StatOfImmigrantDetails}</p>
+          </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">
+          <p>40.&nbsp; Pursuant to: (a) Indigenous People's Act (RA 8371); (b) Magna Carta for Disabled</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Persons (RA 7277); and (c) Solo Parents Welfare Act of 2000 (RA 8972), please</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a) Are you a member of any indigenous group?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If YES, give details:</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b) Are you a person with disablity?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; If YES, give details:</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c) Are you a solo parent?</p>
+ 
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If YES, give details:</p>
+          </th>
+ 
+          <td>
+            <p>&nbsp;</p>
+ 
+            <p>&nbsp;</p>
+ 
+            <p>{IndigenousGroupMember}</p>
+ 
+            <p>{IndigenousDetails}</p>
+ 
+            <p>&nbsp;</p>
+ 
+            <p>{DifferentlyAbled}</p>
+ 
+            <p>{DifferentlyAbledDetails}</p>
+ 
+            <p>&nbsp;</p>
+ 
+            <p>{SoloParent}</p>
+ 
+            <p>{SoloParentDetails}</p>
+          </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Government Issued ID</th>
+ 
+          <td>{GovIssuedID} </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">ID/License/Passprt No.</th>
+ 
+          <td>{IDNo} </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Date/Place of Issuance</th>
+ 
+          <td>{DatePlaceIssuance} </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">&nbsp;</th>
+ 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Date Accomplished </th>
+ 
+          <td>{DateAccomplished} </td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="2">No records</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report employee --><br>
+</body>
+</html>

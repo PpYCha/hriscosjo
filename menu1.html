@@ -1,0 +1,46 @@
+<link rel="stylesheet" type="text/css" href="Styles/Fresh/Style_doctype.css">
+<link href="{page:pathToRoot}Styles/adx.css" type="text/css" rel="stylesheet">
+<link href="{page:pathToRoot}Styles/Fresh/Menu.css" type="text/css" rel="stylesheet">
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-A2F3288E
+</script>
+<script language="JavaScript" src="{page:pathToRoot}ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Include User Scripts @1-A09BEFEA
+</script>
+<script language="JavaScript" src="{page:pathToRoot}js/menu/WCH.js" type="text/javascript"></script>
+<script language="JavaScript" src="{page:pathToRoot}js/menu/ADxMenu.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include User Scripts
+
+//bind_events @1-1A34EA2D
+function menu1_bind_events() {
+    addEventHandler("menu1Menu2Container", "load", load_ADxMenu);
+}
+//End bind_events
+
+//End CCS script
+</script>
+<p><a href="{Logout_Src}" id="menumainLogout">{CustomLogoutLinkText}</a>{CustomLogoutText}</p>
+<p>
+<!-- BEGIN Menu Menu2 -->
+<div class="MenuStyle" id="menu1Menu2Container">
+  <ul class="adxm {Menu2:MenuType} level1">
+    <!-- BEGIN Item -->
+    <!-- BEGIN OpenLevel -->
+    <ul class="level{Menu2:Item_Level}">
+      <!-- END OpenLevel -->
+      <li {Menu2:DefaultItem}><a href="{ItemLink_Src}" class="{Menu2:Submenu}" target="{Menu2:Target}" title="{Menu2:Title}">{ItemLink}</a> 
+      <!-- BEGIN CloseItem --></li>
+ <!-- END CloseItem -->
+      <!-- BEGIN CloseLevel -->
+    </ul>
+ </li>
+ <!-- END CloseLevel --><!-- END Item -->
+  </ul>
+</div>
+<!-- END Menu Menu2 --></p>

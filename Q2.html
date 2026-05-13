@@ -1,0 +1,535 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Q2</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1">Back</a></p>
+<!-- BEGIN Record employeeSearch -->
+<form id="employeeSearch" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Search Employee </strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="4">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="employeeSearchs_Surname">Employee ID No.</label></td> 
+            <td><input id="employeeSearchs_EmployeeIDNo" maxlength="6" size="6" value="{s_EmployeeIDNo}" name="{s_EmployeeIDNo_Name}"></td> 
+            <td><label for="employeeSearchs_CivilStatus"><font style="BACKGROUND-COLOR: #eef1e2">Department/Office</font> </label></td> 
+            <td>&nbsp; 
+              <select id="employeeSearchs_OfficeID" name="{s_OfficeID_Name}">
+                <option value="" selected>Select Value</option>
+                {s_OfficeID_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeeSearchs_Surname">Surname</label></td> 
+            <td><input id="employeeSearchs_Surname" style="WIDTH: 202px; HEIGHT: 22px" maxlength="50" size="30" value="{s_Surname}" name="{s_Surname_Name}"></td> 
+            <td><label for="employeeSearchs_PermMunicipality"><font style="BACKGROUND-COLOR: #eef1e2">Status of Appointment</font></label></td> 
+            <td>&nbsp; 
+              <select id="employeeSearchs_StatAppt" name="{s_StatAppt_Name}">
+                <option value="" selected>Select Value</option>
+                {s_StatAppt_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeeSearchs_FirstName">First Name</label></td> 
+            <td><input id="employeeSearchs_FirstName" style="WIDTH: 202px; HEIGHT: 22px" maxlength="50" size="30" value="{s_FirstName}" name="{s_FirstName_Name}"></td> 
+            <td>Original Appointment</td> 
+            <td>&nbsp; 
+              <select id="employeeSearchs_OrigApptMonth" name="{s_OrigApptMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {s_OrigApptMonth_Options}
+              </select>
+ 
+              <select id="employeeSearchs_OrigApptDay" name="{s_OrigApptDay_Name}">
+                <option value="" selected>Select Value</option>
+                {s_OrigApptDay_Options}
+              </select>
+ <input id="employeeSearchs_OrigApptYear" maxlength="4" size="4" value="{s_OrigApptYear}" name="{s_OrigApptYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeeSearchs_Sex">Middle Name</label></td> 
+            <td><input id="employeeSearchs_MiddleName" style="WIDTH: 200px; HEIGHT: 22px" maxlength="50" size="29" value="{s_MiddleName}" name="{s_MiddleName_Name}"></td> 
+            <td>Date of Last Promotion</td> 
+            <td>&nbsp; 
+              <select id="employeeSearchs_PromotedMonth" name="{s_PromotedMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {s_PromotedMonth_Options}
+              </select>
+ 
+              <select id="employeeSearchs_PromotedDay" name="{s_PromotedDay_Name}">
+                <option value="" selected>Select Value</option>
+                {s_PromotedDay_Options}
+              </select>
+ <input id="employeeSearchs_PromotedYear" maxlength="4" size="4" value="{s_PromotedYear}" name="{s_PromotedYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="employeeSearchs_Sex">Municipality</label></td> 
+            <td>
+              <select id="employeeSearchs_PermMunicipality" name="{s_PermMunicipality_Name}">
+                <option value="" selected>Select Value</option>
+                {s_PermMunicipality_Options}
+              </select>
+ </td> 
+            <td>Compulsory Retirement</td> 
+            <td>&nbsp; 
+              <select id="employeeSearchs_CompRetireMonth" name="{s_CompRetireMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {s_CompRetireMonth_Options}
+              </select>
+ 
+              <select id="employeeSearchs_CompRetireDay" name="{s_CompRetireDay_Name}">
+                <option value="" selected>Select Value</option>
+                {s_CompRetireDay_Options}
+              </select>
+ <input id="employeeSearchs_CompRetireYear" maxlength="4" size="4" value="{s_CompRetireYear}" name="{s_CompRetireYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"></td> 
+            <td>&nbsp;</td> 
+            <td>Date of Separation</td> 
+            <td>&nbsp; 
+              <select id="employeeSearchs_SeparationMonth" name="{s_SeparationMonth_Name}">
+                <option value="" selected>Select Value</option>
+                {s_SeparationMonth_Options}
+              </select>
+ 
+              <select id="employeeSearchs_SeparationDay" name="{s_SeparationDay_Name}">
+                <option value="" selected>Select Value</option>
+                {s_SeparationDay_Options}
+              </select>
+ <input id="employeeSearchs_SeparationYear" maxlength="4" size="4" value="{s_SeparationYear}" name="{s_SeparationYear_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td></td> 
+            <td align="right"><a href="{ClearParameters_Src}" id="employeeSearchClearParameters">Clear</a></td> 
+            <td align="right">&nbsp;</td> 
+            <td align="right">
+              <!-- BEGIN Button Button_DoSearch --><input class="Button" id="employeeSearchButton_DoSearch" type="submit" alt="Search" value="Search" name="{Button_Name}"><!-- END Button Button_DoSearch -->&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record employeeSearch --><br>
+<div align="center">
+  <!-- BEGIN Report employee -->
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td valign="top">
+          <table class="Header" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+              <td class="th">
+                <p align="center"><strong>Employee Profile</strong></p>
+              </td> 
+              <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+            </tr>
+          </table>
+ 
+          <table class="Grid" cellspacing="0" cellpadding="0">
+            <!-- BEGIN Section Report_Header -->
+            <caption class="Row">Total Records:&nbsp;{Report_TotalRecords}&nbsp;</caption>
+ <!-- END Section Report_Header -->
+            <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+            <!-- BEGIN Section Page_Footer -->
+            <tr class="Footer">
+              <td colspan="4">Page {Report_CurrentPage} of {Report_TotalPages} 
+                <!-- BEGIN Navigator Navigator -->
+                <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+                <!-- BEGIN First_Off -->First <!-- END First_Off -->
+                <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+                <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+                <!-- BEGIN Pages -->
+                <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+                <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+                <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+                <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+                <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+                <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+            </tr>
+ <!-- END Section Page_Footer -->
+            <!-- BEGIN Section Detail -->
+            <tr class="Row">
+              <th scope="row" colspan="2">&nbsp;</th>
+ 
+              <td colspan="2">&nbsp;</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">&nbsp;</th>
+ 
+              <td>
+                <p><img id="employeeDetailEmpPicture3" height="120" alt="" src="photofolder/{EmpPicture3}" width="80"></p>
+              </td> 
+              <td>
+                <p>&nbsp;<a href="{Link1_Src}" id="employeeDetailLink1_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Children</a><a href="{Link2_Src}" id="employeeDetailLink2_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Education</a><a href="{Link3_Src}" id="employeeDetailLink3_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Eligibility</a><a href="{Link4_Src}" id="employeeDetailLink4_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Work Experience</a><a href="{Link5_Src}" id="employeeDetailLink5_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Training</a></p>
+ 
+                <p><a href="{Link6_Src}" id="employeeDetailLink6_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Skills</a><a href="{Link7_Src}" id="employeeDetailLink7_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Distinctions</a><a href="{Link8_Src}" id="employeeDetailLink8_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Membership</a><a href="{Link9_Src}" id="employeeDetailLink9_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Consanguinity</a><a href="{Link10_Src}" id="employeeDetailLink10_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Refereces</a></p>
+ 
+                <p><a href="{Link11_Src}" id="employeeDetailLink11_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Service Record</a><a href="{Link12_Src}" id="employeeDetailLink12_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Current Employment</a></p>
+              </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Employee ID No. </th>
+ 
+              <td colspan="2">{EmployeeIDNo} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Surname </th>
+ 
+              <td colspan="2">{Surname} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">FirstName </th>
+ 
+              <td colspan="2">{FirstName} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Middle Name </th>
+ 
+              <td colspan="2">{MiddleName} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Middle Initial </th>
+ 
+              <td colspan="2">{MiddleInitial} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Name Extension </th>
+ 
+              <td colspan="2">{NameExtension} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Date of Birth</th>
+ 
+              <td colspan="2">{BirthMonth}&nbsp;{BirthDay}, {BirthYear}</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Place of Birth</th>
+ 
+              <td colspan="2">{PlaceOfBirth} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Sex </th>
+ 
+              <td colspan="2">{Sex} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Civil Status </th>
+ 
+              <td colspan="2">{CivilStatus} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Height (m)&nbsp;</th>
+ 
+              <td colspan="2">{Height} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Weight (kg)</th>
+ 
+              <td colspan="2">{Weight} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Blood Type </th>
+ 
+              <td colspan="2">{BloodType} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">GSIS ID No. </th>
+ 
+              <td colspan="2">{GsisIdNo} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">GSIS BPN </th>
+ 
+              <td colspan="2">{GsisBPN} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Pag-Ibig ID No. </th>
+ 
+              <td colspan="2">{PagIbigIDNo} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Philhealth No. </th>
+ 
+              <td colspan="2">{PhilhealthNo} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">SSS No. </th>
+ 
+              <td colspan="2">{SssNo} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">TIN No.</th>
+ 
+              <td colspan="2">{Tin} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Agency Employee No. </th>
+ 
+              <td colspan="2">{AgencyEmpNo} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Citizenship </th>
+ 
+              <td colspan="2">{Citizenship} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Residential Address</th>
+ 
+              <td colspan="2">{ResHouseNo}{ResStreet}</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2"></th>
+ 
+              <td colspan="2">{ResSubVillage}{ResBrgy}</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">&nbsp;</th>
+ 
+              <td colspan="2">{ResMunicipality}, {ResProvince}</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <th scope="row">&nbsp;Zip Code</th>
+ 
+              <td colspan="2">{ResZipcode}</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Permanent Address</th>
+ 
+              <td colspan="2">{PermHouseNo} {PermStreet}</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2"></th>
+ 
+              <td colspan="2">{PermSubVillage} {PermBrgy}</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2"></th>
+ 
+              <td colspan="2">{PermMunicipality}, {PermProvince}</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Zip Code</td> 
+              <td colspan="2">{PermZipcode} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Telephone No. </th>
+ 
+              <td colspan="2">{TelNo} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Mobile No. </th>
+ 
+              <td colspan="2">{MobileNo} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Email Address </th>
+ 
+              <td colspan="2">{EmailAdd} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Spouse's</th>
+ 
+              <td colspan="2">&nbsp;</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Surname</td> 
+              <td colspan="2">{SpouseSurname} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;First Name </td> 
+              <td colspan="2">{SpouseFirstName} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Middle Name </td> 
+              <td colspan="2">{SpouseMiddleName} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Name Extension </td> 
+              <td colspan="2">{SpouseNameExt} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Occupation </td> 
+              <td colspan="2">{SpouseOccupatn} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Business Name </td> 
+              <td colspan="2">{SpouseBusinessName} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Business Address </td> 
+              <td colspan="2">{SpouseBusinessAddress} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Telephone No. </td> 
+              <td colspan="2">{SpouseTelNo} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Father's</th>
+ 
+              <td colspan="2">&nbsp;</td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Surname </td> 
+              <td colspan="2">{FatherSurname} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;First Name </td> 
+              <td colspan="2">{FatherFirstName} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Middle Name </td> 
+              <td colspan="2">{FatherMiddleName} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Name Extension </td> 
+              <td colspan="2">{FatherNameExt} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row" colspan="2">Mother's Maiden Name</th>
+ 
+              <td colspan="2">{MotherMaiden} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Surname </td> 
+              <td colspan="2">{MotherSurname} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;First Name </td> 
+              <td colspan="2">{MotherFirstName} </td>
+            </tr>
+ 
+            <tr class="Row">
+              <th scope="row"></th>
+ 
+              <td>&nbsp;Middle Name </td> 
+              <td colspan="2">{MotherMiddleName} </td>
+            </tr>
+ <!-- END Section Detail -->
+            <!-- BEGIN Section Report_Footer -->
+            <!-- BEGIN Panel NoRecords -->
+            <tr class="NoRecords">
+              <td colspan="4">No records</td>
+            </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div align="left">
+  </div>
+  <!-- END Report employee -->
+</div>
+<br>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>QueryTrainings2</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<script language="JavaScript" type="text/javascript">
+//Begin CCS script
+//Include Common JSFunctions @1-56D0AF56
+</script>
+<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="ClientI18N.php?file=DatePicker.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" type="text/javascript">
+//End Include Common JSFunctions
+
+//Date Picker Object Definitions @1-D95E1732
+
+var departmentoffice_employee_DatePicker_s_DateFrom = new Object(); 
+departmentoffice_employee_DatePicker_s_DateFrom.format           = "ShortDate";
+departmentoffice_employee_DatePicker_s_DateFrom.style            = "Styles/Fresh/Style.css";
+departmentoffice_employee_DatePicker_s_DateFrom.relativePathPart = "";
+departmentoffice_employee_DatePicker_s_DateFrom.themeVersion = "3.0";
+
+var departmentoffice_employee_DatePicker_s_DateTo = new Object(); 
+departmentoffice_employee_DatePicker_s_DateTo.format           = "ShortDate";
+departmentoffice_employee_DatePicker_s_DateTo.style            = "Styles/Fresh/Style.css";
+departmentoffice_employee_DatePicker_s_DateTo.relativePathPart = "";
+departmentoffice_employee_DatePicker_s_DateTo.themeVersion = "3.0";
+
+//End Date Picker Object Definitions
+
+//bind_events @1-BF0EB765
+function bind_events() {
+}
+//End bind_events
+
+window.onload = bind_events; //Assign bind_events @1-19F7B649
+
+//End CCS script
+</script>
+<link rel="stylesheet" type="text/css" href="Styles/Fresh/Style_doctype.css">
+</head>
+<body>
+<!-- BEGIN Record departmentoffice_employee -->
+<form id="departmentoffice_employee" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th"><strong>Search Departmentoffice Employee </strong></td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          </tr>
+ 
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td> 
+          </tr>
+ <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_EmployeeIDNo">IDNo</label></td> 
+            <td><input id="departmentoffice_employees_EmployeeIDNo" maxlength="6" size="6" value="{s_EmployeeIDNo}" name="{s_EmployeeIDNo_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_Surname">Surname</label></td> 
+            <td><input id="departmentoffice_employees_Surname" maxlength="50" size="50" value="{s_Surname}" name="{s_Surname_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_FirstName">First Name</label></td> 
+            <td><input id="departmentoffice_employees_FirstName" maxlength="50" size="50" value="{s_FirstName}" name="{s_FirstName_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_MiddleName">Middle Name</label></td> 
+            <td><input id="departmentoffice_employees_MiddleName" maxlength="50" size="50" value="{s_MiddleName}" name="{s_MiddleName_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_OfficeID">Office ID</label></td> 
+            <td>
+              <select id="departmentoffice_employees_OfficeID" name="{s_OfficeID_Name}">
+                <option value="" selected>Select Value</option>
+ {s_OfficeID_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_StatAppt">Stat Appt</label></td> 
+            <td>
+              <select id="departmentoffice_employees_StatAppt" name="{s_StatAppt_Name}">
+                <option value="" selected>Select Value</option>
+ {s_StatAppt_Options} 
+              </select>
+ </td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_TrainingTitle">Training Title</label></td> 
+            <td><input id="departmentoffice_employees_TrainingTitle" maxlength="150" size="50" value="{s_TrainingTitle}" name="{s_TrainingTitle_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_DateFrom">Date From</label></td> 
+            <td><input id="departmentoffice_employees_DateFrom" maxlength="100" size="8" value="{s_DateFrom}" name="{s_DateFrom_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_DateFrom --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="departmentoffice_employeeDatePicker_s_DateFrom"><img id="departmentoffice_employeeDatePicker_s_DateFrom_Image" alt="Show Date Picker" src="Styles/Fresh/Images/DatePicker.gif" border="0"></a><!-- END DatePicker DatePicker_s_DateFrom --></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_DateTo">Date To</label></td> 
+            <td><input id="departmentoffice_employees_DateTo" maxlength="100" size="8" value="{s_DateTo}" name="{s_DateTo_Name}">
+              <!-- BEGIN DatePicker DatePicker_s_DateTo --><a href="javascript:showDatePicker('{Name}','{FormName}','{DateControl}');" id="departmentoffice_employeeDatePicker_s_DateTo"><img id="departmentoffice_employeeDatePicker_s_DateTo_Image" alt="Show Date Picker" src="Styles/Fresh/Images/DatePicker.gif" border="0"></a><!-- END DatePicker DatePicker_s_DateTo --></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_NoOfHours">No Of Hours</label></td> 
+            <td><input id="departmentoffice_employees_NoOfHours" maxlength="5" size="5" value="{s_NoOfHours}" name="{s_NoOfHours_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_TrainingCategory">Training Category</label></td> 
+            <td><input id="departmentoffice_employees_TrainingCategory" maxlength="50" size="50" value="{s_TrainingCategory}" name="{s_TrainingCategory_Name}"></td> 
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_employees_ConductedBy">Conducted By</label></td> 
+            <td><input id="departmentoffice_employees_ConductedBy" maxlength="200" size="50" value="{s_ConductedBy}" name="{s_ConductedBy_Name}"></td> 
+          </tr>
+ 
+          <tr class="Bottom">
+            <td><a href="{ClearParameters_Src}" id="departmentoffice_employeeClearParameters">Clear</a></td> 
+            <td align="right">
+              <!-- BEGIN Button Button_DoSearch --><input class="Button" id="departmentoffice_employeeButton_DoSearch" type="submit" alt="Search" value="Search" name="{Button_Name}"><!-- END Button Button_DoSearch --></td> 
+          </tr>
+ 
+        </table>
+ </td> 
+    </tr>
+ 
+  </table>
+</form>
+<!-- END Record departmentoffice_employee --><br>
+<!-- BEGIN Link Report_Print -->
+<p align="right"><a href="{Report_Print_Src}" id="Report_Print" target="_blank">Printable version</a></p>
+<!-- END Link Report_Print --><font style="BACKGROUND-COLOR: #ffffff"></font>
+<!-- BEGIN Report departmentoffice_employee1 -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th"><strong>Departmentoffice, Employee, Employee Training </strong></td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+        </tr>
+ 
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row">Total Records:&nbsp;{Report_TotalRecords}&nbsp;</caption>
+ <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <tr class="Caption">
+          <th scope="col">Office Acronym &nbsp;</th>
+ 
+          <th scope="col">Surname &nbsp;</th>
+ 
+          <th scope="col">First Name &nbsp;</th>
+ 
+          <th scope="col">Middle Name &nbsp;</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_EmployeeIDNo --><a href="{Sort_URL}">Employee IDNo</a> 
+          <!-- BEGIN Asc_On --><img alt="" src="Styles/Fresh/Images/Asc.gif" border="0"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img alt="" src="Styles/Fresh/Images/Desc.gif" border="0"><!-- END Desc_On --><!-- END Sorter Sorter_EmployeeIDNo -->&nbsp;</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TrainingTitle --><a href="{Sort_URL}">Training Title</a> 
+          <!-- BEGIN Asc_On --><img alt="" src="Styles/Fresh/Images/Asc.gif" border="0"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img alt="" src="Styles/Fresh/Images/Desc.gif" border="0"><!-- END Desc_On --><!-- END Sorter Sorter_TrainingTitle -->&nbsp;</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DateFrom --><a href="{Sort_URL}">Date From</a> 
+          <!-- BEGIN Asc_On --><img alt="" src="Styles/Fresh/Images/Asc.gif" border="0"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img alt="" src="Styles/Fresh/Images/Desc.gif" border="0"><!-- END Desc_On --><!-- END Sorter Sorter_DateFrom -->&nbsp;</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_DateTo --><a href="{Sort_URL}">Date To</a> 
+          <!-- BEGIN Asc_On --><img alt="" src="Styles/Fresh/Images/Asc.gif" border="0"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img alt="" src="Styles/Fresh/Images/Desc.gif" border="0"><!-- END Desc_On --><!-- END Sorter Sorter_DateTo -->&nbsp;</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_NoOfHours --><a href="{Sort_URL}">No Of Hours</a> 
+          <!-- BEGIN Asc_On --><img alt="" src="Styles/Fresh/Images/Asc.gif" border="0"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img alt="" src="Styles/Fresh/Images/Desc.gif" border="0"><!-- END Desc_On --><!-- END Sorter Sorter_NoOfHours -->&nbsp;</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_TrainingCategory --><a href="{Sort_URL}">Training Category</a> 
+          <!-- BEGIN Asc_On --><img alt="" src="Styles/Fresh/Images/Asc.gif" border="0"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img alt="" src="Styles/Fresh/Images/Desc.gif" border="0"><!-- END Desc_On --><!-- END Sorter Sorter_TrainingCategory -->&nbsp;</th>
+ 
+          <th scope="col">
+          <!-- BEGIN Sorter Sorter_ConductedBy --><a href="{Sort_URL}">Conducted By</a> 
+          <!-- BEGIN Asc_On --><img alt="" src="Styles/Fresh/Images/Asc.gif" border="0"><!-- END Asc_On -->
+          <!-- BEGIN Desc_On --><img alt="" src="Styles/Fresh/Images/Desc.gif" border="0"><!-- END Desc_On --><!-- END Sorter Sorter_ConductedBy -->&nbsp;</th>
+ 
+        </tr>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tr class="Footer">
+          <td style="TEXT-ALIGN: right" colspan="11">Page {Report_CurrentPage} of {Report_TotalPages} 
+            <!-- BEGIN Navigator Navigator -->
+            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+            <!-- BEGIN First_Off -->First <!-- END First_Off -->
+            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+            <!-- BEGIN Pages -->
+            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator --></td> 
+        </tr>
+ 
+        <!-- BEGIN Panel PageBreak -->
+      </table>
+ </td> 
+  </tr>
+</table>
+<p style="PAGE-BREAK-AFTER: always">&nbsp;</p>
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- END Panel PageBreak --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section OfficeAcronym_Header -->
+        <tr class="GroupCaption">
+          <th scope="col">{OfficeAcronym} </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+        </tr>
+ <!-- END Section OfficeAcronym_Header -->
+        <!-- BEGIN Section Surname_Header -->
+        <tr class="GroupCaption">
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">{Surname} </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+        </tr>
+ <!-- END Section Surname_Header -->
+        <!-- BEGIN Section FirstName_Header -->
+        <tr class="GroupCaption">
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">{FirstName} </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+        </tr>
+ <!-- END Section FirstName_Header -->
+        <!-- BEGIN Section MiddleName_Header -->
+        <tr class="GroupCaption">
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">{MiddleName} </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+        </tr>
+ <!-- END Section MiddleName_Header -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>&nbsp; </td> 
+          <td>{EmployeeIDNo} </td> 
+          <td>{TrainingTitle} </td> 
+          <td>{DateFrom} </td> 
+          <td>{DateTo} </td> 
+          <td>{NoOfHours} </td> 
+          <td>{TrainingCategory} </td> 
+          <td>{ConductedBy} </td> 
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section MiddleName_Footer --><!-- END Section MiddleName_Footer -->
+        <!-- BEGIN Section FirstName_Footer --><!-- END Section FirstName_Footer -->
+        <!-- BEGIN Section Surname_Footer --><!-- END Section Surname_Footer -->
+        <!-- BEGIN Section OfficeAcronym_Footer --><!-- END Section OfficeAcronym_Footer -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="11">No records</td> 
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+ </td> 
+  </tr>
+</table>
+<!-- END Report departmentoffice_employee1 --><br>
+</body>
+</html>

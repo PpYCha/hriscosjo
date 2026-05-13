@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>QEmp_Trainng2</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<p>&nbsp;&nbsp;&nbsp;</p>
+<!-- BEGIN Report employee_employee_trainin -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th">
+            <p align="center"><strong><font size="4"></font></strong>&nbsp;</p>
+ 
+            <p align="left"><font size="2">Employee ID No. : {EmployeeIDNo}</font></p>
+ 
+            <p align="left"><font size="2">Employee Name&nbsp; :&nbsp; {Surname}, {FirstName} {NameExtension}&nbsp;{MiddleName} </font></p>
+          </td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row">
+        <p>
+        <table style="WIDTH: 711px; HEIGHT: 152px" width="711" border="0">
+          <tr>
+            <td><strong><font size="3"><em>VII. LEARNING AND DEVELOPMENT (L&amp;D) INTERVENTIONS/TRAINING PROGRAMS ATTENDED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</em></font></strong></td> 
+            <td>
+              <p align="center"><img id="employee_employee_traininReport_HeaderReportLabel2_{employee_ipcr_lut_rating:rowNumber}" height="130" alt="" src="photofolder/{ReportLabel2}" width="90"></p>
+            </td>
+          </tr>
+        </table>
+        </p>
+ 
+        <p>Total Records:&nbsp;{Report_TotalRecords}&nbsp;</p>
+        </caption>
+        <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <thead style="DISPLAY: table-header-group">
+          <tr class="Caption">
+            <th scope="col">
+            <p align="center">&nbsp;TITLE OF LEARNING AND DEVELOPMENT INTERVENTIONS/</p>
+            </th>
+ 
+            <th scope="col" colspan="2">
+            <p align="center">INCLUSIVE DATES</p>
+            </th>
+ 
+            <th scope="col" colspan="2">&nbsp;</th>
+ 
+            <th scope="col">
+            <p align="center">CONDUCTED/</p>
+            </th>
+          </tr>
+ 
+          <tr class="Caption">
+            <th scope="col">
+            <p align="center">&nbsp;TRAINING PROGRAMS</p>
+            </th>
+ 
+            <th scope="col">
+            <p align="center">&nbsp;FROM</p>
+            </th>
+ 
+            <th scope="col">
+            <p align="center">&nbsp;TO</p>
+            </th>
+ 
+            <th scope="col">NO. OF HOURS</th>
+ 
+            <th scope="col">TYPE OF LD</th>
+ 
+            <th scope="col">
+            <p align="center">SPONSORED BY</p>
+            </th>
+          </tr>
+ 
+        </thead>
+        <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tfoot style="DISPLAY: table-footer-group">
+          <tr class="Footer">
+            <td colspan="6">
+              <p align="left"><em>Provincial&nbsp;Government of Northern Samar&nbsp;&copy; by PHRMDO&nbsp;<font face="Times New Roman" size="1">E-mpleyadoS&nbsp;</font></em>&nbsp;&nbsp;&nbsp;{Report_CurrentDate}</p>
+            </td>
+          </tr>
+ 
+          <tr class="Footer">
+            <td colspan="6">
+              <!-- BEGIN Navigator Navigator -->
+              <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+              <!-- BEGIN First_Off -->First <!-- END First_Off -->
+              <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+              <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+              <!-- BEGIN Pages -->
+              <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+              <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+              <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+              <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+              <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+              <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator --></td>
+          </tr>
+        </tfoot>
+ <!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td>{TrainingTitle} <input id="employee_employee_traininDetailEmpPicture_{employee_employee_trainin:rowNumber}" type="hidden" value="{EmpPicture}" name="{EmpPicture_Name}"><input id="employee_employee_traininDetailNameExtension_{employee_employee_trainin:rowNumber}" type="hidden" value="{NameExtension}" name="{NameExtension_Name}"><input id="employee_employee_traininDetailMiddleName_{employee_employee_trainin:rowNumber}" type="hidden" value="{MiddleName}" name="{MiddleName_Name}"><input id="employee_employee_traininDetailFirstName_{employee_employee_trainin:rowNumber}" type="hidden" value="{FirstName}" name="{FirstName_Name}"><input id="employee_employee_traininDetailSurname_{employee_employee_trainin:rowNumber}" type="hidden" value="{Surname}" name="{Surname_Name}"><input id="employee_employee_traininDetailEmployeeIDNo_{employee_employee_trainin:rowNumber}" type="hidden" value="{EmployeeIDNo}" name="{EmployeeIDNo_Name}"></td> 
+          <td>{DateFrom} </td> 
+          <td>{DateTo} </td> 
+          <td>
+            <div align="center">
+              {NoOfHours} 
+            </div>
+          </td> 
+          <td>{TrainingCategory} </td> 
+          <td>{ConductedBy} </td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="6">No records</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report employee_employee_trainin --><br>
+</body>
+</html>

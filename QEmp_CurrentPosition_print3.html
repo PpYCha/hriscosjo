@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>QEmp_CurrentPosition</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<p>&nbsp; <a href="{Link1_Src}" id="Link1">&lt;&lt;</a> </p>
+<p>
+<!-- BEGIN Link Report_Print --><a href="{Report_Print_Src}" id="Report_Print" target="_blank">Printable version</a><!-- END Link Report_Print --></p>
+<!-- BEGIN Report employee_lut_statofappt2 -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th">
+            <p align="center"><strong><font size="4"></font></strong>&nbsp;</p>
+ 
+            <p align="left"><font size="2">Employee ID No. :&nbsp; {Position5}</font></p>
+ 
+            <p align="left"><font size="2">Employee Name&nbsp; :&nbsp;&nbsp; {Position1}, {Position2}&nbsp;{Position4} {Position3} </font></p>
+          </td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row"></caption>
+ <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header --><!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tr class="Footer">
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Footer">
+          <td colspan="3">
+            <p align="left"><em>Provincial&nbsp;Government of Northern Samar&nbsp;&copy; by PHRMDO&nbsp;<font face="Times New Roman" size="1">E-mpleyadoS&nbsp;</font></em> {Report_CurrentDate}&nbsp;&nbsp; </p>
+          </td>
+        </tr>
+ 
+        <!-- BEGIN Panel PageBreak -->
+      </table>
+    </td>
+  </tr>
+</table>
+<p style="PAGE-BREAK-AFTER: always">&nbsp;</p>
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- END Panel PageBreak --><!-- END Section Page_Footer -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <th scope="row" colspan="3">&nbsp; <strong><font size="4"><em>CURRENT&nbsp;POSITION</em></font></strong> 
+          <p align="right">&nbsp;</p>
+          &nbsp;</th>
+ 
+          <td>
+            <p align="center"><img id="employee_lut_statofappt2DetailEmpPicture_{employee_lut_statofappt2:rowNumber}" height="130" alt="" src="photofolder/{EmpPicture}"></p>
+          </td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Position </th>
+ 
+          <td>{Position} <input id="employee_lut_statofappt2DetailPosition5_{employee_lut_statofappt2:rowNumber}" type="hidden" value="{Position5}" name="{Position5_Name}"><input id="employee_lut_statofappt2DetailPosition1_{employee_lut_statofappt2:rowNumber}" type="hidden" value="{Position1}" name="{Position1_Name}"><input id="employee_lut_statofappt2DetailPosition4_{employee_lut_statofappt2:rowNumber}" type="hidden" value="{Position4}" name="{Position4_Name}"></td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Birth Date</th>
+ 
+          <td>{ReportLabel1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="employee_lut_statofappt2DetailPosition2_{employee_lut_statofappt2:rowNumber}" type="hidden" value="{Position2}" name="{Position2_Name}"><input id="employee_lut_statofappt2DetailPosition3_{employee_lut_statofappt2:rowNumber}" type="hidden" value="{Position3}" name="{Position3_Name}"></td> 
+          <td>Age: {ReportLabel2}</td> 
+          <td>&nbsp;&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Effectivity Date</th>
+ 
+          <td>{EffectiveMonth}&nbsp;{EffectiveDay}, {EffectiveYear}</td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Daily Rate&nbsp;</th>
+ 
+          <td>{MonthlySalary} </td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Status of Appointment</th>
+ 
+          <td>{StatApp} </td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Department/Office</th>
+ 
+          <td>{NameOfficeDept} </td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">&nbsp;</th>
+ 
+          <td>&nbsp;</td> 
+          <td></td> 
+          <td><label style="display: none;" for="employee_lut_statofappt2DetailDetailedID_{employee_lut_statofappt2:rowNumber}"></label></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Entrance to Duty (PGNS)</th>
+ 
+          <td>{OrigApptMonth}&nbsp;{OrigApptDay}, {OrigApptYear}</td> 
+          <td></td> 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row"></th>
+ 
+          <td>&nbsp;</td> 
+          <td></td> 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Last Day of Service</th>
+ 
+          <td>{LastServiceMonth}&nbsp;{LastServiceDay}, {LastService}</td> 
+          <td></td> 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Mode of Separation&nbsp;</th>
+ 
+          <td>{ModeSeparatn}</td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th scope="row"></th>
+ 
+          <td></td> 
+          <td></td> 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Detailed</th>
+ 
+          <td><input id="employee_lut_statofappt2DetailDetailedID_{employee_lut_statofappt2:rowNumber}" type="checkbox" value="1" name="{DetailedID_Name}" {DetailedID}></td> 
+          <td></td> 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Detailed Department/Office</th>
+ 
+          <td>{DetailedOffice}</td> 
+          <td></td> 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Detailed Date</th>
+ 
+          <td>{DetailedDate}</td> 
+          <td></td> 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Detailed Remarks </th>
+ 
+          <td>{DetailedRemarks}</td> 
+          <td></td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th scope="row"></th>
+ 
+          <td></td> 
+          <td></td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Reassignment</th>
+ 
+          <td><input id="employee_lut_statofappt2DetailReassignmentID_{employee_lut_statofappt2:rowNumber}" type="checkbox" value="1" name="{ReassignmentID_Name}" {ReassignmentID}></td> 
+          <td></td> 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Reassignment Department/Office&nbsp;</th>
+ 
+          <td>{ReassignmentOffice}&nbsp;</td> 
+          <td></td> 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Reassignment Date</th>
+ 
+          <td>{ReassignmentDate}</td> 
+          <td></td> 
+          <td></td>
+        </tr>
+ 
+        <tr class="Row">
+          <th style="BACKGROUND-COLOR: #c0c0c0" scope="row">Reassignment Remarks&nbsp;&nbsp;</th>
+ 
+          <td>{ReassignmentRemarks}&nbsp;</td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th scope="row"></th>
+ 
+          <td></td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th scope="row"></th>
+ 
+          <td></td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ 
+        <tr class="Row">
+          <th scope="row">&nbsp;</th>
+ 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td> 
+          <td>&nbsp;</td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="4">No records</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report employee_lut_statofappt2 --><br>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>QueryReassignDetailed</title>
+<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
+<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<p><a href="{Link1_Src}" id="Link1">Back</a></p>
+<!-- BEGIN Record departmentoffice_departme -->
+<form id="departmentoffice_departme" name="{HTMLFormName}" action="{Action}" method="post">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td valign="top">
+        <table class="Header" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+            <td class="th">
+              <p align="left"><strong>Search</strong></p>
+            </td> 
+            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+          </tr>
+        </table>
+ 
+        <table class="Record" cellspacing="0" cellpadding="0">
+          <!-- BEGIN Error -->
+          <tr class="Error">
+            <td colspan="2">{Error}</td>
+          </tr>
+          <!-- END Error -->
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_departmes_ReassignmentID">Reassignment </label></td> 
+            <td><input id="departmentoffice_departmes_ReassignmentID" type="checkbox" value="1" name="{s_ReassignmentID_Name}" {s_ReassignmentID}></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_departmes_ReassignmentOffice">Reassignment Office</label></td> 
+            <td>
+              <select id="departmentoffice_departmes_ReassignmentOffice" name="{s_ReassignmentOffice_Name}">
+                <option value="" selected>Select Value</option>
+                {s_ReassignmentOffice_Options}
+              </select>
+ </td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_departmes_DetailedID">Detailed</label></td> 
+            <td><input id="departmentoffice_departmes_DetailedID" type="checkbox" value="1" name="{s_DetailedID_Name}" {s_DetailedID}></td>
+          </tr>
+ 
+          <tr class="Controls">
+            <td class="th"><label for="departmentoffice_departmes_DetailedOffice">Detailed Office</label></td> 
+            <td><input id="departmentoffice_departmes_DetailedOffice" style="TEXT-TRANSFORM: uppercase" maxlength="50" size="50" value="{s_DetailedOffice}" name="{s_DetailedOffice_Name}"></td>
+          </tr>
+ 
+          <tr class="Bottom">
+            <td><a href="{ClearParameters_Src}" id="departmentoffice_departmeClearParameters">Clear</a></td> 
+            <td align="right">
+              <!-- BEGIN Button Button_DoSearch --><input class="Button" id="departmentoffice_departmeButton_DoSearch" type="submit" alt="Search" value="Search" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</form>
+<!-- END Record departmentoffice_departme -->
+<p><br>
+<!-- BEGIN Link Report_Print --><a href="{Report_Print_Src}" id="Report_Print" target="_blank">Printable version</a><!-- END Link Report_Print --></p>
+<!-- BEGIN Report employee_departmentoffice -->
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <td valign="top">
+      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
+          <td class="th">
+            <p align="left"><strong>List of Reassigned/Detailed Employees</strong></p>
+          </td> 
+          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
+        </tr>
+      </table>
+ 
+      <table class="Grid" cellspacing="0" cellpadding="0">
+        <!-- BEGIN Section Report_Header -->
+        <caption class="Row">Total Records:&nbsp;{Report_TotalRecords}&nbsp;</caption>
+ <!-- END Section Report_Header -->
+        <!-- BEGIN Section Page_Header -->
+        <thead style="DISPLAY: table-header-group">
+          <tr class="Caption">
+            <th scope="col" colspan="6"></th>
+ 
+            <th scope="col" colspan="3">
+            <p align="center">&nbsp;&nbsp;REASSIGNMENT</p>
+            </th>
+ 
+            <th scope="col" colspan="3">
+            <p align="center">&nbsp;&nbsp;DETAILED</p>
+            </th>
+          </tr>
+ 
+          <tr class="Caption">
+            <th scope="col">Department/Office</th>
+ 
+            <th scope="col">#</th>
+ 
+            <th scope="col">Surname</th>
+ 
+            <th scope="col">FirstName</th>
+ 
+            <th scope="col">Middle Name</th>
+ 
+            <th scope="col">Position</th>
+ 
+            <th scope="col">Department/&nbsp;Office</th>
+ 
+            <th scope="col">Effective&nbsp;Date</th>
+ 
+            <th scope="col">Remarks</th>
+ 
+            <th scope="col">Agency</th>
+ 
+            <th scope="col">Effective&nbsp;Date&nbsp;</th>
+ 
+            <th scope="col">Remarks</th>
+          </tr>
+ 
+        </thead>
+ <!-- END Section Page_Header -->
+        <!-- BEGIN Section Page_Footer -->
+        <tfoot style="DISPLAY: table-footer-group">
+          <tr class="Footer">
+            <td colspan="12">
+              <p align="left"><font size="1">Provincial&nbsp;Government of Northern Samar&nbsp;<font face="Times New Roman"><em>&copy; by PHRMDO&nbsp;E-mpleyadoS&nbsp;&nbsp; </em></font></font>{Report_CurrentDate} 
+              <!-- BEGIN Navigator Navigator -->
+              <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
+              <!-- BEGIN First_Off -->First <!-- END First_Off -->
+              <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
+              <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
+              <!-- BEGIN Pages -->
+              <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
+              <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
+              <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
+              <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
+              <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
+              <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator --></p>
+            </td>
+          </tr>
+        </tfoot>
+ <!-- END Section Page_Footer -->
+        <!-- BEGIN Section departmentoffice_OfficeAcronym_Header -->
+        <tr class="GroupCaption">
+          <th scope="col">{departmentoffice_OfficeAcronym} </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+ 
+          <th scope="col">&nbsp; </th>
+        </tr>
+ <!-- END Section departmentoffice_OfficeAcronym_Header -->
+        <!-- BEGIN Section Detail -->
+        <tr class="Row">
+          <td>&nbsp; </td> 
+          <td style="TEXT-ALIGN: right">{Report_Row_Number} </td> 
+          <td>{Surname} </td> 
+          <td>{FirstName} </td> 
+          <td>{MiddleName} </td> 
+          <td>{employee_Position} </td> 
+          <td style="TEXT-ALIGN: right">
+            <div align="left">
+              {ReassignmentOffice} 
+            </div>
+          </td> 
+          <td>
+            <div align="right">
+              {ReassignmentDate} 
+            </div>
+          </td> 
+          <td>{ReassignmentRemarks} </td> 
+          <td>{DetailedOffice} </td> 
+          <td>
+            <div align="right">
+              {DetailedDate} 
+            </div>
+          </td> 
+          <td>{DetailedRemarks} </td>
+        </tr>
+ <!-- END Section Detail -->
+        <!-- BEGIN Section departmentoffice_OfficeAcronym_Footer --><!-- END Section departmentoffice_OfficeAcronym_Footer -->
+        <!-- BEGIN Section Report_Footer -->
+        <!-- BEGIN Panel NoRecords -->
+        <tr class="NoRecords">
+          <td colspan="12">No records</td>
+        </tr>
+ <!-- END Panel NoRecords --><!-- END Section Report_Footer -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- END Report employee_departmentoffice --><br>
+</body>
+</html>

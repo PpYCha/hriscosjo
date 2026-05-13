@@ -1,0 +1,1068 @@
+<?php
+//Include Common Files @1-51473D65
+define("RelativePath", ".");
+define("PathToCurrentPage", "/");
+define("FileName", "ServiceRecord.php");
+include_once(RelativePath . "/Common.php");
+include_once(RelativePath . "/Template.php");
+include_once(RelativePath . "/Sorter.php");
+include_once(RelativePath . "/Navigator.php");
+//End Include Common Files
+
+class clsGridemployee_servicerecord { //employee_servicerecord class @2-C2329F08
+
+//Variables @2-702213D4
+
+    // Public variables
+    var $ComponentType = "Grid";
+    var $ComponentName;
+    var $Visible;
+    var $Errors;
+    var $ErrorBlock;
+    var $ds;
+    var $DataSource;
+    var $PageSize;
+    var $IsEmpty;
+    var $ForceIteration = false;
+    var $HasRecord = false;
+    var $SorterName = "";
+    var $SorterDirection = "";
+    var $PageNumber;
+    var $RowNumber;
+    var $ControlsVisible = array();
+
+    var $CCSEvents = "";
+    var $CCSEventResult;
+
+    var $RelativePath = "";
+    var $Attributes;
+
+    // Grid Controls
+    var $StaticControls;
+    var $RowControls;
+    var $Sorter_EmployeeID;
+    var $Sorter_DateFrom;
+    var $Sorter_DateTo;
+    var $Sorter_Designation;
+    var $Sorter_StatofAppt;
+    var $Sorter_AnnualSalary;
+    var $Sorter_OfficeStatn;
+    var $Sorter_Branch;
+    var $Sorter_AbsenceWOPay;
+    var $Sorter_Separation;
+//End Variables
+
+//Class_Initialize Event @2-27BC8445
+    function clsGridemployee_servicerecord($RelativePath, & $Parent)
+    {
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->ComponentName = "employee_servicerecord";
+        $this->Visible = True;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Grid employee_servicerecord";
+        $this->Attributes = new clsAttributes($this->ComponentName . ":");
+        $this->DataSource = new clsemployee_servicerecordDataSource($this);
+        $this->ds = & $this->DataSource;
+        $this->PageSize = CCGetParam($this->ComponentName . "PageSize", "");
+        if(!is_numeric($this->PageSize) || !strlen($this->PageSize))
+            $this->PageSize = 10;
+        else
+            $this->PageSize = intval($this->PageSize);
+        if ($this->PageSize > 100)
+            $this->PageSize = 100;
+        if($this->PageSize == 0)
+            $this->Errors->addError("<p>Form: Grid " . $this->ComponentName . "<br>Error: (CCS06) Invalid page size.</p>");
+        $this->PageNumber = intval(CCGetParam($this->ComponentName . "Page", 1));
+        if ($this->PageNumber <= 0) $this->PageNumber = 1;
+        $this->SorterName = CCGetParam("employee_servicerecordOrder", "");
+        $this->SorterDirection = CCGetParam("employee_servicerecordDir", "");
+
+        $this->EmployeeID = & new clsControl(ccsLink, "EmployeeID", "EmployeeID", ccsInteger, "", CCGetRequestParam("EmployeeID", ccsGet, NULL), $this);
+        $this->EmployeeID->Page = "ServiceRecord.php";
+        $this->DateFrom = & new clsControl(ccsLabel, "DateFrom", "DateFrom", ccsText, "", CCGetRequestParam("DateFrom", ccsGet, NULL), $this);
+        $this->DateTo = & new clsControl(ccsLabel, "DateTo", "DateTo", ccsText, "", CCGetRequestParam("DateTo", ccsGet, NULL), $this);
+        $this->Designation = & new clsControl(ccsLabel, "Designation", "Designation", ccsText, "", CCGetRequestParam("Designation", ccsGet, NULL), $this);
+        $this->StatofAppt = & new clsControl(ccsLabel, "StatofAppt", "StatofAppt", ccsText, "", CCGetRequestParam("StatofAppt", ccsGet, NULL), $this);
+        $this->AnnualSalary = & new clsControl(ccsLabel, "AnnualSalary", "AnnualSalary", ccsFloat, array(False, 2, Null, Null, False, "", "", 1, True, ""), CCGetRequestParam("AnnualSalary", ccsGet, NULL), $this);
+        $this->OfficeStatn = & new clsControl(ccsLabel, "OfficeStatn", "OfficeStatn", ccsText, "", CCGetRequestParam("OfficeStatn", ccsGet, NULL), $this);
+        $this->Branch = & new clsControl(ccsLabel, "Branch", "Branch", ccsText, "", CCGetRequestParam("Branch", ccsGet, NULL), $this);
+        $this->AbsenceWOPay = & new clsControl(ccsLabel, "AbsenceWOPay", "AbsenceWOPay", ccsText, "", CCGetRequestParam("AbsenceWOPay", ccsGet, NULL), $this);
+        $this->Separation = & new clsControl(ccsLabel, "Separation", "Separation", ccsText, "", CCGetRequestParam("Separation", ccsGet, NULL), $this);
+        $this->employee_servicerecord_Insert = & new clsControl(ccsLink, "employee_servicerecord_Insert", "employee_servicerecord_Insert", ccsText, "", CCGetRequestParam("employee_servicerecord_Insert", ccsGet, NULL), $this);
+        $this->employee_servicerecord_Insert->Parameters = CCGetQueryString("QueryString", array("ServiceRecID", "ccsForm"));
+        $this->employee_servicerecord_Insert->Page = "ServiceRecord.php";
+        $this->employee_servicerecord_TotalRecords = & new clsControl(ccsLabel, "employee_servicerecord_TotalRecords", "employee_servicerecord_TotalRecords", ccsText, "", CCGetRequestParam("employee_servicerecord_TotalRecords", ccsGet, NULL), $this);
+        $this->Sorter_EmployeeID = & new clsSorter($this->ComponentName, "Sorter_EmployeeID", $FileName, $this);
+        $this->Sorter_DateFrom = & new clsSorter($this->ComponentName, "Sorter_DateFrom", $FileName, $this);
+        $this->Sorter_DateTo = & new clsSorter($this->ComponentName, "Sorter_DateTo", $FileName, $this);
+        $this->Sorter_Designation = & new clsSorter($this->ComponentName, "Sorter_Designation", $FileName, $this);
+        $this->Sorter_StatofAppt = & new clsSorter($this->ComponentName, "Sorter_StatofAppt", $FileName, $this);
+        $this->Sorter_AnnualSalary = & new clsSorter($this->ComponentName, "Sorter_AnnualSalary", $FileName, $this);
+        $this->Sorter_OfficeStatn = & new clsSorter($this->ComponentName, "Sorter_OfficeStatn", $FileName, $this);
+        $this->Sorter_Branch = & new clsSorter($this->ComponentName, "Sorter_Branch", $FileName, $this);
+        $this->Sorter_AbsenceWOPay = & new clsSorter($this->ComponentName, "Sorter_AbsenceWOPay", $FileName, $this);
+        $this->Sorter_Separation = & new clsSorter($this->ComponentName, "Sorter_Separation", $FileName, $this);
+        $this->Navigator = & new clsNavigator($this->ComponentName, "Navigator", $FileName, 10, tpCentered, $this);
+        $this->Navigator->PageSizes = array("1", "5", "10", "25", "50");
+    }
+//End Class_Initialize Event
+
+//Initialize Method @2-90E704C5
+    function Initialize()
+    {
+        if(!$this->Visible) return;
+
+        $this->DataSource->PageSize = & $this->PageSize;
+        $this->DataSource->AbsolutePage = & $this->PageNumber;
+        $this->DataSource->SetOrder($this->SorterName, $this->SorterDirection);
+    }
+//End Initialize Method
+
+//Show Method @2-A6A28C95
+    function Show()
+    {
+        global $Tpl;
+        global $CCSLocales;
+        if(!$this->Visible) return;
+
+        $this->RowNumber = 0;
+
+        $this->DataSource->Parameters["urlEmployeeID"] = CCGetFromGet("EmployeeID", NULL);
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+
+        $this->DataSource->Prepare();
+        $this->DataSource->Open();
+        $this->HasRecord = $this->DataSource->has_next_record();
+        $this->IsEmpty = ! $this->HasRecord;
+        $this->Attributes->Show();
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        if(!$this->Visible) return;
+
+        $GridBlock = "Grid " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $GridBlock;
+
+
+        if (!$this->IsEmpty) {
+            $this->ControlsVisible["EmployeeID"] = $this->EmployeeID->Visible;
+            $this->ControlsVisible["DateFrom"] = $this->DateFrom->Visible;
+            $this->ControlsVisible["DateTo"] = $this->DateTo->Visible;
+            $this->ControlsVisible["Designation"] = $this->Designation->Visible;
+            $this->ControlsVisible["StatofAppt"] = $this->StatofAppt->Visible;
+            $this->ControlsVisible["AnnualSalary"] = $this->AnnualSalary->Visible;
+            $this->ControlsVisible["OfficeStatn"] = $this->OfficeStatn->Visible;
+            $this->ControlsVisible["Branch"] = $this->Branch->Visible;
+            $this->ControlsVisible["AbsenceWOPay"] = $this->AbsenceWOPay->Visible;
+            $this->ControlsVisible["Separation"] = $this->Separation->Visible;
+            while ($this->ForceIteration || (($this->RowNumber < $this->PageSize) &&  ($this->HasRecord = $this->DataSource->has_next_record()))) {
+                $this->RowNumber++;
+                if ($this->HasRecord) {
+                    $this->DataSource->next_record();
+                    $this->DataSource->SetValues();
+                }
+                $Tpl->block_path = $ParentPath . "/" . $GridBlock . "/Row";
+                $this->EmployeeID->SetValue($this->DataSource->EmployeeID->GetValue());
+                $this->EmployeeID->Parameters = CCGetQueryString("QueryString", array("ccsForm"));
+                $this->EmployeeID->Parameters = CCAddParam($this->EmployeeID->Parameters, "ServiceRecID", $this->DataSource->f("ServiceRecID"));
+                $this->DateFrom->SetValue($this->DataSource->DateFrom->GetValue());
+                $this->DateTo->SetValue($this->DataSource->DateTo->GetValue());
+                $this->Designation->SetValue($this->DataSource->Designation->GetValue());
+                $this->StatofAppt->SetValue($this->DataSource->StatofAppt->GetValue());
+                $this->AnnualSalary->SetValue($this->DataSource->AnnualSalary->GetValue());
+                $this->OfficeStatn->SetValue($this->DataSource->OfficeStatn->GetValue());
+                $this->Branch->SetValue($this->DataSource->Branch->GetValue());
+                $this->AbsenceWOPay->SetValue($this->DataSource->AbsenceWOPay->GetValue());
+                $this->Separation->SetValue($this->DataSource->Separation->GetValue());
+                $this->Attributes->SetValue("rowNumber", $this->RowNumber);
+                $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShowRow", $this);
+                $this->Attributes->Show();
+                $this->EmployeeID->Show();
+                $this->DateFrom->Show();
+                $this->DateTo->Show();
+                $this->Designation->Show();
+                $this->StatofAppt->Show();
+                $this->AnnualSalary->Show();
+                $this->OfficeStatn->Show();
+                $this->Branch->Show();
+                $this->AbsenceWOPay->Show();
+                $this->Separation->Show();
+                $Tpl->block_path = $ParentPath . "/" . $GridBlock;
+                $Tpl->parse("Row", true);
+            }
+        }
+        else { // Show NoRecords block if no records are found
+            $this->Attributes->Show();
+            $Tpl->parse("NoRecords", false);
+        }
+
+        $errors = $this->GetErrors();
+        if(strlen($errors))
+        {
+            $Tpl->replaceblock("", $errors);
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+        $this->Navigator->PageNumber = $this->DataSource->AbsolutePage;
+        $this->Navigator->PageSize = $this->PageSize;
+        if ($this->DataSource->RecordsCount == "CCS not counted")
+            $this->Navigator->TotalPages = $this->DataSource->AbsolutePage + ($this->DataSource->next_record() ? 1 : 0);
+        else
+            $this->Navigator->TotalPages = $this->DataSource->PageCount();
+        if ($this->Navigator->TotalPages <= 1) {
+            $this->Navigator->Visible = false;
+        }
+        $this->employee_servicerecord_Insert->Show();
+        $this->employee_servicerecord_TotalRecords->Show();
+        $this->Sorter_EmployeeID->Show();
+        $this->Sorter_DateFrom->Show();
+        $this->Sorter_DateTo->Show();
+        $this->Sorter_Designation->Show();
+        $this->Sorter_StatofAppt->Show();
+        $this->Sorter_AnnualSalary->Show();
+        $this->Sorter_OfficeStatn->Show();
+        $this->Sorter_Branch->Show();
+        $this->Sorter_AbsenceWOPay->Show();
+        $this->Sorter_Separation->Show();
+        $this->Navigator->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+        $this->DataSource->close();
+    }
+//End Show Method
+
+//GetErrors Method @2-B3E35016
+    function GetErrors()
+    {
+        $errors = "";
+        $errors = ComposeStrings($errors, $this->EmployeeID->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DateFrom->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DateTo->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Designation->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->StatofAppt->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->AnnualSalary->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->OfficeStatn->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Branch->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->AbsenceWOPay->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Separation->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->Errors->ToString());
+        $errors = ComposeStrings($errors, $this->DataSource->Errors->ToString());
+        return $errors;
+    }
+//End GetErrors Method
+
+} //End employee_servicerecord Class @2-FCB6E20C
+
+class clsemployee_servicerecordDataSource extends clsDBConnection1 {  //employee_servicerecordDataSource Class @2-530A2DAD
+
+//DataSource Variables @2-C8778C9C
+    var $Parent = "";
+    var $CCSEvents = "";
+    var $CCSEventResult;
+    var $ErrorBlock;
+    var $CmdExecution;
+
+    var $CountSQL;
+    var $wp;
+
+
+    // Datasource fields
+    var $EmployeeID;
+    var $DateFrom;
+    var $DateTo;
+    var $Designation;
+    var $StatofAppt;
+    var $AnnualSalary;
+    var $OfficeStatn;
+    var $Branch;
+    var $AbsenceWOPay;
+    var $Separation;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @2-03D874D7
+    function clsemployee_servicerecordDataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Grid employee_servicerecord";
+        $this->Initialize();
+        $this->EmployeeID = new clsField("EmployeeID", ccsInteger, "");
+        
+        $this->DateFrom = new clsField("DateFrom", ccsText, "");
+        
+        $this->DateTo = new clsField("DateTo", ccsText, "");
+        
+        $this->Designation = new clsField("Designation", ccsText, "");
+        
+        $this->StatofAppt = new clsField("StatofAppt", ccsText, "");
+        
+        $this->AnnualSalary = new clsField("AnnualSalary", ccsFloat, "");
+        
+        $this->OfficeStatn = new clsField("OfficeStatn", ccsText, "");
+        
+        $this->Branch = new clsField("Branch", ccsText, "");
+        
+        $this->AbsenceWOPay = new clsField("AbsenceWOPay", ccsText, "");
+        
+        $this->Separation = new clsField("Separation", ccsText, "");
+        
+
+    }
+//End DataSourceClass_Initialize Event
+
+//SetOrder Method @2-9237368E
+    function SetOrder($SorterName, $SorterDirection)
+    {
+        $this->Order = "DateFrom";
+        $this->Order = CCGetOrder($this->Order, $SorterName, $SorterDirection, 
+            array("Sorter_EmployeeID" => array("EmployeeID", ""), 
+            "Sorter_DateFrom" => array("DateFrom", ""), 
+            "Sorter_DateTo" => array("DateTo", ""), 
+            "Sorter_Designation" => array("Designation", ""), 
+            "Sorter_StatofAppt" => array("StatofAppt", ""), 
+            "Sorter_AnnualSalary" => array("AnnualSalary", ""), 
+            "Sorter_OfficeStatn" => array("OfficeStatn", ""), 
+            "Sorter_Branch" => array("Branch", ""), 
+            "Sorter_AbsenceWOPay" => array("AbsenceWOPay", ""), 
+            "Sorter_Separation" => array("Separation", "")));
+    }
+//End SetOrder Method
+
+//Prepare Method @2-532AFE75
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->wp = new clsSQLParameters($this->ErrorBlock);
+        $this->wp->AddParameter("1", "urlEmployeeID", ccsInteger, "", "", $this->Parameters["urlEmployeeID"], "", false);
+        $this->wp->Criterion[1] = $this->wp->Operation(opEqual, "EmployeeID", $this->wp->GetDBValue("1"), $this->ToSQL($this->wp->GetDBValue("1"), ccsInteger),false);
+        $this->Where = 
+             $this->wp->Criterion[1];
+    }
+//End Prepare Method
+
+//Open Method @2-50D66A76
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->CountSQL = "SELECT COUNT(*)\n\n" .
+        "FROM employee_servicerecord";
+        $this->SQL = "SELECT ServiceRecID, EmployeeID, DateFrom, DateTo, Designation, StatofAppt, AnnualSalary, OfficeStatn, Branch, AbsenceWOPay, Separation \n\n" .
+        "FROM employee_servicerecord {SQL_Where} {SQL_OrderBy}";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        if ($this->CountSQL) 
+            $this->RecordsCount = CCGetDBValue(CCBuildSQL($this->CountSQL, $this->Where, ""), $this);
+        else
+            $this->RecordsCount = "CCS not counted";
+        $this->query($this->OptimizeSQL(CCBuildSQL($this->SQL, $this->Where, $this->Order)));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @2-1C043480
+    function SetValues()
+    {
+        $this->EmployeeID->SetDBValue(trim($this->f("EmployeeID")));
+        $this->DateFrom->SetDBValue($this->f("DateFrom"));
+        $this->DateTo->SetDBValue($this->f("DateTo"));
+        $this->Designation->SetDBValue($this->f("Designation"));
+        $this->StatofAppt->SetDBValue($this->f("StatofAppt"));
+        $this->AnnualSalary->SetDBValue(trim($this->f("AnnualSalary")));
+        $this->OfficeStatn->SetDBValue($this->f("OfficeStatn"));
+        $this->Branch->SetDBValue($this->f("Branch"));
+        $this->AbsenceWOPay->SetDBValue($this->f("AbsenceWOPay"));
+        $this->Separation->SetDBValue($this->f("Separation"));
+    }
+//End SetValues Method
+
+} //End employee_servicerecordDataSource Class @2-FCB6E20C
+
+class clsRecordemployee_servicerecord1 { //employee_servicerecord1 Class @39-73D3B4BB
+
+//Variables @39-D6FF3E86
+
+    // Public variables
+    var $ComponentType = "Record";
+    var $ComponentName;
+    var $Parent;
+    var $HTMLFormAction;
+    var $PressedButton;
+    var $Errors;
+    var $ErrorBlock;
+    var $FormSubmitted;
+    var $FormEnctype;
+    var $Visible;
+    var $IsEmpty;
+
+    var $CCSEvents = "";
+    var $CCSEventResult;
+
+    var $RelativePath = "";
+
+    var $InsertAllowed = false;
+    var $UpdateAllowed = false;
+    var $DeleteAllowed = false;
+    var $ReadAllowed   = false;
+    var $EditMode      = false;
+    var $ds;
+    var $DataSource;
+    var $ValidatingControls;
+    var $Controls;
+    var $Attributes;
+
+    // Class variables
+//End Variables
+
+//Class_Initialize Event @39-A135C44E
+    function clsRecordemployee_servicerecord1($RelativePath, & $Parent)
+    {
+
+        global $FileName;
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->Visible = true;
+        $this->Parent = & $Parent;
+        $this->RelativePath = $RelativePath;
+        $this->Errors = new clsErrors();
+        $this->ErrorBlock = "Record employee_servicerecord1/Error";
+        $this->DataSource = new clsemployee_servicerecord1DataSource($this);
+        $this->ds = & $this->DataSource;
+        $this->InsertAllowed = true;
+        $this->UpdateAllowed = true;
+        $this->DeleteAllowed = true;
+        $this->ReadAllowed = true;
+        if($this->Visible)
+        {
+            $this->ComponentName = "employee_servicerecord1";
+            $this->Attributes = new clsAttributes($this->ComponentName . ":");
+            $CCSForm = split(":", CCGetFromGet("ccsForm", ""), 2);
+            if(sizeof($CCSForm) == 1)
+                $CCSForm[1] = "";
+            list($FormName, $FormMethod) = $CCSForm;
+            $this->EditMode = ($FormMethod == "Edit");
+            $this->FormEnctype = "application/x-www-form-urlencoded";
+            $this->FormSubmitted = ($FormName == $this->ComponentName);
+            $Method = $this->FormSubmitted ? ccsPost : ccsGet;
+            $this->Button_Insert = & new clsButton("Button_Insert", $Method, $this);
+            $this->Button_Update = & new clsButton("Button_Update", $Method, $this);
+            $this->Button_Delete = & new clsButton("Button_Delete", $Method, $this);
+            $this->Button_Cancel = & new clsButton("Button_Cancel", $Method, $this);
+            $this->EmployeeID = & new clsControl(ccsTextBox, "EmployeeID", "Employee ID", ccsInteger, "", CCGetRequestParam("EmployeeID", $Method, NULL), $this);
+            $this->EmployeeID->Required = true;
+            $this->DateFrom = & new clsControl(ccsTextBox, "DateFrom", "Date From", ccsText, "", CCGetRequestParam("DateFrom", $Method, NULL), $this);
+            $this->Designation = & new clsControl(ccsTextBox, "Designation", "Designation", ccsText, "", CCGetRequestParam("Designation", $Method, NULL), $this);
+            $this->StatofAppt = & new clsControl(ccsListBox, "StatofAppt", "Statof Appt", ccsText, "", CCGetRequestParam("StatofAppt", $Method, NULL), $this);
+            $this->StatofAppt->DSType = dsTable;
+            $this->StatofAppt->DataSource = new clsDBConnection1();
+            $this->StatofAppt->ds = & $this->StatofAppt->DataSource;
+            $this->StatofAppt->DataSource->SQL = "SELECT * \n" .
+"FROM lut_statofappt {SQL_Where} {SQL_OrderBy}";
+            list($this->StatofAppt->BoundColumn, $this->StatofAppt->TextColumn, $this->StatofAppt->DBFormat) = array("StatAppt", "StatAppt", "");
+            $this->AnnualSalary = & new clsControl(ccsTextBox, "AnnualSalary", "Annual Salary", ccsFloat, array(False, 2, Null, Null, False, "", "", 1, True, ""), CCGetRequestParam("AnnualSalary", $Method, NULL), $this);
+            $this->OfficeStatn = & new clsControl(ccsTextBox, "OfficeStatn", "Office Statn", ccsText, "", CCGetRequestParam("OfficeStatn", $Method, NULL), $this);
+            $this->Branch = & new clsControl(ccsTextBox, "Branch", "Branch", ccsText, "", CCGetRequestParam("Branch", $Method, NULL), $this);
+            $this->AbsenceWOPay = & new clsControl(ccsTextBox, "AbsenceWOPay", "Absence WOPay", ccsText, "", CCGetRequestParam("AbsenceWOPay", $Method, NULL), $this);
+            $this->Separation = & new clsControl(ccsTextBox, "Separation", "Separation", ccsText, "", CCGetRequestParam("Separation", $Method, NULL), $this);
+            $this->DateTo = & new clsControl(ccsTextBox, "DateTo", "Date To", ccsText, "", CCGetRequestParam("DateTo", $Method, NULL), $this);
+        }
+    }
+//End Class_Initialize Event
+
+//Initialize Method @39-97A5A84D
+    function Initialize()
+    {
+
+        if(!$this->Visible)
+            return;
+
+        $this->DataSource->Parameters["urlServiceRecID"] = CCGetFromGet("ServiceRecID", NULL);
+    }
+//End Initialize Method
+
+//Validate Method @39-A2FB6B17
+    function Validate()
+    {
+        global $CCSLocales;
+        $Validation = true;
+        $Where = "";
+        $Validation = ($this->EmployeeID->Validate() && $Validation);
+        $Validation = ($this->DateFrom->Validate() && $Validation);
+        $Validation = ($this->Designation->Validate() && $Validation);
+        $Validation = ($this->StatofAppt->Validate() && $Validation);
+        $Validation = ($this->AnnualSalary->Validate() && $Validation);
+        $Validation = ($this->OfficeStatn->Validate() && $Validation);
+        $Validation = ($this->Branch->Validate() && $Validation);
+        $Validation = ($this->AbsenceWOPay->Validate() && $Validation);
+        $Validation = ($this->Separation->Validate() && $Validation);
+        $Validation = ($this->DateTo->Validate() && $Validation);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "OnValidate", $this);
+        $Validation =  $Validation && ($this->EmployeeID->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->DateFrom->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->Designation->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->StatofAppt->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->AnnualSalary->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->OfficeStatn->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->Branch->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->AbsenceWOPay->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->Separation->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->DateTo->Errors->Count() == 0);
+        return (($this->Errors->Count() == 0) && $Validation);
+    }
+//End Validate Method
+
+//CheckErrors Method @39-F5CFED31
+    function CheckErrors()
+    {
+        $errors = false;
+        $errors = ($errors || $this->EmployeeID->Errors->Count());
+        $errors = ($errors || $this->DateFrom->Errors->Count());
+        $errors = ($errors || $this->Designation->Errors->Count());
+        $errors = ($errors || $this->StatofAppt->Errors->Count());
+        $errors = ($errors || $this->AnnualSalary->Errors->Count());
+        $errors = ($errors || $this->OfficeStatn->Errors->Count());
+        $errors = ($errors || $this->Branch->Errors->Count());
+        $errors = ($errors || $this->AbsenceWOPay->Errors->Count());
+        $errors = ($errors || $this->Separation->Errors->Count());
+        $errors = ($errors || $this->DateTo->Errors->Count());
+        $errors = ($errors || $this->Errors->Count());
+        $errors = ($errors || $this->DataSource->Errors->Count());
+        return $errors;
+    }
+//End CheckErrors Method
+
+//MasterDetail @39-ED598703
+function SetPrimaryKeys($keyArray)
+{
+    $this->PrimaryKeys = $keyArray;
+}
+function GetPrimaryKeys()
+{
+    return $this->PrimaryKeys;
+}
+function GetPrimaryKey($keyName)
+{
+    return $this->PrimaryKeys[$keyName];
+}
+//End MasterDetail
+
+//Operation Method @39-288F0419
+    function Operation()
+    {
+        if(!$this->Visible)
+            return;
+
+        global $Redirect;
+        global $FileName;
+
+        $this->DataSource->Prepare();
+        if(!$this->FormSubmitted) {
+            $this->EditMode = $this->DataSource->AllParametersSet;
+            return;
+        }
+
+        if($this->FormSubmitted) {
+            $this->PressedButton = $this->EditMode ? "Button_Update" : "Button_Insert";
+            if($this->Button_Insert->Pressed) {
+                $this->PressedButton = "Button_Insert";
+            } else if($this->Button_Update->Pressed) {
+                $this->PressedButton = "Button_Update";
+            } else if($this->Button_Delete->Pressed) {
+                $this->PressedButton = "Button_Delete";
+            } else if($this->Button_Cancel->Pressed) {
+                $this->PressedButton = "Button_Cancel";
+            }
+        }
+        $Redirect = $FileName . "?" . CCGetQueryString("QueryString", array("ccsForm"));
+        if($this->PressedButton == "Button_Delete") {
+            if(!CCGetEvent($this->Button_Delete->CCSEvents, "OnClick", $this->Button_Delete) || !$this->DeleteRow()) {
+                $Redirect = "";
+            }
+        } else if($this->PressedButton == "Button_Cancel") {
+            if(!CCGetEvent($this->Button_Cancel->CCSEvents, "OnClick", $this->Button_Cancel)) {
+                $Redirect = "";
+            }
+        } else if($this->Validate()) {
+            if($this->PressedButton == "Button_Insert") {
+                if(!CCGetEvent($this->Button_Insert->CCSEvents, "OnClick", $this->Button_Insert) || !$this->InsertRow()) {
+                    $Redirect = "";
+                }
+            } else if($this->PressedButton == "Button_Update") {
+                if(!CCGetEvent($this->Button_Update->CCSEvents, "OnClick", $this->Button_Update) || !$this->UpdateRow()) {
+                    $Redirect = "";
+                }
+            }
+        } else {
+            $Redirect = "";
+        }
+        if ($Redirect)
+            $this->DataSource->close();
+    }
+//End Operation Method
+
+//InsertRow Method @39-E9CD9825
+    function InsertRow()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeInsert", $this);
+        if(!$this->InsertAllowed) return false;
+        $this->DataSource->EmployeeID->SetValue($this->EmployeeID->GetValue(true));
+        $this->DataSource->DateFrom->SetValue($this->DateFrom->GetValue(true));
+        $this->DataSource->Designation->SetValue($this->Designation->GetValue(true));
+        $this->DataSource->StatofAppt->SetValue($this->StatofAppt->GetValue(true));
+        $this->DataSource->AnnualSalary->SetValue($this->AnnualSalary->GetValue(true));
+        $this->DataSource->OfficeStatn->SetValue($this->OfficeStatn->GetValue(true));
+        $this->DataSource->Branch->SetValue($this->Branch->GetValue(true));
+        $this->DataSource->AbsenceWOPay->SetValue($this->AbsenceWOPay->GetValue(true));
+        $this->DataSource->Separation->SetValue($this->Separation->GetValue(true));
+        $this->DataSource->DateTo->SetValue($this->DateTo->GetValue(true));
+        $this->DataSource->Insert();
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterInsert", $this);
+        return (!$this->CheckErrors());
+    }
+//End InsertRow Method
+
+//UpdateRow Method @39-A5C48562
+    function UpdateRow()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeUpdate", $this);
+        if(!$this->UpdateAllowed) return false;
+        $this->DataSource->EmployeeID->SetValue($this->EmployeeID->GetValue(true));
+        $this->DataSource->DateFrom->SetValue($this->DateFrom->GetValue(true));
+        $this->DataSource->Designation->SetValue($this->Designation->GetValue(true));
+        $this->DataSource->StatofAppt->SetValue($this->StatofAppt->GetValue(true));
+        $this->DataSource->AnnualSalary->SetValue($this->AnnualSalary->GetValue(true));
+        $this->DataSource->OfficeStatn->SetValue($this->OfficeStatn->GetValue(true));
+        $this->DataSource->Branch->SetValue($this->Branch->GetValue(true));
+        $this->DataSource->AbsenceWOPay->SetValue($this->AbsenceWOPay->GetValue(true));
+        $this->DataSource->Separation->SetValue($this->Separation->GetValue(true));
+        $this->DataSource->DateTo->SetValue($this->DateTo->GetValue(true));
+        $this->DataSource->Update();
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterUpdate", $this);
+        return (!$this->CheckErrors());
+    }
+//End UpdateRow Method
+
+//DeleteRow Method @39-299D98C3
+    function DeleteRow()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeDelete", $this);
+        if(!$this->DeleteAllowed) return false;
+        $this->DataSource->Delete();
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterDelete", $this);
+        return (!$this->CheckErrors());
+    }
+//End DeleteRow Method
+
+//Show Method @39-CFB0E18A
+    function Show()
+    {
+        global $CCSUseAmp;
+        global $Tpl;
+        global $FileName;
+        global $CCSLocales;
+        $Error = "";
+
+        if(!$this->Visible)
+            return;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeSelect", $this);
+
+        $this->StatofAppt->Prepare();
+
+        $RecordBlock = "Record " . $this->ComponentName;
+        $ParentPath = $Tpl->block_path;
+        $Tpl->block_path = $ParentPath . "/" . $RecordBlock;
+        $this->EditMode = $this->EditMode && $this->ReadAllowed;
+        if($this->EditMode) {
+            if($this->DataSource->Errors->Count()){
+                $this->Errors->AddErrors($this->DataSource->Errors);
+                $this->DataSource->Errors->clear();
+            }
+            $this->DataSource->Open();
+            if($this->DataSource->Errors->Count() == 0 && $this->DataSource->next_record()) {
+                $this->DataSource->SetValues();
+                if(!$this->FormSubmitted){
+                    $this->EmployeeID->SetValue($this->DataSource->EmployeeID->GetValue());
+                    $this->DateFrom->SetValue($this->DataSource->DateFrom->GetValue());
+                    $this->Designation->SetValue($this->DataSource->Designation->GetValue());
+                    $this->StatofAppt->SetValue($this->DataSource->StatofAppt->GetValue());
+                    $this->AnnualSalary->SetValue($this->DataSource->AnnualSalary->GetValue());
+                    $this->OfficeStatn->SetValue($this->DataSource->OfficeStatn->GetValue());
+                    $this->Branch->SetValue($this->DataSource->Branch->GetValue());
+                    $this->AbsenceWOPay->SetValue($this->DataSource->AbsenceWOPay->GetValue());
+                    $this->Separation->SetValue($this->DataSource->Separation->GetValue());
+                    $this->DateTo->SetValue($this->DataSource->DateTo->GetValue());
+                }
+            } else {
+                $this->EditMode = false;
+            }
+        }
+
+        if($this->FormSubmitted || $this->CheckErrors()) {
+            $Error = "";
+            $Error = ComposeStrings($Error, $this->EmployeeID->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->DateFrom->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Designation->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->StatofAppt->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->AnnualSalary->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->OfficeStatn->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Branch->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->AbsenceWOPay->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Separation->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->DateTo->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->DataSource->Errors->ToString());
+            $Tpl->SetVar("Error", $Error);
+            $Tpl->Parse("Error", false);
+        }
+        $CCSForm = $this->EditMode ? $this->ComponentName . ":" . "Edit" : $this->ComponentName;
+        $this->HTMLFormAction = $FileName . "?" . CCAddParam(CCGetQueryString("QueryString", ""), "ccsForm", $CCSForm);
+        $Tpl->SetVar("Action", !$CCSUseAmp ? $this->HTMLFormAction : str_replace("&", "&amp;", $this->HTMLFormAction));
+        $Tpl->SetVar("HTMLFormName", $this->ComponentName);
+        $Tpl->SetVar("HTMLFormEnctype", $this->FormEnctype);
+        $this->Button_Insert->Visible = !$this->EditMode && $this->InsertAllowed;
+        $this->Button_Update->Visible = $this->EditMode && $this->UpdateAllowed;
+        $this->Button_Delete->Visible = $this->EditMode && $this->DeleteAllowed;
+
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeShow", $this);
+        $this->Attributes->Show();
+        if(!$this->Visible) {
+            $Tpl->block_path = $ParentPath;
+            return;
+        }
+
+        $this->Button_Insert->Show();
+        $this->Button_Update->Show();
+        $this->Button_Delete->Show();
+        $this->Button_Cancel->Show();
+        $this->EmployeeID->Show();
+        $this->DateFrom->Show();
+        $this->Designation->Show();
+        $this->StatofAppt->Show();
+        $this->AnnualSalary->Show();
+        $this->OfficeStatn->Show();
+        $this->Branch->Show();
+        $this->AbsenceWOPay->Show();
+        $this->Separation->Show();
+        $this->DateTo->Show();
+        $Tpl->parse();
+        $Tpl->block_path = $ParentPath;
+        $this->DataSource->close();
+    }
+//End Show Method
+
+} //End employee_servicerecord1 Class @39-FCB6E20C
+
+class clsemployee_servicerecord1DataSource extends clsDBConnection1 {  //employee_servicerecord1DataSource Class @39-5576ACAF
+
+//DataSource Variables @39-42B8DBE3
+    var $Parent = "";
+    var $CCSEvents = "";
+    var $CCSEventResult;
+    var $ErrorBlock;
+    var $CmdExecution;
+
+    var $InsertParameters;
+    var $UpdateParameters;
+    var $DeleteParameters;
+    var $wp;
+    var $AllParametersSet;
+
+    var $InsertFields = array();
+    var $UpdateFields = array();
+
+    // Datasource fields
+    var $EmployeeID;
+    var $DateFrom;
+    var $Designation;
+    var $StatofAppt;
+    var $AnnualSalary;
+    var $OfficeStatn;
+    var $Branch;
+    var $AbsenceWOPay;
+    var $Separation;
+    var $DateTo;
+//End DataSource Variables
+
+//DataSourceClass_Initialize Event @39-FFA45F80
+    function clsemployee_servicerecord1DataSource(& $Parent)
+    {
+        $this->Parent = & $Parent;
+        $this->ErrorBlock = "Record employee_servicerecord1/Error";
+        $this->Initialize();
+        $this->EmployeeID = new clsField("EmployeeID", ccsInteger, "");
+        
+        $this->DateFrom = new clsField("DateFrom", ccsText, "");
+        
+        $this->Designation = new clsField("Designation", ccsText, "");
+        
+        $this->StatofAppt = new clsField("StatofAppt", ccsText, "");
+        
+        $this->AnnualSalary = new clsField("AnnualSalary", ccsFloat, "");
+        
+        $this->OfficeStatn = new clsField("OfficeStatn", ccsText, "");
+        
+        $this->Branch = new clsField("Branch", ccsText, "");
+        
+        $this->AbsenceWOPay = new clsField("AbsenceWOPay", ccsText, "");
+        
+        $this->Separation = new clsField("Separation", ccsText, "");
+        
+        $this->DateTo = new clsField("DateTo", ccsText, "");
+        
+
+        $this->InsertFields["EmployeeID"] = array("Name" => "EmployeeID", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->InsertFields["DateFrom"] = array("Name" => "DateFrom", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->InsertFields["Designation"] = array("Name" => "Designation", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->InsertFields["StatofAppt"] = array("Name" => "StatofAppt", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->InsertFields["AnnualSalary"] = array("Name" => "AnnualSalary", "Value" => "", "DataType" => ccsFloat, "OmitIfEmpty" => 1);
+        $this->InsertFields["OfficeStatn"] = array("Name" => "OfficeStatn", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->InsertFields["Branch"] = array("Name" => "Branch", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->InsertFields["AbsenceWOPay"] = array("Name" => "AbsenceWOPay", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->InsertFields["Separation"] = array("Name" => "Separation", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->InsertFields["DateTo"] = array("Name" => "DateTo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["EmployeeID"] = array("Name" => "EmployeeID", "Value" => "", "DataType" => ccsInteger, "OmitIfEmpty" => 1);
+        $this->UpdateFields["DateFrom"] = array("Name" => "DateFrom", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["Designation"] = array("Name" => "Designation", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["StatofAppt"] = array("Name" => "StatofAppt", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["AnnualSalary"] = array("Name" => "AnnualSalary", "Value" => "", "DataType" => ccsFloat, "OmitIfEmpty" => 1);
+        $this->UpdateFields["OfficeStatn"] = array("Name" => "OfficeStatn", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["Branch"] = array("Name" => "Branch", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["AbsenceWOPay"] = array("Name" => "AbsenceWOPay", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["Separation"] = array("Name" => "Separation", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["DateTo"] = array("Name" => "DateTo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+    }
+//End DataSourceClass_Initialize Event
+
+//Prepare Method @39-867A0EC8
+    function Prepare()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->wp = new clsSQLParameters($this->ErrorBlock);
+        $this->wp->AddParameter("1", "urlServiceRecID", ccsInteger, "", "", $this->Parameters["urlServiceRecID"], "", false);
+        $this->AllParametersSet = $this->wp->AllParamsSet();
+        $this->wp->Criterion[1] = $this->wp->Operation(opEqual, "ServiceRecID", $this->wp->GetDBValue("1"), $this->ToSQL($this->wp->GetDBValue("1"), ccsInteger),false);
+        $this->Where = 
+             $this->wp->Criterion[1];
+    }
+//End Prepare Method
+
+//Open Method @39-E4EDB6B3
+    function Open()
+    {
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildSelect", $this->Parent);
+        $this->SQL = "SELECT * \n\n" .
+        "FROM employee_servicerecord {SQL_Where} {SQL_OrderBy}";
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteSelect", $this->Parent);
+        $this->PageSize = 1;
+        $this->query($this->OptimizeSQL(CCBuildSQL($this->SQL, $this->Where, $this->Order)));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteSelect", $this->Parent);
+    }
+//End Open Method
+
+//SetValues Method @39-43556783
+    function SetValues()
+    {
+        $this->EmployeeID->SetDBValue(trim($this->f("EmployeeID")));
+        $this->DateFrom->SetDBValue($this->f("DateFrom"));
+        $this->Designation->SetDBValue($this->f("Designation"));
+        $this->StatofAppt->SetDBValue($this->f("StatofAppt"));
+        $this->AnnualSalary->SetDBValue(trim($this->f("AnnualSalary")));
+        $this->OfficeStatn->SetDBValue($this->f("OfficeStatn"));
+        $this->Branch->SetDBValue($this->f("Branch"));
+        $this->AbsenceWOPay->SetDBValue($this->f("AbsenceWOPay"));
+        $this->Separation->SetDBValue($this->f("Separation"));
+        $this->DateTo->SetDBValue($this->f("DateTo"));
+    }
+//End SetValues Method
+
+//Insert Method @39-15E98DF9
+    function Insert()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->CmdExecution = true;
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildInsert", $this->Parent);
+        $this->InsertFields["EmployeeID"]["Value"] = $this->EmployeeID->GetDBValue(true);
+        $this->InsertFields["DateFrom"]["Value"] = $this->DateFrom->GetDBValue(true);
+        $this->InsertFields["Designation"]["Value"] = $this->Designation->GetDBValue(true);
+        $this->InsertFields["StatofAppt"]["Value"] = $this->StatofAppt->GetDBValue(true);
+        $this->InsertFields["AnnualSalary"]["Value"] = $this->AnnualSalary->GetDBValue(true);
+        $this->InsertFields["OfficeStatn"]["Value"] = $this->OfficeStatn->GetDBValue(true);
+        $this->InsertFields["Branch"]["Value"] = $this->Branch->GetDBValue(true);
+        $this->InsertFields["AbsenceWOPay"]["Value"] = $this->AbsenceWOPay->GetDBValue(true);
+        $this->InsertFields["Separation"]["Value"] = $this->Separation->GetDBValue(true);
+        $this->InsertFields["DateTo"]["Value"] = $this->DateTo->GetDBValue(true);
+        $this->SQL = CCBuildInsert("employee_servicerecord", $this->InsertFields, $this);
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteInsert", $this->Parent);
+        if($this->Errors->Count() == 0 && $this->CmdExecution) {
+            $this->query($this->SQL);
+            $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteInsert", $this->Parent);
+        }
+    }
+//End Insert Method
+
+//Update Method @39-3E8CEA3E
+    function Update()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->CmdExecution = true;
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildUpdate", $this->Parent);
+        $this->UpdateFields["EmployeeID"]["Value"] = $this->EmployeeID->GetDBValue(true);
+        $this->UpdateFields["DateFrom"]["Value"] = $this->DateFrom->GetDBValue(true);
+        $this->UpdateFields["Designation"]["Value"] = $this->Designation->GetDBValue(true);
+        $this->UpdateFields["StatofAppt"]["Value"] = $this->StatofAppt->GetDBValue(true);
+        $this->UpdateFields["AnnualSalary"]["Value"] = $this->AnnualSalary->GetDBValue(true);
+        $this->UpdateFields["OfficeStatn"]["Value"] = $this->OfficeStatn->GetDBValue(true);
+        $this->UpdateFields["Branch"]["Value"] = $this->Branch->GetDBValue(true);
+        $this->UpdateFields["AbsenceWOPay"]["Value"] = $this->AbsenceWOPay->GetDBValue(true);
+        $this->UpdateFields["Separation"]["Value"] = $this->Separation->GetDBValue(true);
+        $this->UpdateFields["DateTo"]["Value"] = $this->DateTo->GetDBValue(true);
+        $this->SQL = CCBuildUpdate("employee_servicerecord", $this->UpdateFields, $this);
+        $this->SQL = CCBuildSQL($this->SQL, $this->Where, "");
+        if (!strlen($this->Where) && $this->Errors->Count() == 0) 
+            $this->Errors->addError($CCSLocales->GetText("CCS_CustomOperationError_MissingParameters"));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteUpdate", $this->Parent);
+        if($this->Errors->Count() == 0 && $this->CmdExecution) {
+            $this->query($this->SQL);
+            $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteUpdate", $this->Parent);
+        }
+    }
+//End Update Method
+
+//Delete Method @39-88E0A989
+    function Delete()
+    {
+        global $CCSLocales;
+        global $DefaultDateFormat;
+        $this->CmdExecution = true;
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeBuildDelete", $this->Parent);
+        $this->SQL = "DELETE FROM employee_servicerecord";
+        $this->SQL = CCBuildSQL($this->SQL, $this->Where, "");
+        if (!strlen($this->Where) && $this->Errors->Count() == 0) 
+            $this->Errors->addError($CCSLocales->GetText("CCS_CustomOperationError_MissingParameters"));
+        $this->CCSEventResult = CCGetEvent($this->CCSEvents, "BeforeExecuteDelete", $this->Parent);
+        if($this->Errors->Count() == 0 && $this->CmdExecution) {
+            $this->query($this->SQL);
+            $this->CCSEventResult = CCGetEvent($this->CCSEvents, "AfterExecuteDelete", $this->Parent);
+        }
+    }
+//End Delete Method
+
+} //End employee_servicerecord1DataSource Class @39-FCB6E20C
+
+//Initialize Page @1-27FC9F85
+// Variables
+$FileName = "";
+$Redirect = "";
+$Tpl = "";
+$TemplateFileName = "";
+$BlockToParse = "";
+$ComponentName = "";
+$Attributes = "";
+
+// Events;
+$CCSEvents = "";
+$CCSEventResult = "";
+
+$FileName = FileName;
+$Redirect = "";
+$TemplateFileName = "ServiceRecord.html";
+$BlockToParse = "main";
+$TemplateEncoding = "CP1252";
+$ContentType = "text/html";
+$PathToRoot = "./";
+$Charset = $Charset ? $Charset : "windows-1252";
+//End Initialize Page
+
+//Include events file @1-35D322FD
+include_once("./ServiceRecord_events.php");
+//End Include events file
+
+//Before Initialize @1-E870CEBC
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeInitialize", $MainPage);
+//End Before Initialize
+
+//Initialize Objects @1-2FC32A6D
+$DBConnection1 = new clsDBConnection1();
+$MainPage->Connections["Connection1"] = & $DBConnection1;
+$Attributes = new clsAttributes("page:");
+$MainPage->Attributes = & $Attributes;
+
+// Controls
+$employee_servicerecord = & new clsGridemployee_servicerecord("", $MainPage);
+$employee_servicerecord1 = & new clsRecordemployee_servicerecord1("", $MainPage);
+$Link1 = & new clsControl(ccsLink, "Link1", "Link1", ccsText, "", CCGetRequestParam("Link1", ccsGet, NULL), $MainPage);
+$Link1->Parameters = CCGetQueryString("QueryString", array("ccsForm"));
+$Link1->Page = "Employee.php";
+$MainPage->employee_servicerecord = & $employee_servicerecord;
+$MainPage->employee_servicerecord1 = & $employee_servicerecord1;
+$MainPage->Link1 = & $Link1;
+$employee_servicerecord->Initialize();
+$employee_servicerecord1->Initialize();
+
+BindEvents();
+
+$CCSEventResult = CCGetEvent($CCSEvents, "AfterInitialize", $MainPage);
+
+if ($Charset) {
+    header("Content-Type: " . $ContentType . "; charset=" . $Charset);
+} else {
+    header("Content-Type: " . $ContentType);
+}
+//End Initialize Objects
+
+//Initialize HTML Template @1-E710DB26
+$CCSEventResult = CCGetEvent($CCSEvents, "OnInitializeView", $MainPage);
+$Tpl = new clsTemplate($FileEncoding, $TemplateEncoding);
+$Tpl->LoadTemplate(PathToCurrentPage . $TemplateFileName, $BlockToParse, "CP1252");
+$Tpl->block_path = "/$BlockToParse";
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeShow", $MainPage);
+$Attributes->SetValue("pathToRoot", "");
+$Attributes->Show();
+//End Initialize HTML Template
+
+//Execute Components @1-66E72E0C
+$employee_servicerecord1->Operation();
+//End Execute Components
+
+//Go to destination page @1-893B79A1
+if($Redirect)
+{
+    $CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+    $DBConnection1->close();
+    header("Location: " . $Redirect);
+    unset($employee_servicerecord);
+    unset($employee_servicerecord1);
+    unset($Tpl);
+    exit;
+}
+//End Go to destination page
+
+//Show Page @1-6E8F03C0
+$employee_servicerecord->Show();
+$employee_servicerecord1->Show();
+$Link1->Show();
+$Tpl->block_path = "";
+$Tpl->Parse($BlockToParse, false);
+if (!isset($main_block)) $main_block = $Tpl->GetVar($BlockToParse);
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeOutput", $MainPage);
+if ($CCSEventResult) echo $main_block;
+//End Show Page
+
+//Unload Page @1-EA2D9C3E
+$CCSEventResult = CCGetEvent($CCSEvents, "BeforeUnload", $MainPage);
+$DBConnection1->close();
+unset($employee_servicerecord);
+unset($employee_servicerecord1);
+unset($Tpl);
+//End Unload Page
+
+
+?>
