@@ -341,6 +341,7 @@ class clsRecordemployee1 { //employee1 Class @76-BD315ADE
             $this->GsisBPN = & new clsControl(ccsTextBox, "GsisBPN", "Gsis BPN", ccsText, "", CCGetRequestParam("GsisBPN", $Method, NULL), $this);
             $this->PagIbigIDNo = & new clsControl(ccsTextBox, "PagIbigIDNo", "Pag Ibig IDNo", ccsText, "", CCGetRequestParam("PagIbigIDNo", $Method, NULL), $this);
             $this->PhilhealthNo = & new clsControl(ccsTextBox, "PhilhealthNo", "Philhealth No", ccsText, "", CCGetRequestParam("PhilhealthNo", $Method, NULL), $this);
+            $this->PhilSysNo = & new clsControl(ccsTextBox, "PhilSysNo", "PhilSys number (PSN)", ccsText, "", CCGetRequestParam("PhilSysNo", $Method, NULL), $this);
             $this->SssNo = & new clsControl(ccsTextBox, "SssNo", "Sss No", ccsText, "", CCGetRequestParam("SssNo", $Method, NULL), $this);
             $this->Tin = & new clsControl(ccsTextBox, "Tin", "Tin", ccsText, "", CCGetRequestParam("Tin", $Method, NULL), $this);
             $this->AgencyEmpNo = & new clsControl(ccsTextBox, "AgencyEmpNo", "Agency Emp No", ccsText, "", CCGetRequestParam("AgencyEmpNo", $Method, NULL), $this);
@@ -467,6 +468,7 @@ class clsRecordemployee1 { //employee1 Class @76-BD315ADE
         $Validation = ($this->GsisBPN->Validate() && $Validation);
         $Validation = ($this->PagIbigIDNo->Validate() && $Validation);
         $Validation = ($this->PhilhealthNo->Validate() && $Validation);
+        $Validation = ($this->PhilSysNo->Validate() && $Validation);
         $Validation = ($this->SssNo->Validate() && $Validation);
         $Validation = ($this->Tin->Validate() && $Validation);
         $Validation = ($this->AgencyEmpNo->Validate() && $Validation);
@@ -531,6 +533,7 @@ class clsRecordemployee1 { //employee1 Class @76-BD315ADE
         $Validation =  $Validation && ($this->GsisBPN->Errors->Count() == 0);
         $Validation =  $Validation && ($this->PagIbigIDNo->Errors->Count() == 0);
         $Validation =  $Validation && ($this->PhilhealthNo->Errors->Count() == 0);
+        $Validation =  $Validation && ($this->PhilSysNo->Errors->Count() == 0);
         $Validation =  $Validation && ($this->SssNo->Errors->Count() == 0);
         $Validation =  $Validation && ($this->Tin->Errors->Count() == 0);
         $Validation =  $Validation && ($this->AgencyEmpNo->Errors->Count() == 0);
@@ -602,6 +605,7 @@ class clsRecordemployee1 { //employee1 Class @76-BD315ADE
         $errors = ($errors || $this->GsisBPN->Errors->Count());
         $errors = ($errors || $this->PagIbigIDNo->Errors->Count());
         $errors = ($errors || $this->PhilhealthNo->Errors->Count());
+        $errors = ($errors || $this->PhilSysNo->Errors->Count());
         $errors = ($errors || $this->SssNo->Errors->Count());
         $errors = ($errors || $this->Tin->Errors->Count());
         $errors = ($errors || $this->AgencyEmpNo->Errors->Count());
@@ -747,6 +751,7 @@ function GetPrimaryKey($keyName)
         $this->DataSource->GsisBPN->SetValue($this->GsisBPN->GetValue(true));
         $this->DataSource->PagIbigIDNo->SetValue($this->PagIbigIDNo->GetValue(true));
         $this->DataSource->PhilhealthNo->SetValue($this->PhilhealthNo->GetValue(true));
+        $this->DataSource->PhilSysNo->SetValue($this->PhilSysNo->GetValue(true));
         $this->DataSource->SssNo->SetValue($this->SssNo->GetValue(true));
         $this->DataSource->Tin->SetValue($this->Tin->GetValue(true));
         $this->DataSource->AgencyEmpNo->SetValue($this->AgencyEmpNo->GetValue(true));
@@ -824,6 +829,7 @@ function GetPrimaryKey($keyName)
         $this->DataSource->GsisBPN->SetValue($this->GsisBPN->GetValue(true));
         $this->DataSource->PagIbigIDNo->SetValue($this->PagIbigIDNo->GetValue(true));
         $this->DataSource->PhilhealthNo->SetValue($this->PhilhealthNo->GetValue(true));
+        $this->DataSource->PhilSysNo->SetValue($this->PhilSysNo->GetValue(true));
         $this->DataSource->SssNo->SetValue($this->SssNo->GetValue(true));
         $this->DataSource->Tin->SetValue($this->Tin->GetValue(true));
         $this->DataSource->AgencyEmpNo->SetValue($this->AgencyEmpNo->GetValue(true));
@@ -950,6 +956,7 @@ function GetPrimaryKey($keyName)
                     $this->GsisBPN->SetValue($this->DataSource->GsisBPN->GetValue());
                     $this->PagIbigIDNo->SetValue($this->DataSource->PagIbigIDNo->GetValue());
                     $this->PhilhealthNo->SetValue($this->DataSource->PhilhealthNo->GetValue());
+                    $this->PhilSysNo->SetValue($this->DataSource->PhilSysNo->GetValue());
                     $this->SssNo->SetValue($this->DataSource->SssNo->GetValue());
                     $this->Tin->SetValue($this->DataSource->Tin->GetValue());
                     $this->AgencyEmpNo->SetValue($this->DataSource->AgencyEmpNo->GetValue());
@@ -1021,6 +1028,7 @@ function GetPrimaryKey($keyName)
             $Error = ComposeStrings($Error, $this->GsisBPN->Errors->ToString());
             $Error = ComposeStrings($Error, $this->PagIbigIDNo->Errors->ToString());
             $Error = ComposeStrings($Error, $this->PhilhealthNo->Errors->ToString());
+            $Error = ComposeStrings($Error, $this->PhilSysNo->Errors->ToString());
             $Error = ComposeStrings($Error, $this->SssNo->Errors->ToString());
             $Error = ComposeStrings($Error, $this->Tin->Errors->ToString());
             $Error = ComposeStrings($Error, $this->AgencyEmpNo->Errors->ToString());
@@ -1109,6 +1117,7 @@ function GetPrimaryKey($keyName)
         $this->GsisBPN->Show();
         $this->PagIbigIDNo->Show();
         $this->PhilhealthNo->Show();
+        $this->PhilSysNo->Show();
         $this->SssNo->Show();
         $this->Tin->Show();
         $this->AgencyEmpNo->Show();
@@ -1199,6 +1208,7 @@ class clsemployee1DataSource extends clsDBConnection1 {  //employee1DataSource C
     var $GsisBPN;
     var $PagIbigIDNo;
     var $PhilhealthNo;
+    var $PhilSysNo;
     var $SssNo;
     var $Tin;
     var $AgencyEmpNo;
@@ -1286,6 +1296,8 @@ class clsemployee1DataSource extends clsDBConnection1 {  //employee1DataSource C
         $this->PagIbigIDNo = new clsField("PagIbigIDNo", ccsText, "");
         
         $this->PhilhealthNo = new clsField("PhilhealthNo", ccsText, "");
+
+        $this->PhilSysNo = new clsField("PhilSysNo", ccsText, "");
         
         $this->SssNo = new clsField("SssNo", ccsText, "");
         
@@ -1397,6 +1409,7 @@ class clsemployee1DataSource extends clsDBConnection1 {  //employee1DataSource C
         $this->InsertFields["GsisBPN"] = array("Name" => "GsisBPN", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
         $this->InsertFields["PagIbigIDNo"] = array("Name" => "PagIbigIDNo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
         $this->InsertFields["PhilhealthNo"] = array("Name" => "PhilhealthNo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->InsertFields["PhilSysNo"] = array("Name" => "PhilSysNo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
         $this->InsertFields["SssNo"] = array("Name" => "SssNo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
         $this->InsertFields["Tin"] = array("Name" => "Tin", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
         $this->InsertFields["AgencyEmpNo"] = array("Name" => "AgencyEmpNo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
@@ -1460,6 +1473,7 @@ class clsemployee1DataSource extends clsDBConnection1 {  //employee1DataSource C
         $this->UpdateFields["GsisBPN"] = array("Name" => "GsisBPN", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
         $this->UpdateFields["PagIbigIDNo"] = array("Name" => "PagIbigIDNo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
         $this->UpdateFields["PhilhealthNo"] = array("Name" => "PhilhealthNo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
+        $this->UpdateFields["PhilSysNo"] = array("Name" => "PhilSysNo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
         $this->UpdateFields["SssNo"] = array("Name" => "SssNo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
         $this->UpdateFields["Tin"] = array("Name" => "Tin", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
         $this->UpdateFields["AgencyEmpNo"] = array("Name" => "AgencyEmpNo", "Value" => "", "DataType" => ccsText, "OmitIfEmpty" => 1);
@@ -1556,6 +1570,7 @@ class clsemployee1DataSource extends clsDBConnection1 {  //employee1DataSource C
         $this->GsisBPN->SetDBValue($this->f("GsisBPN"));
         $this->PagIbigIDNo->SetDBValue($this->f("PagIbigIDNo"));
         $this->PhilhealthNo->SetDBValue($this->f("PhilhealthNo"));
+        $this->PhilSysNo->SetDBValue($this->f("PhilSysNo"));
         $this->SssNo->SetDBValue($this->f("SssNo"));
         $this->Tin->SetDBValue($this->f("Tin"));
         $this->AgencyEmpNo->SetDBValue($this->f("AgencyEmpNo"));
@@ -1629,6 +1644,7 @@ class clsemployee1DataSource extends clsDBConnection1 {  //employee1DataSource C
         $this->InsertFields["GsisBPN"]["Value"] = $this->GsisBPN->GetDBValue(true);
         $this->InsertFields["PagIbigIDNo"]["Value"] = $this->PagIbigIDNo->GetDBValue(true);
         $this->InsertFields["PhilhealthNo"]["Value"] = $this->PhilhealthNo->GetDBValue(true);
+        $this->InsertFields["PhilSysNo"]["Value"] = $this->PhilSysNo->GetDBValue(true);
         $this->InsertFields["SssNo"]["Value"] = $this->SssNo->GetDBValue(true);
         $this->InsertFields["Tin"]["Value"] = $this->Tin->GetDBValue(true);
         $this->InsertFields["AgencyEmpNo"]["Value"] = $this->AgencyEmpNo->GetDBValue(true);
@@ -1708,6 +1724,7 @@ class clsemployee1DataSource extends clsDBConnection1 {  //employee1DataSource C
         $this->UpdateFields["GsisBPN"]["Value"] = $this->GsisBPN->GetDBValue(true);
         $this->UpdateFields["PagIbigIDNo"]["Value"] = $this->PagIbigIDNo->GetDBValue(true);
         $this->UpdateFields["PhilhealthNo"]["Value"] = $this->PhilhealthNo->GetDBValue(true);
+        $this->UpdateFields["PhilSysNo"]["Value"] = $this->PhilSysNo->GetDBValue(true);
         $this->UpdateFields["SssNo"]["Value"] = $this->SssNo->GetDBValue(true);
         $this->UpdateFields["Tin"]["Value"] = $this->Tin->GetDBValue(true);
         $this->UpdateFields["AgencyEmpNo"]["Value"] = $this->AgencyEmpNo->GetDBValue(true);
