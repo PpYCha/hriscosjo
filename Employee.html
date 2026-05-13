@@ -1,627 +1,1523 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252">
-<title>Employee</title>
-<meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR">
-<script language="JavaScript" type="text/javascript">
-//Begin CCS script
-//Include Common JSFunctions @1-D3B5F5BF
-</script>
-<script language="JavaScript" src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}" type="text/javascript" charset="utf-8"></script>
-<script language="JavaScript" type="text/javascript">
-//End Include Common JSFunctions
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+    <title>Employee</title>
+    <meta content="CodeCharge Studio 4.1.00.027" name="GENERATOR" />
+    <script language="JavaScript" type="text/javascript">
+      //Begin CCS script
+      //Include Common JSFunctions @1-D3B5F5BF
+    </script>
+    <script
+      language="JavaScript"
+      src="ClientI18N.php?file=Functions.js&amp;locale={res:CCS_LocaleID}"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script language="JavaScript" type="text/javascript">
+      //End Include Common JSFunctions
 
-//employee1Button_Delete_OnClick @79-9D84B75E
-function employee1Button_Delete_OnClick()
-{
-    var result = true;
-//End employee1Button_Delete_OnClick
+      //employee1Button_Delete_OnClick @79-9D84B75E
+      function employee1Button_Delete_OnClick() {
+        var result = true;
+        //End employee1Button_Delete_OnClick
 
-//Confirmation Message @80-8243B274
-    return confirm('Delete record?');
-//End Confirmation Message
+        //Confirmation Message @80-8243B274
+        return confirm("Delete record?");
+        //End Confirmation Message
 
-//Close employee1Button_Delete_OnClick @79-BC33A33A
-    return result;
-}
-//End Close employee1Button_Delete_OnClick
+        //Close employee1Button_Delete_OnClick @79-BC33A33A
+        return result;
+      }
+      //End Close employee1Button_Delete_OnClick
 
-//employee1Button_Cancel_OnClick @81-431A3369
-function employee1Button_Cancel_OnClick()
-{
-    disableValidation = true;
-}
-//End employee1Button_Cancel_OnClick
+      //employee1Button_Cancel_OnClick @81-431A3369
+      function employee1Button_Cancel_OnClick() {
+        disableValidation = true;
+      }
+      //End employee1Button_Cancel_OnClick
 
-//bind_events @1-6115F593
-function bind_events() {
-    addEventHandler("employee1Button_Delete", "click", employee1Button_Delete_OnClick);
-    addEventHandler("employee1Button_Cancel", "click", employee1Button_Cancel_OnClick);
-}
-//End bind_events
+      //bind_events @1-6115F593
+      function bind_events() {
+        addEventHandler(
+          "employee1Button_Delete",
+          "click",
+          employee1Button_Delete_OnClick,
+        );
+        addEventHandler(
+          "employee1Button_Cancel",
+          "click",
+          employee1Button_Cancel_OnClick,
+        );
+      }
+      //End bind_events
 
-window.onload = bind_events; //Assign bind_events @1-19F7B649
+      window.onload = bind_events; //Assign bind_events @1-19F7B649
 
-//End CCS script
-</script>
-<link href="Styles/Fresh/Style_doctype.css" type="text/css" rel="stylesheet">
-</head>
-<body>
-<p><a href="{Link1_Src}" id="Link1">Back</a></p>
-<!-- BEGIN Record employeeSearch -->
-<form id="employeeSearch" name="{HTMLFormName}" action="{Action}" method="post" enctype="{HTMLFormEnctype}">
-  <table cellspacing="0" cellpadding="0" border="0">
-    <tr>
-      <td valign="top">
-        <table class="Header" cellspacing="0" cellpadding="0" border="0">
-          <tr>
-            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
-            <td class="th"><strong>Search Employee </strong></td> 
-            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
-          </tr>
-        </table>
- 
-        <table class="Record" cellspacing="0" cellpadding="0">
-          <!-- BEGIN Error -->
-          <tr class="Error">
-            <td colspan="2">{Error}</td>
-          </tr>
-          <!-- END Error -->
-          <tr class="Controls">
-            <td class="th"><label for="employeeSearchs_EmployeeIDNo">Employee ID No.</label></td> 
-            <td><input id="employeeSearchs_EmployeeIDNo" maxlength="6" size="6" value="{s_EmployeeIDNo}" name="{s_EmployeeIDNo_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employeeSearchs_Surname">Surname</label></td> 
-            <td><input id="employeeSearchs_Surname" style="TEXT-TRANSFORM: uppercase" maxlength="50" size="50" value="{s_Surname}" name="{s_Surname_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employeeSearchs_FirstName">First Name</label></td> 
-            <td><input id="employeeSearchs_FirstName" style="TEXT-TRANSFORM: uppercase" maxlength="50" size="50" value="{s_FirstName}" name="{s_FirstName_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employeeSearchs_MiddleName">Middle Name</label></td> 
-            <td><input id="employeeSearchs_MiddleName" style="TEXT-TRANSFORM: uppercase" maxlength="50" size="50" value="{s_MiddleName}" name="{s_MiddleName_Name}"></td>
-          </tr>
- 
-          <tr class="Bottom">
-            <td><a href="{ClearParameters_Src}" id="employeeSearchClearParameters">Clear</a></td> 
-            <td align="right">
-              <!-- BEGIN Button Button_DoSearch --><input class="Button" id="employeeSearchButton_DoSearch" type="submit" alt="Search" value="Search" name="{Button_Name}"><!-- END Button Button_DoSearch --></td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</form>
-<!-- END Record employeeSearch --><br>
-<!-- BEGIN Grid employee -->
-<table cellspacing="0" cellpadding="0" border="0">
-  <tr>
-    <td valign="top">
-      <table class="Header" cellspacing="0" cellpadding="0" border="0">
+      //End CCS script
+    </script>
+    <link
+      href="Styles/Fresh/Style_doctype.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <p><a href="{Link1_Src}" id="Link1">Back</a></p>
+    <!-- BEGIN Record employeeSearch -->
+    <form
+      id="employeeSearch"
+      name="{HTMLFormName}"
+      action="{Action}"
+      method="post"
+      enctype="{HTMLFormEnctype}"
+    >
+      <table cellspacing="0" cellpadding="0" border="0">
         <tr>
-          <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
-          <td class="th"><strong>List of Employee </strong></td> 
-          <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
-        </tr>
-      </table>
- 
-      <table class="Grid" cellspacing="0" cellpadding="0">
-        <tr class="Row">
-          <td colspan="7">Total Employees:&nbsp;{employee_TotalRecords}</td>
-        </tr>
- 
-        <tr class="Caption">
-          <th scope="col">&nbsp;</th>
- 
-          <th scope="col">Employee</th>
- 
-          <th scope="col">&nbsp;</th>
- 
-          <th scope="col">&nbsp;</th>
- 
-          <th scope="col">&nbsp;</th>
- 
-          <th scope="col">&nbsp;</th>
- 
-          <th scope="col">&nbsp;</th>
-        </tr>
- 
-        <tr class="Caption">
-          <th scope="col">ID</th>
- 
-          <th scope="col">&nbsp;&nbsp; ID No.</th>
- 
-          <th scope="col">Surname&nbsp;&nbsp; </th>
- 
-          <th scope="col">First Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
- 
-          <th scope="col">Middle Name </th>
- 
-          <th scope="col">Photo</th>
- 
-          <th scope="col">&nbsp;</th>
-        </tr>
- 
-        <!-- BEGIN Row -->
-        <tr class="Row">
-          <td style="TEXT-ALIGN: right"><a href="{EmployeeID_Src}" id="employeeEmployeeID_{employee:rowNumber}">{EmployeeID}</a>&nbsp;</td> 
-          <td>
-            <div align="center">
-              {EmployeeIDNo} 
-            </div>
-            &nbsp;</td> 
-          <td>{Surname}&nbsp;&nbsp;&nbsp;&nbsp; </td> 
-          <td>{FirstName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> 
-          <td>{MiddleName}&nbsp;</td> 
-          <td><img id="employeeEmpPicture_{employee:rowNumber}" height="130" alt="" src="photofolder/{EmpPicture}" width="90">&nbsp;</td> 
-          <td>
-            <p align="center"><a href="{MiddleInitial_Src}" id="employeeMiddleInitial_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Children</a><a href="{NameExtension_Src}" class="KnockoutButton" id="employeeNameExtension_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Education</a><a href="{BirthMonth_Src}" class="KnockoutButton" id="employeeBirthMonth_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Eligibility</a><a href="{BirthDay_Src}" class="KnockoutButton" id="employeeBirthDay_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">WorkExp.</a><a href="{BirthYear_Src}" class="KnockoutButton" id="employeeBirthYear_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Vol.Work</a><a href="{PlaceOfBirth_Src}" class="KnockoutButton" id="employeePlaceOfBirth_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Training</a></p>
- 
-            <p align="center"><a href="{Sex_Src}" class="KnockoutButton" id="employeeSex_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Skills</a><a href="{CivilStatus_Src}" class="KnockoutButton" id="employeeCivilStatus_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Distinctions</a><a href="{Height_Src}" class="KnockoutButton" id="employeeHeight_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Membership</a><a href="{Weight_Src}" class="KnockoutButton" id="employeeWeight_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">Consanguinity</a><a href="{BloodType_Src}" class="KnockoutButton" id="employeeBloodType_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">References</a></p>
- 
-            <p align="center"><a href="{GsisIdNo_Src}" id="employeeGsisIdNo_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">ServiceRecord</a><a href="{GsisBPN_Src}" id="employeeGsisBPN_{employee:rowNumber}" style="BORDER-RIGHT: #fcfcfc outset; BORDER-TOP: #fcfcfc outset; BORDER-LEFT: #fcfcfc outset; BORDER-BOTTOM: #fcfcfc outset; TEXT-DECORATION: none">CurrentPosition</a></p>
+          <td valign="top">
+            <table class="Header" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td class="HeaderLeft">
+                  <img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0" />
+                </td>
+                <td class="th"><strong>Search Employee </strong></td>
+                <td class="HeaderRight">
+                  <img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0" />
+                </td>
+              </tr>
+            </table>
+
+            <table class="Record" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Error -->
+              <tr class="Error">
+                <td colspan="2">{Error}</td>
+              </tr>
+              <!-- END Error -->
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employeeSearchs_EmployeeIDNo"
+                    >Employee ID No.</label
+                  >
+                </td>
+                <td>
+                  <input
+                    id="employeeSearchs_EmployeeIDNo"
+                    maxlength="6"
+                    size="6"
+                    value="{s_EmployeeIDNo}"
+                    name="{s_EmployeeIDNo_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employeeSearchs_Surname">Surname</label>
+                </td>
+                <td>
+                  <input
+                    id="employeeSearchs_Surname"
+                    style="text-transform: uppercase"
+                    maxlength="50"
+                    size="50"
+                    value="{s_Surname}"
+                    name="{s_Surname_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employeeSearchs_FirstName">First Name</label>
+                </td>
+                <td>
+                  <input
+                    id="employeeSearchs_FirstName"
+                    style="text-transform: uppercase"
+                    maxlength="50"
+                    size="50"
+                    value="{s_FirstName}"
+                    name="{s_FirstName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employeeSearchs_MiddleName">Middle Name</label>
+                </td>
+                <td>
+                  <input
+                    id="employeeSearchs_MiddleName"
+                    style="text-transform: uppercase"
+                    maxlength="50"
+                    size="50"
+                    value="{s_MiddleName}"
+                    name="{s_MiddleName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Bottom">
+                <td>
+                  <a
+                    href="{ClearParameters_Src}"
+                    id="employeeSearchClearParameters"
+                    >Clear</a
+                  >
+                </td>
+                <td align="right">
+                  <!-- BEGIN Button Button_DoSearch --><input
+                    class="Button"
+                    id="employeeSearchButton_DoSearch"
+                    type="submit"
+                    alt="Search"
+                    value="Search"
+                    name="{Button_Name}"
+                  /><!-- END Button Button_DoSearch -->
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
- <!-- END Row -->
-        <!-- BEGIN NoRecords -->
-        <tr class="NoRecords">
-          <td colspan="7">No records</td>
-        </tr>
-        <!-- END NoRecords -->
-        <tr class="Footer">
-          <td colspan="7">
-            <p align="left"><a href="{employee_Insert_Src}" id="employeeemployee_Insert">Add New</a>&nbsp; 
-            <!-- BEGIN Navigator Navigator -->
-            <!-- BEGIN Page_Parameter --><input type="hidden" value="{Value}" name="{Name}"><!-- END Page_Parameter -->Per page: 
-            <select onchange="CCChangeSize(this, '{FormName}')" name="{FormName}PageSize">
-              <option value="" selected>-</option>
- {PageSize_Options}
-            </select>
- 
-            <!-- BEGIN First_On --><a href="{First_URL}">First</a> <!-- END First_On -->
-            <!-- BEGIN First_Off -->First <!-- END First_Off -->
-            <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a> <!-- END Prev_On -->
-            <!-- BEGIN Prev_Off -->Prev <!-- END Prev_Off -->&nbsp; 
-            <!-- BEGIN Pages -->
-            <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a>&nbsp;<!-- END Page_On -->
-            <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of &nbsp;{Total_Pages}&nbsp; 
-            <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a> <!-- END Next_On -->
-            <!-- BEGIN Next_Off -->Next <!-- END Next_Off -->
-            <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a> <!-- END Last_On -->
-            <!-- BEGIN Last_Off -->Last <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;</p>
+      </table>
+    </form>
+    <!-- END Record employeeSearch --><br />
+    <!-- BEGIN Grid employee -->
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td valign="top">
+          <table class="Header" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+              <td class="HeaderLeft">
+                <img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0" />
+              </td>
+              <td class="th"><strong>List of Employee </strong></td>
+              <td class="HeaderRight">
+                <img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0" />
+              </td>
+            </tr>
+          </table>
+
+          <table class="Grid" cellspacing="0" cellpadding="0">
+            <tr class="Row">
+              <td colspan="7">Total Employees:&nbsp;{employee_TotalRecords}</td>
+            </tr>
+
+            <tr class="Caption">
+              <th scope="col">&nbsp;</th>
+
+              <th scope="col">Employee</th>
+
+              <th scope="col">&nbsp;</th>
+
+              <th scope="col">&nbsp;</th>
+
+              <th scope="col">&nbsp;</th>
+
+              <th scope="col">&nbsp;</th>
+
+              <th scope="col">&nbsp;</th>
+            </tr>
+
+            <tr class="Caption">
+              <th scope="col">ID</th>
+
+              <th scope="col">&nbsp;&nbsp; ID No.</th>
+
+              <th scope="col">Surname&nbsp;&nbsp;</th>
+
+              <th scope="col">
+                First Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </th>
+
+              <th scope="col">Middle Name</th>
+
+              <th scope="col">Photo</th>
+
+              <th scope="col">&nbsp;</th>
+            </tr>
+
+            <!-- BEGIN Row -->
+            <tr class="Row">
+              <td style="text-align: right">
+                <a
+                  href="{EmployeeID_Src}"
+                  id="employeeEmployeeID_{employee:rowNumber}"
+                  >{EmployeeID}</a
+                >&nbsp;
+              </td>
+              <td>
+                <div align="center">{EmployeeIDNo}</div>
+                &nbsp;
+              </td>
+              <td>{Surname}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td>
+                {FirstName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </td>
+              <td>{MiddleName}&nbsp;</td>
+              <td>
+                <img
+                  id="employeeEmpPicture_{employee:rowNumber}"
+                  height="130"
+                  alt=""
+                  src="photofolder/{EmpPicture}"
+                  width="90"
+                />&nbsp;
+              </td>
+              <td>
+                <p align="center">
+                  <a
+                    href="{MiddleInitial_Src}"
+                    id="employeeMiddleInitial_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >Children</a
+                  ><a
+                    href="{NameExtension_Src}"
+                    class="KnockoutButton"
+                    id="employeeNameExtension_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >Education</a
+                  ><a
+                    href="{BirthMonth_Src}"
+                    class="KnockoutButton"
+                    id="employeeBirthMonth_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >Eligibility</a
+                  ><a
+                    href="{BirthDay_Src}"
+                    class="KnockoutButton"
+                    id="employeeBirthDay_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >WorkExp.</a
+                  ><a
+                    href="{BirthYear_Src}"
+                    class="KnockoutButton"
+                    id="employeeBirthYear_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >Vol.Work</a
+                  ><a
+                    href="{PlaceOfBirth_Src}"
+                    class="KnockoutButton"
+                    id="employeePlaceOfBirth_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >Training</a
+                  >
+                </p>
+
+                <p align="center">
+                  <a
+                    href="{Sex_Src}"
+                    class="KnockoutButton"
+                    id="employeeSex_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >Skills</a
+                  ><a
+                    href="{CivilStatus_Src}"
+                    class="KnockoutButton"
+                    id="employeeCivilStatus_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >Distinctions</a
+                  ><a
+                    href="{Height_Src}"
+                    class="KnockoutButton"
+                    id="employeeHeight_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >Membership</a
+                  ><a
+                    href="{Weight_Src}"
+                    class="KnockoutButton"
+                    id="employeeWeight_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >Consanguinity</a
+                  ><a
+                    href="{BloodType_Src}"
+                    class="KnockoutButton"
+                    id="employeeBloodType_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >References</a
+                  >
+                </p>
+
+                <p align="center">
+                  <a
+                    href="{GsisIdNo_Src}"
+                    id="employeeGsisIdNo_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >ServiceRecord</a
+                  ><a
+                    href="{GsisBPN_Src}"
+                    id="employeeGsisBPN_{employee:rowNumber}"
+                    style="
+                      border-right: #fcfcfc outset;
+                      border-top: #fcfcfc outset;
+                      border-left: #fcfcfc outset;
+                      border-bottom: #fcfcfc outset;
+                      text-decoration: none;
+                    "
+                    >CurrentPosition</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <!-- END Row -->
+            <!-- BEGIN NoRecords -->
+            <tr class="NoRecords">
+              <td colspan="7">No records</td>
+            </tr>
+            <!-- END NoRecords -->
+            <tr class="Footer">
+              <td colspan="7">
+                <p align="left">
+                  <a href="{employee_Insert_Src}" id="employeeemployee_Insert"
+                    >Add New</a
+                  >&nbsp;
+                  <!-- BEGIN Navigator Navigator -->
+                  <!-- BEGIN Page_Parameter --><input
+                    type="hidden"
+                    value="{Value}"
+                    name="{Name}"
+                  /><!-- END Page_Parameter -->Per page:
+                  <select
+                    onchange="CCChangeSize(this, '{FormName}')"
+                    name="{FormName}PageSize"
+                  >
+                    <option value="" selected>-</option>
+                    {PageSize_Options}
+                  </select>
+
+                  <!-- BEGIN First_On --><a href="{First_URL}">First</a>
+                  <!-- END First_On -->
+                  <!-- BEGIN First_Off -->First
+                  <!-- END First_Off -->
+                  <!-- BEGIN Prev_On --><a href="{Prev_URL}">Prev</a>
+                  <!-- END Prev_On -->
+                  <!-- BEGIN Prev_Off -->Prev
+                  <!-- END Prev_Off -->&nbsp;
+                  <!-- BEGIN Pages -->
+                  <!-- BEGIN Page_On --><a href="{Page_URL}">{Page_Number}</a
+                  >&nbsp;<!-- END Page_On -->
+                  <!-- BEGIN Page_Off -->{Page_Number}&nbsp;<!-- END Page_Off --><!-- END Pages -->of
+                  &nbsp;{Total_Pages}&nbsp;
+                  <!-- BEGIN Next_On --><a href="{Next_URL}">Next</a>
+                  <!-- END Next_On -->
+                  <!-- BEGIN Next_Off -->Next
+                  <!-- END Next_Off -->
+                  <!-- BEGIN Last_On --><a href="{Last_URL}">Last</a>
+                  <!-- END Last_On -->
+                  <!-- BEGIN Last_Off -->Last
+                  <!-- END Last_Off --><!-- END Navigator Navigator -->&nbsp;
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- END Grid employee --><br />
+    <!-- BEGIN Record employee1 -->
+    <form
+      id="employee1"
+      name="{HTMLFormName}"
+      action="{Action}"
+      method="post"
+      enctype="{HTMLFormEnctype}"
+    >
+      <table cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td valign="top">
+            <table class="Header" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td class="HeaderLeft">
+                  <img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0" />
+                </td>
+                <td class="th"><strong>Add/Edit Employee </strong></td>
+                <td class="HeaderRight">
+                  <img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0" />
+                </td>
+              </tr>
+            </table>
+
+            <table class="Record" cellspacing="0" cellpadding="0">
+              <!-- BEGIN Error -->
+              <tr class="Error">
+                <td colspan="3">{Error}</td>
+              </tr>
+              <!-- END Error -->
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1EmployeeIDNo">Employee ID No.</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1EmployeeIDNo"
+                    maxlength="9"
+                    size="9"
+                    value="{EmployeeIDNo}"
+                    name="{EmployeeIDNo_Name}"
+                  />&nbsp;Title
+                  <select id="employee1ListBox1" name="{ListBox1_Name}">
+                    <option value="" selected>Select Value</option>
+                    {ListBox1_Options}
+                  </select>
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1Surname">Surname</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1Surname"
+                    maxlength="50"
+                    size="50"
+                    value="{Surname}"
+                    name="{Surname_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1FirstName">First Name</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1FirstName"
+                    maxlength="50"
+                    size="50"
+                    value="{FirstName}"
+                    name="{FirstName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1MiddleName">Middle Name</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1MiddleName"
+                    maxlength="50"
+                    size="50"
+                    value="{MiddleName}"
+                    name="{MiddleName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1MiddleInitial">Middle Initial</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1MiddleInitial"
+                    maxlength="2"
+                    size="2"
+                    value="{MiddleInitial}"
+                    name="{MiddleInitial_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1NameExtension">Name Extension</label>
+                </td>
+                <td>
+                  <select
+                    id="employee1NameExtension"
+                    name="{NameExtension_Name}"
+                  >
+                    <option value="" selected>Select Value</option>
+                    {NameExtension_Options}
+                  </select>
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1BirthMonth">Date of Birth</label>
+                </td>
+                <td>
+                  <select id="employee1BirthMonth" name="{BirthMonth_Name}">
+                    <option value="" selected>Select Value</option>
+                    {BirthMonth_Options}
+                  </select>
+
+                  <select id="employee1BirthDay" name="{BirthDay_Name}">
+                    <option value="" selected>Select Value</option>
+                    {BirthDay_Options}
+                  </select>
+                  <input
+                    id="employee1BirthYear"
+                    maxlength="4"
+                    size="4"
+                    value="{BirthYear}"
+                    name="{BirthYear_Name}"
+                  />&nbsp;-<input
+                    id="employee1TextBox1"
+                    style="width: 65px; height: 14px"
+                    size="8"
+                    value="{TextBox1}"
+                    name="{TextBox1_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1PlaceOfBirth">Place of Birth</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1PlaceOfBirth"
+                    maxlength="100"
+                    size="50"
+                    value="{PlaceOfBirth}"
+                    name="{PlaceOfBirth_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1Sex">Sex</label>
+                </td>
+                <td>
+                  <select id="employee1Sex" name="{Sex_Name}">
+                    <option value="" selected>Select Value</option>
+                    {Sex_Options}
+                  </select>
+
+                  <select
+                    id="employee1ListBox2"
+                    style="width: 46px"
+                    name="{ListBox2_Name}"
+                  >
+                    <option value="" selected>Select Value</option>
+                    {ListBox2_Options}
+                  </select>
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1CivilStatus">Civil Status</label>
+                </td>
+                <td>
+                  <select id="employee1CivilStatus" name="{CivilStatus_Name}">
+                    <option value="" selected>Select Value</option>
+                    {CivilStatus_Options}
+                  </select>
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1Height">Height (m) </label>
+                </td>
+                <td>
+                  <input
+                    id="employee1Height"
+                    maxlength="7"
+                    size="7"
+                    value="{Height}"
+                    name="{Height_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1Weight">Weight (kg)</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1Weight"
+                    maxlength="6"
+                    size="6"
+                    value="{Weight}"
+                    name="{Weight_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1BloodType">Blood Type</label>
+                </td>
+                <td>
+                  <select id="employee1BloodType" name="{BloodType_Name}">
+                    <option value="" selected>Select Value</option>
+                    {BloodType_Options}
+                  </select>
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1GsisIdNo">GSIS ID No.</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1GsisIdNo"
+                    maxlength="15"
+                    size="15"
+                    value="{GsisIdNo}"
+                    name="{GsisIdNo_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1GsisBPN">GSIS BPN</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1GsisBPN"
+                    maxlength="15"
+                    size="15"
+                    value="{GsisBPN}"
+                    name="{GsisBPN_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1PagIbigIDNo">Pag-Ibig ID No.</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1PagIbigIDNo"
+                    maxlength="14"
+                    size="14"
+                    value="{PagIbigIDNo}"
+                    name="{PagIbigIDNo_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1PhilhealthNo">Philhealth No.</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1PhilhealthNo"
+                    maxlength="16"
+                    size="16"
+                    value="{PhilhealthNo}"
+                    name="{PhilhealthNo_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1PhilSysNo">PhilSys number (PSN)</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1PhilSysNo"
+                    maxlength="19"
+                    size="19"
+                    value="{PhilSysNo}"
+                    name="{PhilSysNo_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1SssNo">SSS No.</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1SssNo"
+                    maxlength="16"
+                    size="16"
+                    value="{SssNo}"
+                    name="{SssNo_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1Tin">TIN No.</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1Tin"
+                    maxlength="15"
+                    size="15"
+                    value="{Tin}"
+                    name="{Tin_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1AgencyEmpNo">Agency Employee No.</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1AgencyEmpNo"
+                    maxlength="6"
+                    size="6"
+                    value="{AgencyEmpNo}"
+                    name="{AgencyEmpNo_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1Citizenship">Citizenship</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1Citizenship"
+                    maxlength="50"
+                    size="50"
+                    value="{Citizenship}"
+                    name="{Citizenship_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1ResHouseNo">Residential Address</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1ResHouseNo"
+                    maxlength="25"
+                    size="25"
+                    value="{ResHouseNo}"
+                    name="{ResHouseNo_Name}"
+                  /><input
+                    id="employee1ResStreet"
+                    maxlength="35"
+                    size="35"
+                    value="{ResStreet}"
+                    name="{ResStreet_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1ResStreet"></label>
+                </td>
+                <td>
+                  House/Block/Lot
+                  No.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Street
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1ResSubVillage"></label>
+                </td>
+                <td>
+                  <input
+                    id="employee1ResSubVillage"
+                    maxlength="35"
+                    size="35"
+                    value="{ResSubVillage}"
+                    name="{ResSubVillage_Name}"
+                  /><input
+                    id="employee1ResBrgy"
+                    maxlength="35"
+                    size="35"
+                    value="{ResBrgy}"
+                    name="{ResBrgy_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1ResBrgy"></label>
+                </td>
+                <td>
+                  Subdivision/Village&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barangay
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1ResMunicipality"></label>
+                </td>
+                <td>
+                  <select
+                    id="employee1ResMunicipality"
+                    name="{ResMunicipality_Name}"
+                  >
+                    <option value="" selected>Select Value</option>
+                    {ResMunicipality_Options}
+                  </select>
+                  <input
+                    id="employee1ResProvince"
+                    maxlength="35"
+                    size="35"
+                    value="{ResProvince}"
+                    name="{ResProvince_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1ResProvince"></label>
+                </td>
+                <td>
+                  Municipality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  Province
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th"><label for="employee1ResZipcode"></label></td>
+                <td class="th">Zipcode&nbsp;</td>
+                <td>
+                  <input
+                    id="employee1ResZipcode"
+                    maxlength="4"
+                    size="4"
+                    value="{ResZipcode}"
+                    name="{ResZipcode_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1PermHouseNo">Permanent Address</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1PermHouseNo"
+                    maxlength="25"
+                    size="25"
+                    value="{PermHouseNo}"
+                    name="{PermHouseNo_Name}"
+                  /><input
+                    id="employee1PermStreet"
+                    maxlength="25"
+                    size="25"
+                    value="{PermStreet}"
+                    name="{PermStreet_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1PermStreet"></label>
+                </td>
+                <td>
+                  House/Block/Lot
+                  No.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  Street
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1PermSubVillage"></label>
+                </td>
+                <td>
+                  <input
+                    id="employee1PermSubVillage"
+                    maxlength="35"
+                    size="35"
+                    value="{PermSubVillage}"
+                    name="{PermSubVillage_Name}"
+                  /><input
+                    id="employee1PermBrgy"
+                    maxlength="35"
+                    size="35"
+                    value="{PermBrgy}"
+                    name="{PermBrgy_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1PermBrgy"></label>
+                </td>
+                <td>
+                  Subdivision/Village&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barangay
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1PermMunicipality"></label>
+                </td>
+                <td>
+                  <select
+                    id="employee1PermMunicipality"
+                    name="{PermMunicipality_Name}"
+                  >
+                    <option value="" selected>Select Value</option>
+                    {PermMunicipality_Options}
+                  </select>
+                  <input
+                    id="employee1PermProvince"
+                    maxlength="35"
+                    size="35"
+                    value="{PermProvince}"
+                    name="{PermProvince_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1PermProvince"></label>
+                </td>
+                <td>
+                  Municipality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Province
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th"><label for="employee1PermZipcode"></label></td>
+                <td>&nbsp;Zipcode&nbsp;</td>
+                <td>
+                  <input
+                    id="employee1PermZipcode"
+                    maxlength="4"
+                    size="4"
+                    value="{PermZipcode}"
+                    name="{PermZipcode_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1TelNo">Telephone No.</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1TelNo"
+                    maxlength="50"
+                    size="50"
+                    value="{TelNo}"
+                    name="{TelNo_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1MobileNo">Mobile No.</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1MobileNo"
+                    maxlength="50"
+                    size="50"
+                    value="{MobileNo}"
+                    name="{MobileNo_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1EmailAdd">Email Address</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1EmailAdd"
+                    maxlength="50"
+                    size="50"
+                    value="{EmailAdd}"
+                    name="{EmailAdd_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">Spouse's</td>
+                <td>&nbsp;</td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th"><label for="employee1SpouseSurname"></label></td>
+                <td><label for="employee1SpouseSurname">Surname</label></td>
+                <td>
+                  <input
+                    id="employee1SpouseSurname"
+                    maxlength="50"
+                    size="50"
+                    value="{SpouseSurname}"
+                    name="{SpouseSurname_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employee1SpouseFirstName"></label>
+                </td>
+                <td>
+                  <label for="employee1SpouseFirstName">First Name</label>&nbsp;
+                </td>
+                <td>
+                  <input
+                    id="employee1SpouseFirstName"
+                    maxlength="50"
+                    size="50"
+                    value="{SpouseFirstName}"
+                    name="{SpouseFirstName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employee1SpouseMiddleName"></label>
+                </td>
+                <td>
+                  <label for="employee1SpouseMiddleName">Middle Name</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1SpouseMiddleName"
+                    maxlength="50"
+                    size="50"
+                    value="{SpouseMiddleName}"
+                    name="{SpouseMiddleName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th"><label for="employee1SpouseNameExt"></label></td>
+                <td>
+                  <label for="employee1SpouseNameExt">Name Extension</label>
+                </td>
+                <td>
+                  <select
+                    id="employee1SpouseNameExt"
+                    name="{SpouseNameExt_Name}"
+                  >
+                    <option value="" selected>Select Value</option>
+                    {SpouseNameExt_Options}
+                  </select>
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employee1SpouseOccupatn"></label>
+                </td>
+                <td>Occupation</td>
+                <td>
+                  <input
+                    id="employee1SpouseOccupatn"
+                    maxlength="50"
+                    size="50"
+                    value="{SpouseOccupatn}"
+                    name="{SpouseOccupatn_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employee1SpouseBusinessName"></label>
+                </td>
+                <td>
+                  <label for="employee1SpouseBusinessName">BusinessName</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1SpouseBusinessName"
+                    maxlength="50"
+                    size="50"
+                    value="{SpouseBusinessName}"
+                    name="{SpouseBusinessName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employee1SpouseBusinessAddress"></label>
+                </td>
+                <td>
+                  <label for="employee1SpouseBusinessAddress"
+                    >Business Address</label
+                  >
+                </td>
+                <td>
+                  <input
+                    id="employee1SpouseBusinessAddress"
+                    maxlength="50"
+                    size="50"
+                    value="{SpouseBusinessAddress}"
+                    name="{SpouseBusinessAddress_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th"><label for="employee1SpouseTelNo"></label></td>
+                <td><label for="employee1SpouseTelNo">Telephone No.</label></td>
+                <td>
+                  <input
+                    id="employee1SpouseTelNo"
+                    maxlength="50"
+                    size="50"
+                    value="{SpouseTelNo}"
+                    name="{SpouseTelNo_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">Father's</td>
+                <td>&nbsp;</td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th"><label for="employee1FatherSurname"></label></td>
+                <td>Surname</td>
+                <td>
+                  <input
+                    id="employee1FatherSurname"
+                    maxlength="50"
+                    size="50"
+                    value="{FatherSurname}"
+                    name="{FatherSurname_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employee1FatherFirstName"></label>
+                </td>
+                <td>
+                  <label for="employee1FatherFirstName">First Name</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1FatherFirstName"
+                    maxlength="50"
+                    size="50"
+                    value="{FatherFirstName}"
+                    name="{FatherFirstName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employee1FatherMiddleName"></label>
+                </td>
+                <td>Middle Name</td>
+                <td>
+                  <input
+                    id="employee1FatherMiddleName"
+                    maxlength="50"
+                    size="50"
+                    value="{FatherMiddleName}"
+                    name="{FatherMiddleName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th"><label for="employee1FatherNameExt"></label></td>
+                <td>
+                  <label for="employee1FatherNameExt">Name Extension</label>
+                </td>
+                <td>
+                  <select
+                    id="employee1FatherNameExt"
+                    name="{FatherNameExt_Name}"
+                  >
+                    <option value="" selected>Select Value</option>
+                    {FatherNameExt_Options}
+                  </select>
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1MotherMaiden"
+                    >Mother's Maiden Name</label
+                  >
+                </td>
+                <td>
+                  <input
+                    id="employee1MotherMaiden"
+                    maxlength="70"
+                    size="50"
+                    value="{MotherMaiden}"
+                    name="{MotherMaiden_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th"><label for="employee1MotherSurname"></label></td>
+                <td><label for="employee1MotherSurname">Surname</label></td>
+                <td>
+                  <input
+                    id="employee1MotherSurname"
+                    maxlength="50"
+                    size="50"
+                    value="{MotherSurname}"
+                    name="{MotherSurname_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employee1MotherFirstName"></label>
+                </td>
+                <td>
+                  <label for="employee1MotherFirstName">First Name</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1MotherFirstName"
+                    maxlength="50"
+                    size="50"
+                    value="{MotherFirstName}"
+                    name="{MotherFirstName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">
+                  <label for="employee1MotherMiddleName"></label>
+                </td>
+                <td>
+                  <label for="employee1MotherMiddleName">Middle Name</label>
+                </td>
+                <td>
+                  <input
+                    id="employee1MotherMiddleName"
+                    maxlength="50"
+                    size="50"
+                    value="{MotherMiddleName}"
+                    name="{MotherMiddleName_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">In Case of Emergency</td>
+                <td>&nbsp;</td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">&nbsp;</td>
+                <td>Name</td>
+                <td>
+                  <input
+                    id="employee1TextBox2"
+                    size="35"
+                    value="{TextBox2}"
+                    name="{TextBox2_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">&nbsp;</td>
+                <td>Address</td>
+                <td>
+                  <input
+                    id="employee1TextBox3"
+                    size="50"
+                    value="{TextBox3}"
+                    name="{TextBox3_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th">&nbsp;</td>
+                <td>Contact No.</td>
+                <td>
+                  <input
+                    id="employee1TextBox4"
+                    size="25"
+                    value="{TextBox4}"
+                    name="{TextBox4_Name}"
+                  />
+                </td>
+              </tr>
+
+              <tr class="Controls">
+                <td class="th" colspan="2">
+                  <label for="employee1EmpPicture">Photo</label>
+                </td>
+                <td>
+                  &nbsp;
+                  <!-- BEGIN FileUpload FileUpload1 --><input
+                    id="employee1FileUpload1ControlName"
+                    type="hidden"
+                    value="{State}"
+                    name="{ControlName}"
+                  />
+                  <!-- BEGIN Info -->&nbsp;{FileName}&nbsp;{FileSize}&nbsp;bytes.<!-- END Info -->
+                  <!-- BEGIN Upload --><label
+                    for="employee1FileUpload1FileControl"
+                    style="display: none"
+                    >File upload</label
+                  ><input
+                    id="employee1FileUpload1FileControl"
+                    type="file"
+                    name="{FileControl}"
+                  /><!-- END Upload -->
+                  <!-- BEGIN DeleteControl --><label
+                    for="employee1FileUpload1DeleteControl"
+                    >Delete</label
+                  ><input
+                    id="employee1FileUpload1DeleteControl"
+                    type="checkbox"
+                    name="{DeleteControl}"
+                    {DeleteChecked}
+                  /><!-- END DeleteControl --><!-- END FileUpload FileUpload1 -->
+                </td>
+              </tr>
+
+              <tr class="Bottom">
+                <td align="right" colspan="3">
+                  <!-- BEGIN Button Button_Insert --><input
+                    class="Button"
+                    id="employee1Button_Insert"
+                    type="submit"
+                    alt="Add"
+                    value="Add"
+                    name="{Button_Name}"
+                  /><!-- END Button Button_Insert -->
+                  <!-- BEGIN Button Button_Update --><input
+                    class="Button"
+                    id="employee1Button_Update"
+                    type="submit"
+                    alt="Submit"
+                    value="Submit"
+                    name="{Button_Name}"
+                  /><!-- END Button Button_Update -->
+                  <!-- BEGIN Button Button_Delete --><input
+                    class="Button"
+                    id="employee1Button_Delete"
+                    type="submit"
+                    alt="Delete"
+                    value="Delete"
+                    name="{Button_Name}"
+                  /><!-- END Button Button_Delete -->
+                  <!-- BEGIN Button Button_Cancel --><input
+                    class="Button"
+                    id="employee1Button_Cancel"
+                    type="submit"
+                    alt="Cancel"
+                    value="Cancel"
+                    name="{Button_Name}"
+                  /><!-- END Button Button_Cancel -->
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
       </table>
-    </td>
-  </tr>
-</table>
-<!-- END Grid employee --><br>
-<!-- BEGIN Record employee1 -->
-<form id="employee1" name="{HTMLFormName}" action="{Action}" method="post" enctype="{HTMLFormEnctype}">
-  <table cellspacing="0" cellpadding="0" border="0">
-    <tr>
-      <td valign="top">
-        <table class="Header" cellspacing="0" cellpadding="0" border="0">
-          <tr>
-            <td class="HeaderLeft"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td> 
-            <td class="th"><strong>Add/Edit Employee </strong></td> 
-            <td class="HeaderRight"><img alt="" src="Styles/Fresh/Images/Spacer.gif" border="0"></td>
-          </tr>
-        </table>
- 
-        <table class="Record" cellspacing="0" cellpadding="0">
-          <!-- BEGIN Error -->
-          <tr class="Error">
-            <td colspan="3">{Error}</td>
-          </tr>
-          <!-- END Error -->
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1EmployeeIDNo">Employee ID No.</label></td> 
-            <td><input id="employee1EmployeeIDNo" maxlength="9" size="9" value="{EmployeeIDNo}" name="{EmployeeIDNo_Name}">&nbsp;Title 
-              <select id="employee1ListBox1" name="{ListBox1_Name}">
-                <option value="" selected>Select Value</option>
-                {ListBox1_Options}
-              </select>
- </td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1Surname">Surname</label></td> 
-            <td><input id="employee1Surname" maxlength="50" size="50" value="{Surname}" name="{Surname_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1FirstName">First Name</label></td> 
-            <td><input id="employee1FirstName" maxlength="50" size="50" value="{FirstName}" name="{FirstName_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1MiddleName">Middle Name</label></td> 
-            <td><input id="employee1MiddleName" maxlength="50" size="50" value="{MiddleName}" name="{MiddleName_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1MiddleInitial">Middle Initial</label></td> 
-            <td><input id="employee1MiddleInitial" maxlength="2" size="2" value="{MiddleInitial}" name="{MiddleInitial_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1NameExtension">Name Extension</label></td> 
-            <td>
-              <select id="employee1NameExtension" name="{NameExtension_Name}">
-                <option value="" selected>Select Value</option>
-                {NameExtension_Options}
-              </select>
- </td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1BirthMonth">Date of Birth</label></td> 
-            <td>
-              <select id="employee1BirthMonth" name="{BirthMonth_Name}">
-                <option value="" selected>Select Value</option>
-                {BirthMonth_Options}
-              </select>
- 
-              <select id="employee1BirthDay" name="{BirthDay_Name}">
-                <option value="" selected>Select Value</option>
-                {BirthDay_Options}
-              </select>
- <input id="employee1BirthYear" maxlength="4" size="4" value="{BirthYear}" name="{BirthYear_Name}">&nbsp;-<input id="employee1TextBox1" style="WIDTH: 65px; HEIGHT: 14px" size="8" value="{TextBox1}" name="{TextBox1_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1PlaceOfBirth">Place of Birth</label></td> 
-            <td><input id="employee1PlaceOfBirth" maxlength="100" size="50" value="{PlaceOfBirth}" name="{PlaceOfBirth_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1Sex">Sex</label></td> 
-            <td>
-              <select id="employee1Sex" name="{Sex_Name}">
-                <option value="" selected>Select Value</option>
-                {Sex_Options}
-              </select>
- 
-              <select id="employee1ListBox2" style="WIDTH: 46px" name="{ListBox2_Name}">
-                <option value="" selected>Select Value</option>
-                {ListBox2_Options}
-              </select>
- </td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1CivilStatus">Civil Status</label></td> 
-            <td>
-              <select id="employee1CivilStatus" name="{CivilStatus_Name}">
-                <option value="" selected>Select Value</option>
-                {CivilStatus_Options}
-              </select>
- </td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1Height">Height (m) </label></td> 
-            <td><input id="employee1Height" maxlength="7" size="7" value="{Height}" name="{Height_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1Weight">Weight (kg)</label></td> 
-            <td><input id="employee1Weight" maxlength="6" size="6" value="{Weight}" name="{Weight_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1BloodType">Blood Type</label></td> 
-            <td>
-              <select id="employee1BloodType" name="{BloodType_Name}">
-                <option value="" selected>Select Value</option>
-                {BloodType_Options}
-              </select>
- </td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1GsisIdNo">GSIS ID No.</label></td> 
-            <td><input id="employee1GsisIdNo" maxlength="15" size="15" value="{GsisIdNo}" name="{GsisIdNo_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1GsisBPN">GSIS BPN</label></td> 
-            <td><input id="employee1GsisBPN" maxlength="15" size="15" value="{GsisBPN}" name="{GsisBPN_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1PagIbigIDNo">Pag-Ibig ID No.</label></td> 
-            <td><input id="employee1PagIbigIDNo" maxlength="14" size="14" value="{PagIbigIDNo}" name="{PagIbigIDNo_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1PhilhealthNo">Philhealth No.</label></td> 
-            <td><input id="employee1PhilhealthNo" maxlength="16" size="16" value="{PhilhealthNo}" name="{PhilhealthNo_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1SssNo">SSS No.</label></td> 
-            <td><input id="employee1SssNo" maxlength="16" size="16" value="{SssNo}" name="{SssNo_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1Tin">TIN No.</label></td> 
-            <td><input id="employee1Tin" maxlength="15" size="15" value="{Tin}" name="{Tin_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1AgencyEmpNo">Agency Employee No.</label></td> 
-            <td><input id="employee1AgencyEmpNo" maxlength="6" size="6" value="{AgencyEmpNo}" name="{AgencyEmpNo_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1Citizenship">Citizenship</label></td> 
-            <td><input id="employee1Citizenship" maxlength="50" size="50" value="{Citizenship}" name="{Citizenship_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1ResHouseNo">Residential Address</label></td> 
-            <td><input id="employee1ResHouseNo" maxlength="25" size="25" value="{ResHouseNo}" name="{ResHouseNo_Name}"><input id="employee1ResStreet" maxlength="35" size="35" value="{ResStreet}" name="{ResStreet_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1ResStreet"></label></td> 
-            <td>House/Block/Lot No.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Street</td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1ResSubVillage"></label></td> 
-            <td><input id="employee1ResSubVillage" maxlength="35" size="35" value="{ResSubVillage}" name="{ResSubVillage_Name}"><input id="employee1ResBrgy" maxlength="35" size="35" value="{ResBrgy}" name="{ResBrgy_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1ResBrgy"></label></td> 
-            <td>Subdivision/Village&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barangay</td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1ResMunicipality"></label></td> 
-            <td>
-              <select id="employee1ResMunicipality" name="{ResMunicipality_Name}">
-                <option value="" selected>Select Value</option>
-                {ResMunicipality_Options}
-              </select>
- <input id="employee1ResProvince" maxlength="35" size="35" value="{ResProvince}" name="{ResProvince_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1ResProvince"></label></td> 
-            <td>Municipality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Province</td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1ResZipcode"></label></td> 
-            <td class="th">Zipcode&nbsp;</td> 
-            <td><input id="employee1ResZipcode" maxlength="4" size="4" value="{ResZipcode}" name="{ResZipcode_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1PermHouseNo">Permanent Address</label></td> 
-            <td><input id="employee1PermHouseNo" maxlength="25" size="25" value="{PermHouseNo}" name="{PermHouseNo_Name}"><input id="employee1PermStreet" maxlength="25" size="25" value="{PermStreet}" name="{PermStreet_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1PermStreet"></label></td> 
-            <td>House/Block/Lot No.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Street</td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1PermSubVillage"></label></td> 
-            <td><input id="employee1PermSubVillage" maxlength="35" size="35" value="{PermSubVillage}" name="{PermSubVillage_Name}"><input id="employee1PermBrgy" maxlength="35" size="35" value="{PermBrgy}" name="{PermBrgy_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1PermBrgy"></label></td> 
-            <td>Subdivision/Village&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barangay</td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1PermMunicipality"></label></td> 
-            <td>
-              <select id="employee1PermMunicipality" name="{PermMunicipality_Name}">
-                <option value="" selected>Select Value</option>
-                {PermMunicipality_Options}
-              </select>
- <input id="employee1PermProvince" maxlength="35" size="35" value="{PermProvince}" name="{PermProvince_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1PermProvince"></label></td> 
-            <td>Municipality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Province</td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1PermZipcode"></label></td> 
-            <td>&nbsp;Zipcode&nbsp;</td> 
-            <td><input id="employee1PermZipcode" maxlength="4" size="4" value="{PermZipcode}" name="{PermZipcode_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1TelNo">Telephone No.</label></td> 
-            <td><input id="employee1TelNo" maxlength="50" size="50" value="{TelNo}" name="{TelNo_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1MobileNo">Mobile No.</label></td> 
-            <td><input id="employee1MobileNo" maxlength="50" size="50" value="{MobileNo}" name="{MobileNo_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1EmailAdd">Email Address</label></td> 
-            <td><input id="employee1EmailAdd" maxlength="50" size="50" value="{EmailAdd}" name="{EmailAdd_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2">Spouse's</td> 
-            <td>&nbsp;</td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1SpouseSurname"></label></td> 
-            <td><label for="employee1SpouseSurname">Surname</label></td> 
-            <td><input id="employee1SpouseSurname" maxlength="50" size="50" value="{SpouseSurname}" name="{SpouseSurname_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1SpouseFirstName"></label></td> 
-            <td><label for="employee1SpouseFirstName">First Name</label>&nbsp;</td> 
-            <td><input id="employee1SpouseFirstName" maxlength="50" size="50" value="{SpouseFirstName}" name="{SpouseFirstName_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1SpouseMiddleName"></label></td> 
-            <td><label for="employee1SpouseMiddleName">Middle Name</label></td> 
-            <td><input id="employee1SpouseMiddleName" maxlength="50" size="50" value="{SpouseMiddleName}" name="{SpouseMiddleName_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1SpouseNameExt"></label></td> 
-            <td><label for="employee1SpouseNameExt">Name Extension</label></td> 
-            <td>
-              <select id="employee1SpouseNameExt" name="{SpouseNameExt_Name}">
-                <option value="" selected>Select Value</option>
-                {SpouseNameExt_Options}
-              </select>
- </td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1SpouseOccupatn"></label></td> 
-            <td>Occupation</td> 
-            <td><input id="employee1SpouseOccupatn" maxlength="50" size="50" value="{SpouseOccupatn}" name="{SpouseOccupatn_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1SpouseBusinessName"></label></td> 
-            <td><label for="employee1SpouseBusinessName">BusinessName</label></td> 
-            <td><input id="employee1SpouseBusinessName" maxlength="50" size="50" value="{SpouseBusinessName}" name="{SpouseBusinessName_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1SpouseBusinessAddress"></label></td> 
-            <td><label for="employee1SpouseBusinessAddress">Business Address</label></td> 
-            <td><input id="employee1SpouseBusinessAddress" maxlength="50" size="50" value="{SpouseBusinessAddress}" name="{SpouseBusinessAddress_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1SpouseTelNo"></label></td> 
-            <td><label for="employee1SpouseTelNo">Telephone No.</label></td> 
-            <td><input id="employee1SpouseTelNo" maxlength="50" size="50" value="{SpouseTelNo}" name="{SpouseTelNo_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2">Father's</td> 
-            <td>&nbsp;</td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1FatherSurname"></label></td> 
-            <td>Surname</td> 
-            <td><input id="employee1FatherSurname" maxlength="50" size="50" value="{FatherSurname}" name="{FatherSurname_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1FatherFirstName"></label></td> 
-            <td><label for="employee1FatherFirstName">First Name</label></td> 
-            <td><input id="employee1FatherFirstName" maxlength="50" size="50" value="{FatherFirstName}" name="{FatherFirstName_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1FatherMiddleName"></label></td> 
-            <td>Middle Name</td> 
-            <td><input id="employee1FatherMiddleName" maxlength="50" size="50" value="{FatherMiddleName}" name="{FatherMiddleName_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1FatherNameExt"></label></td> 
-            <td><label for="employee1FatherNameExt">Name Extension</label></td> 
-            <td>
-              <select id="employee1FatherNameExt" name="{FatherNameExt_Name}">
-                <option value="" selected>Select Value</option>
-                {FatherNameExt_Options}
-              </select>
- </td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1MotherMaiden">Mother's Maiden Name</label></td> 
-            <td><input id="employee1MotherMaiden" maxlength="70" size="50" value="{MotherMaiden}" name="{MotherMaiden_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1MotherSurname"></label></td> 
-            <td><label for="employee1MotherSurname">Surname</label></td> 
-            <td><input id="employee1MotherSurname" maxlength="50" size="50" value="{MotherSurname}" name="{MotherSurname_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1MotherFirstName"></label></td> 
-            <td><label for="employee1MotherFirstName">First Name</label></td> 
-            <td><input id="employee1MotherFirstName" maxlength="50" size="50" value="{MotherFirstName}" name="{MotherFirstName_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th"><label for="employee1MotherMiddleName"></label></td> 
-            <td><label for="employee1MotherMiddleName">Middle Name</label></td> 
-            <td><input id="employee1MotherMiddleName" maxlength="50" size="50" value="{MotherMiddleName}" name="{MotherMiddleName_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2">In Case of Emergency</td> 
-            <td>&nbsp;</td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th">&nbsp;</td> 
-            <td>Name</td> 
-            <td><input id="employee1TextBox2" size="35" value="{TextBox2}" name="{TextBox2_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th">&nbsp;</td> 
-            <td>Address</td> 
-            <td><input id="employee1TextBox3" size="50" value="{TextBox3}" name="{TextBox3_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th">&nbsp;</td> 
-            <td>Contact No.</td> 
-            <td><input id="employee1TextBox4" size="25" value="{TextBox4}" name="{TextBox4_Name}"></td>
-          </tr>
- 
-          <tr class="Controls">
-            <td class="th" colspan="2"><label for="employee1EmpPicture">Photo</label></td> 
-            <td>&nbsp; 
-              <!-- BEGIN FileUpload FileUpload1 --><input id="employee1FileUpload1ControlName" type="hidden" value="{State}" name="{ControlName}">
-              <!-- BEGIN Info -->&nbsp;{FileName}&nbsp;{FileSize}&nbsp;bytes.<!-- END Info -->
-              <!-- BEGIN Upload --><label for="employee1FileUpload1FileControl" style="display: none;">File upload</label><input id="employee1FileUpload1FileControl" type="file" name="{FileControl}"><!-- END Upload -->
-              <!-- BEGIN DeleteControl --><label for="employee1FileUpload1DeleteControl">Delete</label><input id="employee1FileUpload1DeleteControl" type="checkbox" name="{DeleteControl}" {DeleteChecked}><!-- END DeleteControl --><!-- END FileUpload FileUpload1 --></td>
-          </tr>
- 
-          <tr class="Bottom">
-            <td align="right" colspan="3">
-              <!-- BEGIN Button Button_Insert --><input class="Button" id="employee1Button_Insert" type="submit" alt="Add" value="Add" name="{Button_Name}"><!-- END Button Button_Insert -->
-              <!-- BEGIN Button Button_Update --><input class="Button" id="employee1Button_Update" type="submit" alt="Submit" value="Submit" name="{Button_Name}"><!-- END Button Button_Update -->
-              <!-- BEGIN Button Button_Delete --><input class="Button" id="employee1Button_Delete" type="submit" alt="Delete" value="Delete" name="{Button_Name}"><!-- END Button Button_Delete -->
-              <!-- BEGIN Button Button_Cancel --><input class="Button" id="employee1Button_Cancel" type="submit" alt="Cancel" value="Cancel" name="{Button_Name}"><!-- END Button Button_Cancel --></td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</form>
-<!-- END Record employee1 --><br>
-</body>
+    </form>
+    <!-- END Record employee1 --><br />
+  </body>
 </html>
